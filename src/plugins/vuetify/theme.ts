@@ -1,6 +1,6 @@
-import type { VuetifyOptions } from 'vuetify'
 import { resolveVuetifyTheme } from '@core/utils/vuetify'
 import { themeConfig } from '@themeConfig'
+import type { VuetifyOptions } from 'vuetify'
 
 export const staticPrimaryColor = '#666CFF'
 
@@ -21,9 +21,9 @@ const theme: VuetifyOptions['theme'] = {
         'warning': '#FDB528',
         'on-warning': '#fff',
         'error': '#FF4D49',
-        'background': '#F7F7F9',
+        'background': '#FF0000',
         'on-background': '#4c4e64',
-        'on-surface': '#4c4e64',
+        'on-surface': '#ffffff',
         'perfect-scrollbar-thumb': '#DBDADE',
         'snackbar-background': '#212121',
         'tooltip-background': '#262732',
