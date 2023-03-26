@@ -20,7 +20,7 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
     overlayNavFromBreakpoint: breakpointsVuetify.md + 16, // 16 for scrollbar. Docs: https://next.vuetifyjs.com/en/features/display-and-platform/
     enableI18n: true,
     theme: 'system',
-    isRtl: false,
+    isRtl: true,
     skin: Skins.Default,
     routeTransition: RouteTransitions.Fade,
     iconRenderer: VIcon,
