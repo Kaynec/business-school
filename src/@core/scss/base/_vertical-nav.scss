@@ -20,7 +20,10 @@
       }
     }
 
-    background-color: variables.$vertical-nav-background-color;
+    backdrop-filter: blur(25px);
+    background: linear-gradient(180deg, rgb(107, 8, 8) 0%, #292929 75%);
+
+    // background-color: variables.$vertical-nav-background-color;
 
     // 👉 Nav header
     .nav-header {

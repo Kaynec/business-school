@@ -1,1 +1,20 @@
 // Write your overrides
+.v-application {
+  backdrop-filter: blur(5px);
+  background: linear-gradient(180deg, #1d1d1d 0%, #292929 100%);
+}
+
+.v-theme--light {
+  .layout-vertical-nav {
+    backdrop-filter: blur(25px);
+    background: rgba(29, 29, 29, 70%);
+  }
+}
+
+.layout-horizontal-nav .nav-link:not(.sub-item) a.router-link-active,
+.layout-horizontal-nav .nav-group:not(.sub-item).active > .popper-triggerer > .nav-group-label,
+.layout-nav-type-vertical .layout-vertical-nav .nav-link > .router-link-exact-active {
+  background-color: #e30613;
+  font-size: 15px;
+  font-weight: 600;
+}

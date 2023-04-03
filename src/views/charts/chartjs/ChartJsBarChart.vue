@@ -1,51 +1,65 @@
 <script setup lang="ts">
-import { useTheme } from 'vuetify'
-import BarChart from '@/@core/libs/chartjs/components/BarChart'
-import type { ChartJsCustomColors } from '@/views/demos/charts-and-maps/charts/chartjs/types'
-import { getLatestBarChartConfig } from '@core/libs/chartjs/chartjsConfig'
+import BarChart from "@/@core/libs/chartjs/components/BarChart";
+import type { ChartJsCustomColors } from "@/views/demos/charts-and-maps/charts/chartjs/types";
 
 interface Props {
-  colors: ChartJsCustomColors
+  colors?: ChartJsCustomColors;
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const vuetifyTheme = useTheme()
+const chartOptions = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+    responsive: true,
+  },
+  responsive: true,
 
-const chartOptions = computed(() => getLatestBarChartConfig(vuetifyTheme.current.value))
+  scales: {
+    y: {
+      min: 1,
+      max: 5,
+      step: 1,
+      ticks: {
+        // forces step size to be 50 units
+        stepSize: 1,
+      },
+    },
+  },
+};
 
 const data = {
   labels: [
-    '7/12',
-    '8/12',
-    '9/12',
-    '10/12',
-    '11/12',
-    '12/12',
-    '13/12',
-    '14/12',
-    '15/12',
-    '16/12',
-    '17/12',
-    '18/12',
-    '19/12',
+    "دیجیتال مارکتینگ",
+    "توسعه فردی",
+    "بورس مقدماتی",
+    "دیجیتال مارکتینگ",
   ],
   datasets: [
     {
-      maxBarThickness: 15,
-      backgroundColor: props.colors.barChartYellow,
-      borderColor: 'transparent',
-      borderRadius: { topRight: 15, topLeft: 15 },
-      data: [275, 90, 190, 205, 125, 85, 55, 87, 127, 150, 230, 280, 190],
+      maxBarThickness: 20,
+      backgroundColor: "#E30613",
+      borderRadius: { topRight: 10, topLeft: 10 },
+      data: [1, 3.5, 5.0, 5.0],
+    },
+    {
+      maxBarThickness: 20,
+      backgroundColor: "#D9D9D9",
+      borderRadius: { topRight: 10, topLeft: 10 },
+      data: [5.0, 4.9, 5, 1.2],
     },
   ],
-}
+};
 </script>
 
 <template>
   <BarChart
-    :height="400"
+    class="rounded-xl"
+    style="padding-left: 3rem"
     :chart-data="data"
     :chart-options="chartOptions"
+    :height="200"
   />
 </template>

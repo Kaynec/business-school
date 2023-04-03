@@ -10,7 +10,8 @@ html {
 #loading-bg {
   position: absolute;
   display: block;
-  background: var(--initial-loader-bg, #fff);
+  background: linear-gradient(180deg, #1D1D1D 0%, #292929 100%);
+  backdrop-filter: blur(5px);
   block-size: 100%;
   inline-size: 100%;
 }

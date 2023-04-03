@@ -1,11 +1,39 @@
 @use "@configured-variables" as variables;
 
-.bg-card {
-  background: rgb(var(--v-theme-surface)) !important;
+.table {
+  border-end-end-radius: 2.4rem;
+  border-end-start-radius: 2.4rem;
+  border-start-end-radius: 2.4rem;
+  border-start-start-radius: 2.4rem;
+
+  th {
+    background: #323233;
+  }
+
+  td {
+    background-color: #282828;
+  }
 }
 
-.table-header-bg {
-  th {
-    background-color: rgb(var(--v-theme-grey-200));
+.table-content {
+  max-block-size: 75vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+
+  td {
+    background-color: #282828;
   }
+}
+
+.table tbody {
+  display: block;
+  overflow: auto;
+  block-size: 75%;
+}
+
+.table thead,
+.table tbody tr {
+  display: table;
+  inline-size: 100%;
+  table-layout: fixed;/* even columns width , fix width of table too */
 }

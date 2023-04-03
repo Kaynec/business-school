@@ -41,3 +41,22 @@ $alert-prominent-icon-size: 38px;
     }
   }
 }
+
+.v-card {
+  background-color: rgba(var(--v-theme-cardBackground));
+  color: rgba(var(--v-theme-cardText));
+  direction: rtl;
+
+  span {
+    color: rgba(var(--v-theme-cardText));
+  }
+}
+
+.v-card-text {
+  color: rgba(var(--v-theme-cardText));
+}
+
+.v-progress-circular__underlay {
+  border-radius: 1rem;
+  stroke: white;
+}

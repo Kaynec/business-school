@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import FullCalendar from '@fullcalendar/vue3'
-import { blankEvent, useCalendar } from '@/views/apps/calendar/useCalendar'
-import { useCalendarStore } from '@/views/apps/calendar/useCalendarStore'
-import { useResponsiveLeftSidebar } from '@core/composable/useResponsiveSidebar'
+import { blankEvent, useCalendar } from "@/views/apps/calendar/useCalendar";
+import { useCalendarStore } from "@/views/apps/calendar/useCalendarStore";
+import { useResponsiveLeftSidebar } from "@core/composable/useResponsiveSidebar";
+import FullCalendar from "@fullcalendar/vue3";
 
 // Components
-import CalendarEventHandler from '@/views/apps/calendar/CalendarEventHandler.vue'
+import CalendarEventHandler from "@/views/apps/calendar/CalendarEventHandler.vue";
 
 // 👉 Store
-const store = useCalendarStore()
+const store = useCalendarStore();
 
 // 👉 Event
-const event = ref(structuredClone(blankEvent))
-const isEventHandlerSidebarActive = ref(false)
+const event = ref(structuredClone(blankEvent));
+const isEventHandlerSidebarActive = ref(false);
 
-watch(isEventHandlerSidebarActive, val => {
-  if (!val)
-    event.value = structuredClone(blankEvent)
-})
+watch(isEventHandlerSidebarActive, (val) => {
+  if (!val) event.value = structuredClone(blankEvent);
+});
 
-const { isLeftSidebarOpen } = useResponsiveLeftSidebar()
+const { isLeftSidebarOpen } = useResponsiveLeftSidebar();
 
 // 👉 useCalendar
-const { refCalendar, calendarOptions, addEvent, updateEvent, removeEvent } = useCalendar(event, isEventHandlerSidebarActive, isLeftSidebarOpen)
+const { refCalendar, calendarOptions, addEvent, updateEvent, removeEvent } =
+  useCalendar(event, isEventHandlerSidebarActive, isLeftSidebarOpen);
 
 // SECTION Sidebar
 // 👉 Check all
@@ -33,14 +33,13 @@ const checkAll = computed({
           Else if => all filters are selected (by checking length of both array) => Empty Selected array  => Deselect All
   */
   get: () => store.selectedCalendars.length === store.availableCalendars.length,
-  set: val => {
+  set: (val) => {
     if (val)
-      store.selectedCalendars = store.availableCalendars.map(i => i.label)
-
+      store.selectedCalendars = store.availableCalendars.map((i) => i.label);
     else if (store.selectedCalendars.length === store.availableCalendars.length)
-      store.selectedCalendars = []
+      store.selectedCalendars = [];
   },
-})
+});
 
 // !SECTION
 </script>
@@ -49,7 +48,7 @@ const checkAll = computed({
   <div>
     <VCard>
       <!-- `z-index: 0` Allows overlapping vertical nav on calendar -->
-      <VLayout style="z-index: 0;">
+      <VLayout style="z-index: 0">
         <!-- 👉 Navigation drawer -->
         <VNavigationDrawer
           v-model="isLeftSidebarOpen"
@@ -59,23 +58,18 @@ const checkAll = computed({
           location="start"
           class="calendar-add-event-drawer"
           :temporary="$vuetify.display.mdAndDown"
+          style="background: #282828; border-top-right-radius: 2.4rem"
         >
-          <div class="pa-5 d-flex flex-column gap-y-8">
-            <VBtn
-              block
-              @click="isEventHandlerSidebarActive = true"
-            >
-              Add event
-            </VBtn>
+          <div class="pa-5 d-flex flex-column gap-y-8 pt-8">
             <div>
-              <p class="text-sm text-uppercase text-medium-emphasis mb-3">
-                Calendars
+              <p class="text-xl text-uppercase text-white text-bold mb-3">
+                تقویم دوره‌ها
               </p>
 
               <div class="d-flex flex-column calendars-checkbox">
                 <VCheckbox
                   v-model="checkAll"
-                  label="View all"
+                  label="مشاهده همه"
                   density="default"
                   color="secondary"
                 />
@@ -93,12 +87,7 @@ const checkAll = computed({
           </div>
         </VNavigationDrawer>
         <VMain>
-          <VCard flat>
-            <FullCalendar
-              ref="refCalendar"
-              :options="calendarOptions"
-            />
-          </VCard>
+          <FullCalendar ref="refCalendar" :options="calendarOptions" />
         </VMain>
       </VLayout>
     </VCard>
@@ -128,6 +117,22 @@ const checkAll = computed({
     border-start-start-radius: 0.375rem;
   }
 }
+
+.v-card {
+  z-index: 10 !important;
+  border-radius: 2.4rem;
+  background-color: #282828 !important;
+}
+
+.v-layout {
+  z-index: 10 !important;
+  border-radius: 2.4rem;
+  background-color: #282828 !important;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border-inline-end: none;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -137,5 +142,9 @@ const checkAll = computed({
   .v-card {
     overflow: visible;
   }
+}
+
+.fc.fc-toolbar {
+  display: none !important;
 }
 </style>

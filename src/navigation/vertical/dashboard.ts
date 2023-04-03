@@ -1,22 +1,28 @@
 export default [
   {
-    title: 'Dashboards',
-    icon: { icon: 'mdi-home-outline' },
-    children: [
-      {
-        title: 'CRM',
-        to: 'dashboards-crm',
-      },
-      {
-        title: 'Analytics',
-        to: 'dashboards-analytics',
-      },
-      {
-        title: 'eCommerce',
-        to: 'dashboards-ecommerce',
-      },
-    ],
-    badgeContent: 'New',
-    badgeClass: 'bg-error',
+    title: "داشبورد",
+    to: "dashboards-crm",
+    icon: { icon: "mdi-home-outline" },
   },
-]
+
+  {
+    title: "تقویم",
+    icon: { icon: "mdi-calendar-blank-outline" },
+    to: "apps-calendar",
+  },
+  {
+    title: "دوره ها",
+    to: "apps-courses",
+    icon: { icon: "mdi-home-outline" },
+  },
+  {
+    title: "ارسال تیکت",
+    to: "apps-ticket",
+    icon: { icon: "mdi-home-outline" },
+  },
+  {
+    title: "رضایت دوره",
+    to: "",
+    icon: { icon: "mdi-home-outline" },
+  },
+];

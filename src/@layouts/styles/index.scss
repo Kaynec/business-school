@@ -1,3 +1,43 @@
 @use "_global";
 @use "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.min.css";
 @use "_classes";
+
+@font-face {
+    font-family: "Sahel HD";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../../assets/fonts/Sahel/Sahel-FD.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Sahel HD";
+    font-style: normal;
+    font-weight: 500;
+    src: url("../../assets/fonts/Sahel/Sahel-FD.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Sahel HD";
+    font-style: normal;
+    font-weight: 600;
+    src: url("../../assets/fonts/Sahel/Sahel-Bold-FD.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Sahel HD";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../../assets/fonts/Sahel/Sahel-Bold-FD.ttf") format("truetype");
+}
+
+.sahel {
+    font-family: "Sahel HD" !important;
+}
+
+body {
+    font-family: "Sahel HD" !important;
+}
+
+.v-application .v-application--wrap * {
+    font-family: "Sahel HD" !important;
+}

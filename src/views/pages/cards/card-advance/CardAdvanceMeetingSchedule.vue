@@ -8,37 +8,37 @@ import avatar5 from '@images/avatars/avatar-8.png'
 
 const meetingSchedules = [
   {
-    type: 'Business',
+    type: 'کار',
     title: 'Call with Woods',
     avatar: avatar1,
     dateTime: '21 Jul | 08:20-10:30',
   },
   {
-    type: 'Dinner',
+    type: 'شام',
     title: 'Conference call',
     avatar: avatar2,
     dateTime: '28 Jul | 05:00-6:45',
   },
   {
-    type: 'Meetup',
+    type: 'ملاقات',
     title: 'Meeting with Mark',
     avatar: avatar3,
     dateTime: '03 Aug | 07:00-8:30',
   },
   {
-    type: 'Dinner',
+    type: 'شام',
     title: 'Meeting in Oakland',
     avatar: avatar4,
     dateTime: '14 Feb | 04:15-05:30',
   },
   {
-    type: 'Meditation',
+    type: 'مدینیشن',
     title: 'Call with Hilda',
     avatar: avatar5,
     dateTime: '24 Jul | 11:30-12:00',
   },
   {
-    type: 'Business',
+    type: 'کار',
     title: 'Meeting with Carl',
     avatar: avatar6,
     dateTime: '05 Oct | 10:00-12:45',
@@ -52,13 +52,13 @@ const moreList = [
 ]
 
 const resolveTypeColor = (meetingType: string) => {
-  if (meetingType === 'Dinner')
+  if (meetingType === 'شام')
     return 'warning'
-  else if (meetingType === 'Meditation')
+  else if (meetingType === 'مدینیشن')
     return 'success'
-  else if (meetingType === 'Business')
+  else if (meetingType === 'کار')
     return 'primary'
-  else if (meetingType === 'Meetup')
+  else if (meetingType === 'ملاقات')
     return 'secondary'
 }
 </script>
@@ -104,7 +104,7 @@ const resolveTypeColor = (meetingType: string) => {
             <span>{{ meeting.dateTime }}</span>
           </VListItemSubtitle>
 
-          <!-- 👉 Business Types -->
+          <!-- 👉 کار Types -->
           <template #append>
             <VChip
               size="x-small"
