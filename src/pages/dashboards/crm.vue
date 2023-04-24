@@ -39,7 +39,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
     </VCol>
     <VCol cols="12" md="6" lg="3">
       <VCard class="rounded-xl h-100% customCard" :image="globe">
-        <div class="flex flex-col w-full pr-6 gap-4 pb-8 pt-25 peyda">
+        <div class="!flex flex-col w-full pr-6 gap-4 pb-8 pt-25 peyda">
           <span class="text-3xl"> ثبت نام در دوره بین المللی </span>
           <span class="text-2xl"> Executive MBA </span>
           <span class="text-2xl"> دانشگاه UMEF </span>
@@ -63,7 +63,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
     </VCol>
 
     <VCol cols="12" md="10" lg="5">
-      <VCard class="pa-2 flex-center-row rounded-xl h-100%">
+      <VCard class="pa-2 !flex-center-row rounded-xl h-100%">
         <ChartJsBarChart />
       </VCard>
     </VCol>
@@ -71,10 +71,10 @@ const chartJsCustomColors: ChartJsCustomColors = {
   <!--  -->
   <VRow>
     <VCol cols="12" md="8" lg="4">
-      <VCard class="p-3 rounded-xl h-100% space-y-2">
+      <VCard class="!p-3 rounded-xl h-100% space-y-2">
         <span class="text-3xl inline-block mb-8 peyda"> دوره‌های من </span>
         <div class="flex justify-between items-center my-4" v-for="i in 4">
-          <div class="flex flex-col">
+          <div class="!flex flex-col">
             <span class="text-lg pb-3 peyda">دوره مدیر اجرایی</span>
             <div class="text-xs text-400 flex-center-row gap-2">
               <svg
@@ -99,7 +99,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
       </VCard>
     </VCol>
     <VCol cols="12" md="6" lg="3">
-      <VCard class="rounded-xl min-h-100% p-4 flex flex-col justify-between">
+      <VCard class="rounded-xl min-h-100% !p-4 !flex flex-col justify-between">
         <span class="text-3xl pt-4 peyda"> مهلت سررسید </span>
 
         <div
@@ -107,11 +107,11 @@ const chartJsCustomColors: ChartJsCustomColors = {
           v-dragscroll
         >
           <section
-            class="cursor-pointer w-full shrink-0 h-90% my-auto flex flex-col justify-between pb-8"
+            class="cursor-pointer w-full shrink-0 h-90% my-auto !flex flex-col justify-between pb-8"
             v-for="i in 3"
           >
             <div class="flex justify-between items-center">
-              <div class="flex flex-col items-start gap-3">
+              <div class="!flex flex-col items-start gap-3">
                 <span class="text-2xl !text-#8D99AE pb-3 peyda">
                   {{ i }} دوره مدیریت</span
                 >
@@ -142,11 +142,11 @@ const chartJsCustomColors: ChartJsCustomColors = {
     </VCol>
 
     <VCol cols="12" md="10" lg="5">
-      <VCard class="p-6 rounded-xl h-100% space-y-2">
+      <VCard class="!p-6 rounded-xl h-100% space-y-2">
         <span class="text-3xl inline-block mb-8 peyda"
           >جعبه ابزار مدیریتی
         </span>
-        <div class="flex flex-col gap-8">
+        <div class="!flex flex-col gap-8">
           <div class="flex justify-between items-center">
             <div flex items-end gap-2>
               <div
@@ -155,7 +155,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
               >
                 <img w-full src="@/assets/images/svg/1.svg" alt="svg" />
               </div>
-              <div class="flex flex-col items-start">
+              <div class="!flex flex-col items-start">
                 <span class="text-lg peyda"
                   >بخش‌بندی مشتریان چیست و چرا اهمیت دارد؟
                 </span>
@@ -226,7 +226,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
               >
                 <img w-full src="@/assets/images/svg/1.svg" alt="svg" />
               </div>
-              <div class="flex flex-col items-start">
+              <div class="!flex flex-col items-start">
                 <span class="text-lg peyda"
                   >بخش‌بندی مشتریان چیست و چرا اهمیت دارد؟
                 </span>
@@ -297,7 +297,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
               >
                 <img w-full src="@/assets/images/svg/1.svg" alt="svg" />
               </div>
-              <div class="flex flex-col items-start">
+              <div class="!flex flex-col items-start">
                 <span class="text-lg peyda"
                   >بخش‌بندی مشتریان چیست و چرا اهمیت دارد؟
                 </span>
@@ -368,7 +368,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
               >
                 <img w-full src="@/assets/images/svg/1.svg" alt="svg" />
               </div>
-              <div class="flex flex-col items-start">
+              <div class="!flex flex-col items-start">
                 <span class="text-lg peyda"
                   >بخش‌بندی مشتریان چیست و چرا اهمیت دارد؟
                 </span>
@@ -495,11 +495,11 @@ const chartJsCustomColors: ChartJsCustomColors = {
     <VCol cols="12" md="5">
       <VCard
         :image="nelson"
-        class="pa-2 rounded-xl min-h-50 h-100% flex flex-col justify-center px-10 pb-8 peyda"
+        class="pa-2 rounded-xl min-h-50 h-100% !flex flex-col justify-center px-10 pb-8 peyda"
       >
         <div
           self-start
-          class="max-w-75% pb-4 flex flex-col text-xl leading-loose text-right"
+          class="max-w-75% pb-4 !flex flex-col text-xl leading-loose text-right"
           dir="rtl"
         >
           <span class="!text-gray-3"> بزرگترین ریسک، ریسک نکردن است! </span>

@@ -1,162 +1,172 @@
 <script setup lang="ts">
-import type { Invoice } from '@/@fake-db/types'
-import { useInvoiceStore } from '@/views/apps/invoice/useInvoiceStore'
-import { avatarText } from '@core/utils/formatters'
+import type { Invoice } from "@/@fake-db/types";
+import { useInvoiceStore } from "@/views/apps/invoice/useInvoiceStore";
+import { avatarText } from "@core/utils/formatters";
 
 // 👉 Store
-const invoiceListStore = useInvoiceStore()
+const invoiceListStore = useInvoiceStore();
 
-const searchQuery = ref('')
-const dateRange = ref('')
-const selectedStatus = ref()
-const rowPerPage = ref(10)
-const currentPage = ref(1)
-const totalPage = ref(1)
-const totalInvoices = ref(0)
-const invoices = ref<Invoice[]>([])
-const selectedRows = ref<string[]>([])
-const selectAllInvoice = ref(false)
+const searchQuery = ref("");
+const dateRange = ref("");
+const selectedStatus = ref();
+const rowPerPage = ref(10);
+const currentPage = ref(1);
+const totalPage = ref(1);
+const totalInvoices = ref(0);
+const invoices = ref<Invoice[]>([]);
+const selectedRows = ref<string[]>([]);
+const selectAllInvoice = ref(false);
 
 // 👉 Fetch Invoices
 watchEffect(() => {
-  const [start, end] = dateRange.value ? dateRange.value.split('to') : ''
+  const [start, end] = dateRange.value ? dateRange.value.split("to") : "";
 
-  invoiceListStore.fetchInvoices(
-    {
+  invoiceListStore
+    .fetchInvoices({
       q: searchQuery.value,
       status: selectedStatus.value,
       perPage: rowPerPage.value,
       currentPage: currentPage.value,
       startDate: start,
       endDate: end,
-    },
-  ).then(response => {
-    invoices.value = response.data.invoices
-    totalPage.value = response.data.totalPage
-    totalInvoices.value = response.data.totalInvoices
-  }).catch(error => {
-    console.log(error)
-  })
-})
+    })
+    .then((response) => {
+      invoices.value = response.data.invoices;
+      totalPage.value = response.data.totalPage;
+      totalInvoices.value = response.data.totalInvoices;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 // 👉 watching current page
 watchEffect(() => {
-  if (currentPage.value > totalPage.value)
-    currentPage.value = totalPage.value
-})
+  if (currentPage.value > totalPage.value) currentPage.value = totalPage.value;
+});
 
 // 👉 Computing pagination data
 const paginationData = computed(() => {
-  const firstIndex = invoices.value.length ? ((currentPage.value - 1) * rowPerPage.value) + 1 : 0
-  const lastIndex = invoices.value.length + ((currentPage.value - 1) * rowPerPage.value)
+  const firstIndex = invoices.value.length
+    ? (currentPage.value - 1) * rowPerPage.value + 1
+    : 0;
+  const lastIndex =
+    invoices.value.length + (currentPage.value - 1) * rowPerPage.value;
 
-  return `${firstIndex}-${lastIndex} of ${totalInvoices.value}`
-})
+  return `${firstIndex}-${lastIndex} of ${totalInvoices.value}`;
+});
 
 // 👉 Invoice balance variant resolver
-const resolveInvoiceBalanceVariant = (balance: string | number, total: number) => {
-  if (balance === total)
-    return { status: 'Unpaid', chip: { color: 'error' } }
+const resolveInvoiceBalanceVariant = (
+  balance: string | number,
+  total: number
+) => {
+  if (balance === total) return { status: "Unpaid", chip: { color: "error" } };
 
-  if (balance === 0)
-    return { status: 'Paid', chip: { color: 'success' } }
+  if (balance === 0) return { status: "Paid", chip: { color: "success" } };
 
-  return { status: balance, chip: { variant: 'text' } }
-}
+  return { status: balance, chip: { variant: "text" } };
+};
 
 // 👉 Invoice status variant resolver
 const resolveInvoiceStatusVariantAndIcon = (status: string) => {
-  if (status === 'Partial Payment')
-    return { variant: 'warning', icon: 'mdi-chart-timeline-variant' }
-  if (status === 'Paid')
-    return { variant: 'success', icon: 'mdi-check' }
-  if (status === 'Downloaded')
-    return { variant: 'info', icon: 'mdi-arrow-down' }
-  if (status === 'Draft')
-    return { variant: 'secondary', icon: 'mdi-content-save-outline' }
-  if (status === 'Sent')
-    return { variant: 'primary', icon: 'mdi-email-outline' }
-  if (status === 'Past Due')
-    return { variant: 'error', icon: 'mdi-alert-circle-outline' }
+  if (status === "Partial Payment")
+    return { variant: "warning", icon: "mdi-chart-timeline-variant" };
+  if (status === "Paid") return { variant: "success", icon: "mdi-check" };
+  if (status === "Downloaded")
+    return { variant: "info", icon: "mdi-arrow-down" };
+  if (status === "Draft")
+    return { variant: "secondary", icon: "mdi-content-save-outline" };
+  if (status === "Sent")
+    return { variant: "primary", icon: "mdi-email-outline" };
+  if (status === "Past Due")
+    return { variant: "error", icon: "mdi-alert-circle-outline" };
 
-  return { variant: 'secondary', icon: 'mdi-close' }
-}
+  return { variant: "secondary", icon: "mdi-close" };
+};
 
 // 👉 Add/Remove all checkbox ids in/from array
 const selectUnselectAll = () => {
-  selectAllInvoice.value = !selectAllInvoice.value
+  selectAllInvoice.value = !selectAllInvoice.value;
   if (selectAllInvoice.value) {
-    invoices.value.forEach(invoice => {
+    invoices.value.forEach((invoice) => {
       if (!selectedRows.value.includes(`check${invoice.id}`))
-        selectedRows.value.push(`check${invoice.id}`)
-    })
+        selectedRows.value.push(`check${invoice.id}`);
+    });
+  } else {
+    selectedRows.value = [];
   }
-  else {
-    selectedRows.value = []
-  }
-}
+};
 
 // 👉 watch if checkbox array is empty all checkbox should be uncheck
-watch(selectedRows, () => {
-  if (!selectedRows.value.length)
-    selectAllInvoice.value = false
-}, { deep: true })
+watch(
+  selectedRows,
+  () => {
+    if (!selectedRows.value.length) selectAllInvoice.value = false;
+  },
+  { deep: true }
+);
 
 // 👉 Add/Remove individual checkbox in/from array
 const addRemoveIndividualCheckbox = (checkID: string) => {
   if (selectedRows.value.includes(checkID)) {
-    const index = selectedRows.value.indexOf(checkID)
+    const index = selectedRows.value.indexOf(checkID);
 
-    selectedRows.value.splice(index, 1)
+    selectedRows.value.splice(index, 1);
+  } else {
+    selectedRows.value.push(checkID);
+    selectAllInvoice.value = true;
   }
-  else {
-    selectedRows.value.push(checkID)
-    selectAllInvoice.value = true
-  }
-}
+};
 
 const computedMoreList = computed(() => {
-  return (paramId: number) => ([
-    { title: 'Download', value: 'download', prependIcon: 'mdi-download-outline' },
+  return (paramId: number) => [
     {
-      title: 'Edit',
-      value: 'edit',
-      prependIcon: 'mdi-pencil-outline',
-      to: { name: 'apps-invoice-edit-id', params: { id: paramId } },
+      title: "Download",
+      value: "download",
+      prependIcon: "mdi-download-outline",
     },
-    { title: 'Duplicate', value: 'duplicate', prependIcon: 'mdi-layers-outline' },
-  ])
-})
+    {
+      title: "Edit",
+      value: "edit",
+      prependIcon: "mdi-pencil-outline",
+      to: { name: "apps-invoice-edit-id", params: { id: paramId } },
+    },
+    {
+      title: "Duplicate",
+      value: "duplicate",
+      prependIcon: "mdi-layers-outline",
+    },
+  ];
+});
 </script>
 
 <template>
   <section v-if="invoices">
     <!-- 👉 Invoice Filters  -->
-    <VCard
-      title="Filters"
-      class="mb-6"
-    >
+    <VCard title="Filters" class="mb-6">
       <VCardText>
         <VRow>
           <!-- 👉 Status filter -->
-          <VCol
-            cols="12"
-            md="6"
-          >
+          <VCol cols="12" md="6">
             <VSelect
               v-model="selectedStatus"
               label="Select Status"
               clearable
               clear-icon="mdi-close"
-              :items="['Downloaded', 'Draft', 'Sent', 'Paid', 'Partial Payment', 'Past Due']"
+              :items="[
+                'Downloaded',
+                'Draft',
+                'Sent',
+                'Paid',
+                'Partial Payment',
+                'Past Due',
+              ]"
             />
           </VCol>
 
           <!-- 👉 DateRange filter -->
-          <VCol
-            cols="12"
-            md="6"
-          >
+          <VCol cols="12" md="6">
             <AppDateTimePicker
               v-model="dateRange"
               label="Invoice Date"
@@ -195,10 +205,7 @@ const computedMoreList = computed(() => {
           </div>
 
           <!-- 👉 Create invoice -->
-          <VBtn
-            prepend-icon="mdi-plus"
-            :to="{ name: 'apps-invoice-add' }"
-          >
+          <VBtn prepend-icon="mdi-plus" :to="{ name: 'apps-invoice-add' }">
             Create invoice
           </VBtn>
         </div>
@@ -212,60 +219,36 @@ const computedMoreList = computed(() => {
         <thead>
           <tr>
             <!-- 👉 Check/Uncheck all checkbox -->
-            <th
-              scope="col"
-              class="text-center"
-            >
-              <div style="width: 1rem;">
+            <th scope="col" class="text-center">
+              <div style="width: 1rem">
                 <VCheckbox
                   :model-value="selectAllInvoice"
-                  :indeterminate="(invoices.length !== selectedRows.length) && !!selectedRows.length"
+                  :indeterminate="
+                    invoices.length !== selectedRows.length &&
+                    !!selectedRows.length
+                  "
                   @click="selectUnselectAll"
                 />
               </div>
             </th>
-            <th scope="col">
-              #ID
-            </th>
-            <th
-              scope="col"
-              class="text-center"
-            >
+            <th scope="col">#ID</th>
+            <th scope="col" class="text-center">
               <VIcon icon="mdi-trending-up" />
             </th>
-            <th scope="col">
-              CLIENT
-            </th>
-            <th
-              scope="col"
-              class="text-center"
-            >
-              TOTAL
-            </th>
-            <th scope="col">
-              DATE
-            </th>
-            <th
-              scope="col"
-              class="text-center"
-            >
-              BALANCE
-            </th>
-            <th scope="col">
-              ACTIONS
-            </th>
+            <th scope="col">CLIENT</th>
+            <th scope="col" class="text-center">TOTAL</th>
+            <th scope="col">DATE</th>
+            <th scope="col" class="text-center">BALANCE</th>
+            <th scope="col">ACTIONS</th>
           </tr>
         </thead>
 
         <!-- 👉 Table Body -->
         <tbody>
-          <tr
-            v-for="invoice in invoices"
-            :key="invoice.id"
-          >
+          <tr v-for="invoice in invoices" :key="invoice.id">
             <!-- 👉 Individual checkbox -->
             <td>
-              <div style="width: 1rem;">
+              <div style="width: 1rem">
                 <VCheckbox
                   :id="`check${invoice.id}`"
                   :model-value="selectedRows.includes(`check${invoice.id}`)"
@@ -276,7 +259,12 @@ const computedMoreList = computed(() => {
 
             <!-- 👉 Id -->
             <td>
-              <RouterLink :to="{ name: 'apps-invoice-preview-id', params: { id: invoice.id } }">
+              <RouterLink
+                :to="{
+                  name: 'apps-invoice-preview-id',
+                  params: { id: invoice.id },
+                }"
+              >
                 #{{ invoice.id }}
               </RouterLink>
             </td>
@@ -288,24 +276,27 @@ const computedMoreList = computed(() => {
                   <VAvatar
                     :size="34"
                     v-bind="props"
-                    :color="resolveInvoiceStatusVariantAndIcon(invoice.invoiceStatus).variant"
+                    :color="
+                      resolveInvoiceStatusVariantAndIcon(invoice.invoiceStatus)
+                        .variant
+                    "
                     variant="tonal"
                   >
                     <VIcon
                       :size="20"
-                      :icon="resolveInvoiceStatusVariantAndIcon(invoice.invoiceStatus).icon"
+                      :icon="
+                        resolveInvoiceStatusVariantAndIcon(
+                          invoice.invoiceStatus
+                        ).icon
+                      "
                     />
                   </VAvatar>
                 </template>
                 <p class="mb-0">
                   {{ invoice.invoiceStatus }}
                 </p>
-                <p class="mb-0">
-                  Balance: {{ invoice.balance }}
-                </p>
-                <p class="mb-0">
-                  Due date: {{ invoice.dueDate }}
-                </p>
+                <p class="mb-0">Balance: {{ invoice.balance }}</p>
+                <p class="mb-0">Due date: {{ invoice.dueDate }}</p>
               </VTooltip>
             </td>
 
@@ -314,32 +305,31 @@ const computedMoreList = computed(() => {
               <div class="d-flex align-center">
                 <VAvatar
                   size="34"
-                  :color="resolveInvoiceStatusVariantAndIcon(invoice.invoiceStatus).variant"
+                  :color="
+                    resolveInvoiceStatusVariantAndIcon(invoice.invoiceStatus)
+                      .variant
+                  "
                   variant="tonal"
                   class="me-3"
                 >
-                  <VImg
-                    v-if="invoice.avatar.length"
-                    :src="invoice.avatar"
-                  />
-                  <span
-                    v-else
-                    class="text-sm"
-                  >{{ avatarText(invoice.client.name) }}</span>
+                  <VImg v-if="invoice.avatar.length" :src="invoice.avatar" />
+                  <span v-else class="text-sm">{{
+                    avatarText(invoice.client.name)
+                  }}</span>
                 </VAvatar>
-                <div class="d-flex flex-column">
+                <div class="!flex flex-col">
                   <h6 class="text-sm font-weight-medium mb-0">
                     {{ invoice.client.name }}
                   </h6>
-                  <span class="text-caption">{{ invoice.client.companyEmail }}</span>
+                  <span class="text-caption">{{
+                    invoice.client.companyEmail
+                  }}</span>
                 </div>
               </div>
             </td>
 
             <!-- 👉 total -->
-            <td class="text-center">
-              ${{ invoice.total }}
-            </td>
+            <td class="text-center">${{ invoice.total }}</td>
 
             <!-- 👉 Date -->
             <td>
@@ -349,28 +339,36 @@ const computedMoreList = computed(() => {
             <!-- 👉 Balance -->
             <td class="text-center">
               <VChip
-                v-bind="resolveInvoiceBalanceVariant(invoice.balance, invoice.total).chip"
+                v-bind="
+                  resolveInvoiceBalanceVariant(invoice.balance, invoice.total)
+                    .chip
+                "
                 size="small"
                 class="text-high-emphasis"
               >
-                {{ resolveInvoiceBalanceVariant(invoice.balance, invoice.total).status }}
+                {{
+                  resolveInvoiceBalanceVariant(invoice.balance, invoice.total)
+                    .status
+                }}
               </VChip>
             </td>
 
             <!-- 👉 Actions -->
-            <td style="width: 8rem;">
+            <td style="width: 8rem">
               <IconBtn>
                 <VIcon icon="mdi-delete-outline" />
               </IconBtn>
 
-              <IconBtn :to="{ name: 'apps-invoice-preview-id', params: { id: invoice.id } }">
+              <IconBtn
+                :to="{
+                  name: 'apps-invoice-preview-id',
+                  params: { id: invoice.id },
+                }"
+              >
                 <VIcon icon="mdi-eye-outline" />
               </IconBtn>
 
-              <MoreBtn
-                :menu-list="computedMoreList(invoice.id)"
-                item-props
-              />
+              <MoreBtn :menu-list="computedMoreList(invoice.id)" item-props />
             </td>
           </tr>
         </tbody>
@@ -378,10 +376,7 @@ const computedMoreList = computed(() => {
         <!-- 👉 table footer  -->
         <tfoot v-show="!invoices.length">
           <tr>
-            <td
-              colspan="8"
-              class="text-center text-body-1"
-            >
+            <td colspan="8" class="text-center text-body-1">
               No data available
             </td>
           </tr>
@@ -394,10 +389,7 @@ const computedMoreList = computed(() => {
       <!-- SECTION Pagination -->
       <VCardText class="d-flex flex-wrap justify-end gap-4 pa-2">
         <!-- 👉 Rows per page -->
-        <div
-          class="d-flex align-center me-3"
-          style="width: 171px;"
-        >
+        <div class="d-flex align-center me-3" style="width: 171px">
           <span class="text-no-wrap me-3">Rows per page:</span>
           <VSelect
             v-model="rowPerPage"

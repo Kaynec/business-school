@@ -21,7 +21,7 @@ const states = ["Alabama", "Alaska", "American Samoa"];
   <VRow>
     <VCol cols="12" md="4" lg="3">
       <VCard
-        class="rounded-xl gap-10 d-flex flex-column"
+        class="rounded-xl gap-10 !flex flex-col"
         style="background: rgba(40, 40, 40, 80%)"
       >
         <!-- <VImg :src="avatar1" height="201" cover /> -->
@@ -41,7 +41,7 @@ const states = ["Alabama", "Alaska", "American Samoa"];
           </VProgressCircular>
         </VCardItem>
 
-        <div class="d-flex flex-column justify-center align-center gap-2">
+        <div class="!flex flex-col justify-center align-center gap-2">
           <span>کددوره : 414</span>
           <h1 class="peyda" style="color: white">Self leadership</h1>
         </div>

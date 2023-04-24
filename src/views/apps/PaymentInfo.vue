@@ -39,12 +39,12 @@ onClickOutside(target, () => {
   >
     <VCard
       ref="target"
-      class="rounded-30px flex flex-col gap-3 relative pt-3 w-90% max-w-150 mb-100"
+      class="!rounded-30px !flex flex-col gap-3 relative pt-3 w-90% max-w-150 mb-100"
     >
       <span class="text-lg !text-#8D99AE pr-5 pt-5 peyda"
         >{{ item.code }} _ {{ item.name }}</span
       >
-      <div class="flex flex-col gap-4 py-4 pr-4">
+      <div class="!flex flex-col gap-4 py-4 pr-4">
         <div class="flex items-center gap-3">
           <span
             style="background: rgba(141, 153, 174, 20%)"
@@ -76,7 +76,7 @@ onClickOutside(target, () => {
       </div>
 
       <!--  -->
-      <VTable class="bg-#323232 rounded-0 my-4">
+      <VTable class="!bg-#323232 rounded-0 my-4">
         <!-- 👉 table head -->
         <thead>
           <tr>

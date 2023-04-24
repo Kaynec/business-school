@@ -1,4 +1,3 @@
-import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import Unocss from "unocss/vite";
@@ -14,6 +13,7 @@ import vuetify from "vite-plugin-vuetify";
 export default defineConfig({
   base: "/business-school/",
   plugins: [
+    Unocss(),
     vue(),
     vueJsx(),
 
@@ -23,7 +23,6 @@ export default defineConfig({
         configFile: "src/styles/variables/_vuetify.scss",
       },
     }),
-    Unocss(),
     Pages({
       dirs: ["./src/pages"],
 
@@ -72,15 +71,15 @@ export default defineConfig({
       ],
       vueTemplate: true,
     }),
-    VueI18nPlugin({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [
-        fileURLToPath(
-          new URL("./src/plugins/i18n/locales/**", import.meta.url)
-        ),
-      ],
-    }),
+    // VueI18nPlugin({
+    //   runtimeOnly: true,
+    //   compositionOnly: true,
+    //   include: [
+    //     fileURLToPath(
+    //       new URL("./src/plugins/i18n/locales/**", import.meta.url)
+    //     ),
+    //   ],
+    // }),
     DefineOptions(),
   ],
   define: { "process.env": {} },
@@ -108,11 +107,11 @@ export default defineConfig({
       ),
     },
   },
-  build: {
-    chunkSizeWarningLimit: 5000,
-  },
-  optimizeDeps: {
-    exclude: ["vuetify"],
-    entries: ["./src/**/*.vue"],
-  },
+  // build: {
+  //   chunkSizeWarningLimit: 5000,
+  // },
+  // optimizeDeps: {
+  //   exclude: ["vuetify"],
+  //   entries: ["./src/**/*.vue"],
+  // },
 });

@@ -30,7 +30,9 @@ const currentItemData = ref({
   ],
 });
 
-const toggleCurrentItemVisivility = (currentItem: typeof tickets.value[0]) => {
+const toggleCurrentItemVisivility = (
+  currentItem: (typeof tickets.value)[0]
+) => {
   currentItemData.value = currentItem as any;
   showCurrentItem.value = true;
 };
@@ -459,8 +461,8 @@ const tickets = ref([
     <div class="flex gap-5 flex-nowrap overflow-auto pb-5 mb-10 scrollbar">
       <VCard
         v-for="ticket in tickets"
-        class="rounded-30px min-w-80 min-h-45 flex flex-col gap-3 relative pt-3"
-        :class="`${ticket.radShode ? 'bg-#111' : ''}`"
+        class="rounded-30px min-w-80 min-h-45 !flex flex-col gap-3 relative pt-3"
+        :class="`${ticket.radShode ? '!bg-#111' : ''}`"
       >
         <span
           v-if="ticket.radShode"
@@ -474,7 +476,7 @@ const tickets = ref([
           >
           <VChip color="#F7A600" text-xs> قسط دوم </VChip>
         </div>
-        <div class="flex flex-col gap-4 py-4 p-2">
+        <div class="!flex flex-col gap-4 py-4 p-2">
           <div class="flex items-center gap-3">
             <span
               style="background: rgba(141, 153, 174, 20%)"

@@ -1,39 +1,31 @@
 <script setup lang="ts">
-import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
+import { PerfectScrollbar } from "vue3-perfect-scrollbar";
 
 interface Shortcut {
-  icon: string
-  title: string
-  subtitle: string
-  to: object | string
+  icon: string;
+  title: string;
+  subtitle: string;
+  to: object | string;
 }
 
 interface Props {
-  togglerIcon?: string
-  shortcuts: Shortcut[]
+  togglerIcon?: string;
+  shortcuts: Shortcut[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  togglerIcon: 'mdi-view-grid-plus-outline',
-})
+  togglerIcon: "mdi-view-grid-plus-outline",
+});
 
-const router = useRouter()
+const router = useRouter();
 </script>
 
 <template>
   <IconBtn>
     <VIcon :icon="props.togglerIcon" />
 
-    <VMenu
-      activator="parent"
-      offset="14px"
-      location="bottom end"
-    >
-      <VCard
-        width="340"
-        max-height="560"
-        class="d-flex flex-column"
-      >
+    <VMenu activator="parent" offset="14px" location="bottom end">
+      <VCard width="340" max-height="560" class="!flex flex-col">
         <VCardItem class="py-4">
           <VCardTitle>Shortcuts</VCardTitle>
 
@@ -56,10 +48,7 @@ const router = useRouter()
               :class="(index + 1) % 2 ? 'border-e' : ''"
               @click="router.push(shortcut.to)"
             >
-              <VAvatar
-                variant="tonal"
-                size="48"
-              >
+              <VAvatar variant="tonal" size="48">
                 <VIcon :icon="shortcut.icon" />
               </VAvatar>
 

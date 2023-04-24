@@ -20,7 +20,7 @@ export default defineConfig({
     ],
     ["error-message", "text-red-600 text-xs m-1.2"],
     ["flex-center-row", "flex flex-row justify-center items-center"],
-    ["flex-center-column", "flex flex-col justify-center items-center "],
+    ["flex-center-column", "!flex flex-col justify-center items-center "],
     [
       "class-icons",
       "flex items-center text-.75em justify-center gap-2 font-600",

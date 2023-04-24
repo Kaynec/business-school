@@ -1,77 +1,54 @@
 <script setup lang="ts">
-import avatar1 from '@images/avatars/avatar-1.png'
-import avatar2 from '@images/avatars/avatar-2.png'
-import avatar3 from '@images/avatars/avatar-3.png'
-import avatar4 from '@images/avatars/avatar-4.png'
-import eCommerce2 from '@images/eCommerce/2.png'
-import pages1 from '@images/pages/1.png'
-import pages2 from '@images/pages/2.png'
-import pages3 from '@images/pages/3.png'
-import pages5 from '@images/pages/5.jpg'
-import pages6 from '@images/pages/6.png'
+import avatar1 from "@images/avatars/avatar-1.png";
+import avatar2 from "@images/avatars/avatar-2.png";
+import avatar3 from "@images/avatars/avatar-3.png";
+import avatar4 from "@images/avatars/avatar-4.png";
+import eCommerce2 from "@images/eCommerce/2.png";
+import pages1 from "@images/pages/1.png";
+import pages2 from "@images/pages/2.png";
+import pages3 from "@images/pages/3.png";
+import pages5 from "@images/pages/5.jpg";
+import pages6 from "@images/pages/6.png";
 
-const avatars = [
-  avatar1,
-  avatar2,
-  avatar3,
-  avatar4,
-]
+const avatars = [avatar1, avatar2, avatar3, avatar4];
 
-const isCardDetailsVisible = ref(false)
+const isCardDetailsVisible = ref(false);
 </script>
 
 <template>
   <VRow>
     <!-- 👉 Influencing The Influencer -->
-    <VCol
-      cols="12"
-      sm="6"
-      md="4"
-    >
+    <VCol cols="12" sm="6" md="4">
       <VCard>
-        <VImg
-          :src="pages1"
-          height="201"
-          cover
-        />
+        <VImg :src="pages1" height="201" cover />
 
         <VCardItem>
           <VCardTitle>Influencing The Influencer</VCardTitle>
         </VCardItem>
 
         <VCardText>
-          Cancun is back, better than ever! Over a hundred Mexico resorts have reopened and the state tourism minister predicts Cancun will draw as many visitors in 2006 as it did two years ago.
+          Cancun is back, better than ever! Over a hundred Mexico resorts have
+          reopened and the state tourism minister predicts Cancun will draw as
+          many visitors in 2006 as it did two years ago.
         </VCardText>
       </VCard>
     </VCol>
 
     <!-- 👉 Robert Meyer -->
-    <VCol
-      cols="12"
-      sm="6"
-      md="4"
-    >
+    <VCol cols="12" sm="6" md="4">
       <VCard>
-        <VImg
-          :src="pages2"
-          height="178"
-          cover
-        />
+        <VImg :src="pages2" height="178" cover />
 
         <VCardText class="position-relative">
           <!-- User Avatar -->
-          <VAvatar
-            size="75"
-            class="avatar-center"
-            :image="avatar1"
-          />
+          <VAvatar size="75" class="avatar-center" :image="avatar1" />
 
           <!-- Title, Subtitle & Action Button -->
-          <div class="d-flex justify-space-between align-center flex-wrap mt-6 mb-6">
+          <div
+            class="d-flex justify-space-between align-center flex-wrap mt-6 mb-6"
+          >
             <div class="me-2 mb-2">
-              <VCardTitle class="pa-0">
-                Robert Meyer
-              </VCardTitle>
+              <VCardTitle class="pa-0"> Robert Meyer </VCardTitle>
               <VCardSubtitle class="text-caption pa-0">
                 London, UK
               </VCardSubtitle>
@@ -97,24 +74,17 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 Popular Uses Of The Internet -->
-    <VCol
-      cols="12"
-      md="4"
-      sm="6"
-    >
+    <VCol cols="12" md="4" sm="6">
       <VCard>
-        <VImg
-          :src="pages3"
-          cover
-          height="198"
-        />
+        <VImg :src="pages3" cover height="198" />
 
         <VCardItem>
           <VCardTitle>Popular Uses Of The Internet</VCardTitle>
         </VCardItem>
 
         <VCardText>
-          Although cards can support multiple actions, UI controls, and an overflow menu.
+          Although cards can support multiple actions, UI controls, and an
+          overflow menu.
         </VCardText>
 
         <VCardActions>
@@ -129,7 +99,11 @@ const isCardDetailsVisible = ref(false)
             size="small"
             @click="isCardDetailsVisible = !isCardDetailsVisible"
           >
-            <VIcon :icon="isCardDetailsVisible ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
+            <VIcon
+              :icon="
+                isCardDetailsVisible ? 'mdi-chevron-up' : 'mdi-chevron-down'
+              "
+            />
           </VBtn>
         </VCardActions>
 
@@ -137,7 +111,11 @@ const isCardDetailsVisible = ref(false)
           <div v-show="isCardDetailsVisible">
             <VDivider />
             <VCardText>
-              I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+              I'm a thing. But, like most politicians, he promised more than he
+              could deliver. You won't have time for sleeping, soldier, not with
+              all the bed making you'll be doing. Then we'll go with that data
+              file! Hey, you add a one and two zeros to that or we walk! You're
+              going to do his laundry? I've got to find a way to escape.
             </VCardText>
           </div>
         </VExpandTransition>
@@ -145,17 +123,13 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 Apple iPhone 11 Pro -->
-    <VCol
-      sm="6"
-      cols="12"
-    >
+    <VCol sm="6" cols="12">
       <VCard>
-        <div class="d-flex justify-space-between flex-wrap flex-md-nowrap flex-column flex-md-row">
+        <div
+          class="d-flex justify-space-between flex-wrap flex-md-nowrap flex-column flex-md-row"
+        >
           <div class="ma-auto pa-5">
-            <VImg
-              width="137"
-              :src="eCommerce2"
-            />
+            <VImg width="137" :src="eCommerce2" />
           </div>
 
           <VDivider :vertical="$vuetify.display.mdAndUp" />
@@ -166,7 +140,8 @@ const isCardDetailsVisible = ref(false)
             </VCardItem>
 
             <VCardText>
-              Apple iPhone 11 Pro smartphone. Announced Sep 2019. Features 5.8″ display Apple A13 Bionic
+              Apple iPhone 11 Pro smartphone. Announced Sep 2019. Features 5.8″
+              display Apple A13 Bionic
 
               <div class="text-subtitle-1">
                 <span>Price :</span> <span class="font-weight-bold">$899</span>
@@ -179,10 +154,7 @@ const isCardDetailsVisible = ref(false)
                 <span class="ms-2">Add to cart</span>
               </VBtn>
 
-              <VBtn
-                color="secondary"
-                icon="mdi-share-variant-outline"
-              />
+              <VBtn color="secondary" icon="mdi-share-variant-outline" />
             </VCardActions>
           </div>
         </div>
@@ -190,12 +162,9 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 Stump town Roasters. -->
-    <VCol
-      sm="6"
-      cols="12"
-    >
+    <VCol sm="6" cols="12">
       <VCard>
-        <div class="d-flex flex-column-reverse flex-md-row">
+        <div class="!flex flex-col-reverse flex-md-row">
           <div>
             <VCardItem>
               <VCardTitle>Stumptown Roasters</VCardTitle>
@@ -212,7 +181,8 @@ const isCardDetailsVisible = ref(false)
               <span>5 Star | 98 reviews</span>
 
               <div class="mt-2 w-75">
-                Before there was a United States of America, there were coffee houses.
+                Before there was a United States of America, there were coffee
+                houses.
               </div>
             </VCardText>
 
@@ -223,72 +193,50 @@ const isCardDetailsVisible = ref(false)
           </div>
 
           <div class="ma-auto pa-5">
-            <VImg
-              :width="176"
-              :src="pages5"
-              class="rounded"
-            />
+            <VImg :width="176" :src="pages5" class="rounded" />
           </div>
         </div>
       </VCard>
     </VCol>
 
     <!-- 👉 Apple Watch card -->
-    <VCol
-      sm="6"
-      md="4"
-      cols="12"
-    >
+    <VCol sm="6" md="4" cols="12">
       <VCard>
-        <VImg
-          :src="pages6"
-          height="140"
-          cover
-        />
+        <VImg :src="pages6" height="140" cover />
 
         <VCardItem>
           <VCardTitle>Apple Watch</VCardTitle>
         </VCardItem>
 
         <VCardText>
-          <p class="font-weight-medium text-base mb-2">
-            $249.40
-          </p>
+          <p class="font-weight-medium text-base mb-2">$249.40</p>
 
           <p class="mb-0">
-            3.1GHz 6-core 10th-generation Intel Core i5 processor, Turbo Boost up to 4.5GHz
+            3.1GHz 6-core 10th-generation Intel Core i5 processor, Turbo Boost
+            up to 4.5GHz
           </p>
         </VCardText>
 
-        <VBtn
-          block
-          class="rounded-t-0"
-        >
-          Add to cart
-        </VBtn>
+        <VBtn block class="rounded-t-0"> Add to cart </VBtn>
       </VCard>
     </VCol>
 
     <!-- 👉 Lifetime Membership -->
-    <VCol
-      md="8"
-      cols="12"
-    >
+    <VCol md="8" cols="12">
       <VCard>
         <VRow no-gutters>
-          <VCol
-            cols="12"
-            sm="8"
-            lg="7"
-            order="2"
-            order-lg="1"
-          >
+          <VCol cols="12" sm="8" lg="7" order="2" order-lg="1">
             <VCardItem>
               <VCardTitle>Lifetime Membership</VCardTitle>
             </VCardItem>
 
             <VCardText>
-              Here, I focus on a range of items and features that we use in life without giving them a second thought such as Coca Cola, body muscles and holding ones own breath. Though, most of these notes are not fundamentally necessary, they are such that you can use them for a good laugh, at a drinks party or for picking up women or men.
+              Here, I focus on a range of items and features that we use in life
+              without giving them a second thought such as Coca Cola, body
+              muscles and holding ones own breath. Though, most of these notes
+              are not fundamentally necessary, they are such that you can use
+              them for a good laugh, at a drinks party or for picking up women
+              or men.
             </VCardText>
 
             <VCardText>
@@ -298,42 +246,26 @@ const isCardDetailsVisible = ref(false)
             <VCardText class="d-flex justify-center">
               <div class="me-auto pe-4">
                 <p class="d-flex align-center mb-6">
-                  <VIcon
-                    color="primary"
-                    icon="mdi-lock-open-outline"
-                  />
+                  <VIcon color="primary" icon="mdi-lock-open-outline" />
                   <span class="ms-3">Full Access</span>
                 </p>
 
                 <p class="d-flex align-center mb-0">
-                  <VIcon
-                    color="primary"
-                    icon="mdi-account-outline"
-                  />
+                  <VIcon color="primary" icon="mdi-account-outline" />
                   <span class="ms-3">15 Members</span>
                 </p>
               </div>
 
-              <VDivider
-                v-if="$vuetify.display.smAndUp"
-                vertical
-                inset
-              />
+              <VDivider v-if="$vuetify.display.smAndUp" vertical inset />
 
               <div class="ms-auto ps-4">
                 <p class="d-flex align-center mb-6">
-                  <VIcon
-                    color="primary"
-                    icon="mdi-star-outline"
-                  />
+                  <VIcon color="primary" icon="mdi-star-outline" />
                   <span class="ms-3">Access all Features</span>
                 </p>
 
                 <p class="d-flex align-center mb-0">
-                  <VIcon
-                    color="primary"
-                    icon="mdi-trending-up"
-                  />
+                  <VIcon color="primary" icon="mdi-trending-up" />
                   <span class="ms-3">Lifetime Free Update</span>
                 </p>
               </div>
@@ -348,7 +280,9 @@ const isCardDetailsVisible = ref(false)
             order-lg="2"
             class="member-pricing-bg text-center"
           >
-            <div class="membership-pricing d-flex flex-column align-center py-14 h-100 justify-center">
+            <div
+              class="membership-pricing !flex flex-col align-center py-14 h-100 justify-center"
+            >
               <p class="mb-5">
                 <sub class="text-h5">$</sub>
                 <sup class="text-h2 font-weight-medium">899</sup>
@@ -356,12 +290,11 @@ const isCardDetailsVisible = ref(false)
               </p>
 
               <p class="text-sm">
-                5 Tips For Offshore <br> Software Development
+                5 Tips For Offshore <br />
+                Software Development
               </p>
 
-              <VBtn class="mt-8">
-                Contact Now
-              </VBtn>
+              <VBtn class="mt-8"> Contact Now </VBtn>
             </div>
           </VCol>
         </VRow>
@@ -369,17 +302,18 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 Influencing The Influencer -->
-    <VCol
-      cols="12"
-      lg="4"
-      md="6"
-    >
+    <VCol cols="12" lg="4" md="6">
       <VCard title="Influencing The Influencer">
         <VCardText>
           <div class="mb-2">
-            Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch.
+            Computers have become ubiquitous in almost every facet of our lives.
+            At work, desk jockeys spend hours in front of their desktops, while
+            delivery people scan bar codes with handhelds and workers in the
+            field stay in touch.
           </div>
-          If you're in the market for new desktops, notebooks, or PDAs, there are a myriad of choices. Here's a rundown of some of the best systems available.
+          If you're in the market for new desktops, notebooks, or PDAs, there
+          are a myriad of choices. Here's a rundown of some of the best systems
+          available.
         </VCardText>
 
         <VCardActions>
@@ -389,28 +323,22 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 The Best Answers -->
-    <VCol
-      cols="12"
-      lg="4"
-      md="6"
-    >
+    <VCol cols="12" lg="4" md="6">
       <VCard title="The Best Answers">
         <VCardText class="d-flex align-center flex-wrap">
-          <VRating
-            :model-value="5"
-            readonly
-            density="compact"
-            class="me-3"
-          />
+          <VRating :model-value="5" readonly density="compact" class="me-3" />
           <span class="text-subtitle-2">5 Star | 98 reviews</span>
         </VCardText>
 
         <VCardText>
-          If you are looking for a new way to promote your business that won't cost you more money, maybe printing is one of the options you won't resist.
+          If you are looking for a new way to promote your business that won't
+          cost you more money, maybe printing is one of the options you won't
+          resist.
         </VCardText>
 
         <VCardText>
-          become fast, easy and simple. If you want your promotional material to be an eye-catching
+          become fast, easy and simple. If you want your promotional material to
+          be an eye-catching
         </VCardText>
 
         <VCardActions>
@@ -421,40 +349,26 @@ const isCardDetailsVisible = ref(false)
     </VCol>
 
     <!-- 👉 Support -->
-    <VCol
-      cols="12"
-      md="6"
-      lg="4"
-    >
+    <VCol cols="12" md="6" lg="4">
       <VCard class="text-center">
-        <VCardText class="d-flex flex-column justify-center align-center">
-          <VAvatar
-            color="primary"
-            variant="tonal"
-            size="50"
-            class="mb-4"
-          >
-            <VIcon
-              size="2rem"
-              icon="mdi-help-circle-outline"
-            />
+        <VCardText class="!flex flex-col justify-center align-center">
+          <VAvatar color="primary" variant="tonal" size="50" class="mb-4">
+            <VIcon size="2rem" icon="mdi-help-circle-outline" />
           </VAvatar>
 
-          <h6 class="text-h6">
-            Support
-          </h6>
+          <h6 class="text-h6">Support</h6>
         </VCardText>
 
         <VCardText>
           <p>
-            According to us blisters are a very common thing and we come across them very often in our daily lives. It is a very common occurrence like cold or fever depending upon your lifestyle.
+            According to us blisters are a very common thing and we come across
+            them very often in our daily lives. It is a very common occurrence
+            like cold or fever depending upon your lifestyle.
           </p>
         </VCardText>
 
         <VCardActions class="justify-center">
-          <VBtn variant="elevated">
-            Contact Now
-          </VBtn>
+          <VBtn variant="elevated"> Contact Now </VBtn>
         </VCardActions>
       </VCard>
     </VCol>

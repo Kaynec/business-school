@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <VCard>
+    <VCard class="custom">
       <!-- `z-index: 0` Allows overlapping vertical nav on calendar -->
       <VLayout style="z-index: 0">
         <!-- 👉 Navigation drawer -->
@@ -70,13 +70,13 @@ onBeforeUnmount(() => {
           :temporary="$vuetify.display.mdAndDown"
           style="background: #282828; border-top-right-radius: 2.4rem"
         >
-          <div class="pa-5 d-flex flex-column gap-y-8 pt-8">
+          <div class="pa-5 !flex flex-col gap-y-8 pt-8">
             <div>
               <p class="text-xl text-uppercase text-white text-bold mb-3 peyda">
                 تقویم دوره‌ها
               </p>
 
-              <div class="d-flex flex-column calendars-checkbox">
+              <div class="!flex flex-col calendars-checkbox">
                 <VCheckbox
                   v-model="checkAll"
                   label="مشاهده همه"
@@ -128,7 +128,7 @@ onBeforeUnmount(() => {
   }
 }
 
-.v-card {
+.v-card.custom {
   z-index: 10 !important;
   border-radius: 2.4rem;
   background-color: #282828 !important;

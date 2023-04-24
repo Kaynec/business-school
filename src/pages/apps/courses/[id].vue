@@ -94,7 +94,7 @@ const resolveUserStatusVariant = (stat: string) => {
                 }}</span>
               </VAvatar>
 
-              <div class="d-flex flex-column">
+              <div class="!flex flex-col">
                 <h6 class="text-sm">
                   <RouterLink
                     :to="{ name: 'apps-user-view-id', params: { id: user.id } }"

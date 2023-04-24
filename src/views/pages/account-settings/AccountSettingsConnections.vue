@@ -67,7 +67,7 @@ const rules = {
           <!-- 👉 Upload Photo -->
           <form
             ref="refForm"
-            class="d-flex flex-column justify-center w-full gap-3"
+            class="!flex flex-col justify-center w-full gap-3"
           >
             <div class="d-flex flex-wrap gap-4">
               <VBtn
@@ -112,7 +112,7 @@ const rules = {
                 <span class="text-3xl mb-5 inline-block peyda">
                   الزامات آپلود مدارک:
                 </span>
-                <VList class="bg-transparent gap-4 flex flex-col">
+                <VList class="bg-transparent gap-4 !flex flex-col">
                   <span class="relative pr-4">
                     <span
                       class="absolute right-0 top-50% w-5px h-5px rounded-full bg-white"

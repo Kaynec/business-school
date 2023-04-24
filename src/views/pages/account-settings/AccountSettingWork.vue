@@ -52,7 +52,7 @@ const currentCitiesOfState = computed(() => {
           <!-- 👉 Upload Photo -->
           <form
             ref="refForm"
-            class="d-flex flex-column justify-center w-full gap-3"
+            class="!flex flex-col justify-center w-full gap-3"
           >
             <div class="d-flex flex-wrap gap-4">
               <VBtn

@@ -109,7 +109,7 @@ const data = ref([
   <VRow>
     <VCol cols="12" md="6" lg="4" v-for="item in data" :key="item.code">
       <VCard
-        class="rounded-xl gap-10 d-flex flex-column"
+        class="rounded-xl gap-10 !flex flex-col"
         style="background: rgba(40, 40, 40, 80%)"
       >
         <VCardItem class="d-flex justify-center">
@@ -127,13 +127,13 @@ const data = ref([
           </VProgressCircular>
         </VCardItem>
 
-        <div class="d-flex flex-column justify-center align-center gap-2">
+        <div class="!flex flex-col justify-center align-center gap-2">
           <span class="peyda text-center">کددوره : {{ item.code }}</span>
           <h1 style="color: white" class="peyda">{{ item.name }}</h1>
         </div>
         <div class="d-flex justify-center align-center gap-2">
           <div
-            class="flex flex-col justify-center items-center gap-4 ma-2"
+            class="!flex flex-col justify-center items-center gap-4 ma-2"
             style="color: white"
           >
             <div
@@ -148,7 +148,7 @@ const data = ref([
             <span class="peyda text-center"> شروع: {{ item.startDate }} </span>
           </div>
           <div
-            class="flex flex-col justify-center items-center gap-4 ma-2"
+            class="!flex flex-col justify-center items-center gap-4 ma-2"
             style="color: white"
           >
             <div
@@ -163,7 +163,7 @@ const data = ref([
             <span class="peyda text-center"> سرفصل: {{ item.sarfasl }} </span>
           </div>
           <div
-            class="flex flex-col justify-center items-center gap-4 ma-2"
+            class="!flex flex-col justify-center items-center gap-4 ma-2"
             style="color: white"
           >
             <div
@@ -182,7 +182,7 @@ const data = ref([
             >
           </div>
           <div
-            class="flex flex-col justify-center items-center gap-4 ma-2"
+            class="!flex flex-col justify-center items-center gap-4 ma-2"
             style="color: white"
           >
             <div

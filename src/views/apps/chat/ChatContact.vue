@@ -1,28 +1,27 @@
 <script lang="ts" setup>
-import type { ChatContact, ChatContactWithChat } from '@/@fake-db/types'
-import { useChat } from '@/views/apps/chat/useChat'
-import { useChatStore } from '@/views/apps/chat/useChatStore'
-import { avatarText, formatDateToMonthShort } from '@core/utils/formatters'
+import type { ChatContact, ChatContactWithChat } from "@/@fake-db/types";
+import { useChat } from "@/views/apps/chat/useChat";
+import { useChatStore } from "@/views/apps/chat/useChatStore";
+import { avatarText, formatDateToMonthShort } from "@core/utils/formatters";
 
 interface Props {
-  isChatContact?: boolean
-  user: ChatContact | ChatContactWithChat
+  isChatContact?: boolean;
+  user: ChatContact | ChatContactWithChat;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isChatContact: false,
-})
+});
 
-const store = useChatStore()
-const { resolveAvatarBadgeVariant } = useChat()
+const store = useChatStore();
+const { resolveAvatarBadgeVariant } = useChat();
 
 const isChatContactActive = computed(() => {
-  const isActive = store.activeChat?.contact.id === props.user.id
-  if (!props.isChatContact)
-    return !store.activeChat?.chat && isActive
+  const isActive = store.activeChat?.contact.id === props.user.id;
+  if (!props.isChatContact) return !store.activeChat?.chat && isActive;
 
-  return isActive
-})
+  return isActive;
+});
 </script>
 
 <template>
@@ -55,14 +54,22 @@ const isChatContactActive = computed(() => {
       </VAvatar>
     </VBadge>
     <div class="flex-grow-1 ms-4 overflow-hidden">
-      <span class="text-high-emphasis font-weight-medium">{{ props.user.fullName }}</span>
-      <span class="d-block text-sm text-truncate">{{ props.isChatContact && 'chat' in props.user ? props.user.chat.lastMessage.message : props.user.about }}</span>
+      <span class="text-high-emphasis font-weight-medium">{{
+        props.user.fullName
+      }}</span>
+      <span class="d-block text-sm text-truncate">{{
+        props.isChatContact && "chat" in props.user
+          ? props.user.chat.lastMessage.message
+          : props.user.about
+      }}</span>
     </div>
     <div
       v-if="props.isChatContact && 'chat' in props.user"
-      class="d-flex flex-column align-self-start"
+      class="!flex flex-col align-self-start"
     >
-      <span class="d-block whitespace-no-wrap">{{ formatDateToMonthShort(props.user.chat.lastMessage.time) }}</span>
+      <span class="d-block whitespace-no-wrap">{{
+        formatDateToMonthShort(props.user.chat.lastMessage.time)
+      }}</span>
       <VBadge
         v-if="props.user.chat.unseenMsgs"
         color="error"

@@ -1,31 +1,33 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import type { ConnectionsTab } from '@/@fake-db/types'
-import axios from '@axios'
+import type { ConnectionsTab } from "@/@fake-db/types";
+import axios from "@axios";
+import { useRoute } from "vue-router";
 
-const router = useRoute()
-const connectionData = ref<ConnectionsTab[]>([])
+const router = useRoute();
+const connectionData = ref<ConnectionsTab[]>([]);
 
 const fetchProjectData = () => {
-  if (router.params.tab === 'connections') {
-    axios.get('/pages/profile', {
-      params: {
-        tab: router.params.tab,
-      },
-    }).then(response => {
-      connectionData.value = response.data
-    })
+  if (router.params.tab === "connections") {
+    axios
+      .get("/pages/profile", {
+        params: {
+          tab: router.params.tab,
+        },
+      })
+      .then((response) => {
+        connectionData.value = response.data;
+      });
   }
-}
+};
 
-watch(router, fetchProjectData, { immediate: true })
+watch(router, fetchProjectData, { immediate: true });
 
 const moreBtnList = [
-  { title: 'Share connection', value: 'Share connection' },
-  { title: 'Block connection', value: 'Block connection' },
-  { type: 'divider', class: 'my-2' },
-  { title: 'Delete', value: 'Delete', class: 'text-error' },
-]
+  { title: "Share connection", value: "Share connection" },
+  { title: "Block connection", value: "Block connection" },
+  { type: "divider", class: "my-2" },
+  { title: "Delete", value: "Delete", class: "text-error" },
+];
 </script>
 
 <template>
@@ -39,18 +41,12 @@ const moreBtnList = [
     >
       <VCard>
         <div class="vertical-more">
-          <MoreBtn
-            item-props
-            :menu-list="moreBtnList"
-          />
+          <MoreBtn item-props :menu-list="moreBtnList" />
         </div>
 
         <VCardItem>
-          <VCardTitle class="d-flex flex-column align-center justify-center">
-            <VAvatar
-              size="100"
-              :image="data.avatar"
-            />
+          <VCardTitle class="!flex flex-col align-center justify-center">
+            <VAvatar size="100" :image="data.avatar" />
 
             <p class="mt-4 mb-0">
               {{ data.name }}
@@ -94,16 +90,17 @@ const moreBtnList = [
 
           <div class="d-flex justify-center gap-4 mt-4">
             <VBtn
-              :prepend-icon="data.isConnected ? 'mdi-account-check-outline' : 'mdi-account-plus-outline'"
+              :prepend-icon="
+                data.isConnected
+                  ? 'mdi-account-check-outline'
+                  : 'mdi-account-plus-outline'
+              "
               :variant="data.isConnected ? 'elevated' : 'tonal'"
             >
-              {{ data.isConnected ? 'connected' : 'connect' }}
+              {{ data.isConnected ? "connected" : "connect" }}
             </VBtn>
 
-            <IconBtn
-              variant="tonal"
-              class="rounded"
-            >
+            <IconBtn variant="tonal" class="rounded">
               <VIcon icon="mdi-email-outline" />
             </IconBtn>
           </div>

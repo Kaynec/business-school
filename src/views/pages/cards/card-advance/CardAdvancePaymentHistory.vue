@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import logo3 from '@images/logos/logo-american-express.png'
-import logo2 from '@images/logos/logo-mastercard.png'
-import logo1 from '@images/logos/logo-visa.png'
+import logo3 from "@images/logos/logo-american-express.png";
+import logo2 from "@images/logos/logo-mastercard.png";
+import logo1 from "@images/logos/logo-visa.png";
 
 const payments = [
   {
-    lastDigits: '4399',
-    method: 'Credit Card',
-    date: '05/Jan',
-    debitAmount: '2,820',
-    balance: '10,450',
+    lastDigits: "4399",
+    method: "Credit Card",
+    date: "05/Jan",
+    debitAmount: "2,820",
+    balance: "10,450",
     logo: logo1,
   },
   {
-    lastDigits: '5545',
-    method: 'Debit Card',
-    date: '12/Feb',
-    debitAmount: '345',
-    balance: '8,709',
+    lastDigits: "5545",
+    method: "Debit Card",
+    date: "12/Feb",
+    debitAmount: "345",
+    balance: "8,709",
     logo: logo2,
   },
   {
-    lastDigits: '9860',
-    method: 'ATM Card',
-    date: '24/Feb',
-    debitAmount: '999',
-    balance: '25,900',
+    lastDigits: "9860",
+    method: "ATM Card",
+    date: "24/Feb",
+    debitAmount: "999",
+    balance: "25,900",
     logo: logo3,
   },
   {
-    lastDigits: '4300',
-    method: 'Credit Card',
-    date: '08/Mar',
-    debitAmount: '8,453',
-    balance: '9,233',
+    lastDigits: "4300",
+    method: "Credit Card",
+    date: "08/Mar",
+    debitAmount: "8,453",
+    balance: "9,233",
     logo: logo1,
   },
   {
-    lastDigits: '5545',
-    method: 'Debit Card',
-    date: '15/Apr',
-    debitAmount: '24',
-    balance: '500',
+    lastDigits: "5545",
+    method: "Debit Card",
+    date: "15/Apr",
+    debitAmount: "24",
+    balance: "500",
     logo: logo2,
   },
   {
-    lastDigits: '4399',
-    method: 'Credit Card',
-    date: '28/Apr',
-    debitAmount: '299',
-    balance: '1,380',
+    lastDigits: "4399",
+    method: "Credit Card",
+    date: "28/Apr",
+    debitAmount: "299",
+    balance: "1,380",
     logo: logo1,
   },
-]
+];
 
 const moreList = [
-  { title: 'Last 28 Days', value: 'Last 28 Days' },
-  { title: 'Last Month', value: 'Last Month' },
-  { title: 'Last Year', value: 'Last Year' },
-]
+  { title: "Last 28 Days", value: "Last 28 Days" },
+  { title: "Last Month", value: "Last Month" },
+  { title: "Last Year", value: "Last Year" },
+];
 </script>
 
 <template>
@@ -75,43 +75,32 @@ const moreList = [
           <th scope="col">
             <span class="text-sm text-medium-emphasis">Card</span>
           </th>
-          <th
-            scope="col"
-            class="text-start text-sm"
-          >
+          <th scope="col" class="text-start text-sm">
             <span class="text-sm text-medium-emphasis">Date</span>
           </th>
-          <th
-            scope="col"
-            class="text-end text-sm"
-          >
+          <th scope="col" class="text-end text-sm">
             <span class="text-sm text-medium-emphasis">Spend</span>
           </th>
         </tr>
       </thead>
 
       <tbody>
-        <tr
-          v-for="payment in payments"
-          :key="payment.lastDigits"
-        >
+        <tr v-for="payment in payments" :key="payment.lastDigits">
           <td>
             <div class="d-flex align-center">
               <div class="me-3">
                 <div class="py-1 px-2 rounded bg-background">
-                  <img
-                    :src="payment.logo"
-                    width="30"
-                    alt="payment-card"
-                  >
+                  <img :src="payment.logo" width="30" alt="payment-card" />
                 </div>
               </div>
 
-              <div class="d-flex flex-column">
+              <div class="!flex flex-col">
                 <p class="text-sm text-high-emphasis font-weight-semibold mb-0">
                   *{{ payment.lastDigits }}
                 </p>
-                <span class="text-xs text-medium-emphasis">{{ payment.method }}</span>
+                <span class="text-xs text-medium-emphasis">{{
+                  payment.method
+                }}</span>
               </div>
             </div>
           </td>
@@ -121,9 +110,13 @@ const moreList = [
           </td>
 
           <td class="text-end">
-            <div class="d-flex flex-column">
-              <span class="font-weight-semibold text-high-emphasis">-${{ payment.debitAmount }}</span>
-              <span class="text-xs text-medium-emphasis">${{ payment.balance }}</span>
+            <div class="!flex flex-col">
+              <span class="font-weight-semibold text-high-emphasis"
+                >-${{ payment.debitAmount }}</span
+              >
+              <span class="text-xs text-medium-emphasis"
+                >${{ payment.balance }}</span
+              >
             </div>
           </td>
         </tr>

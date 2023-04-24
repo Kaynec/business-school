@@ -1,30 +1,30 @@
 <script setup lang="ts">
 const statistics = [
   {
-    title: 'Customers',
-    stats: '8,458',
-    icon: 'mdi-account-outline',
-    color: 'primary',
+    title: "Customers",
+    stats: "8,458",
+    icon: "mdi-account-outline",
+    color: "primary",
   },
   {
-    title: 'Total Profit',
-    stats: '$28.5k',
-    icon: 'mdi-poll',
-    color: 'warning',
+    title: "Total Profit",
+    stats: "$28.5k",
+    icon: "mdi-poll",
+    color: "warning",
   },
   {
-    title: 'Transactions',
-    stats: '2,450k',
-    icon: 'mdi-trending-up',
-    color: 'info',
+    title: "Transactions",
+    stats: "2,450k",
+    icon: "mdi-trending-up",
+    color: "info",
   },
-]
+];
 
 const moreList = [
-  { title: 'Last 28 Days', value: 'Last 28 Days' },
-  { title: 'Last Month', value: 'Last Month' },
-  { title: 'Last Year', value: 'Last Year' },
-]
+  { title: "Last 28 Days", value: "Last 28 Days" },
+  { title: "Last Month", value: "Last Month" },
+  { title: "Last Year", value: "Last Year" },
+];
 </script>
 
 <template>
@@ -48,12 +48,7 @@ const moreList = [
 
     <VCardText>
       <VRow>
-        <VCol
-          v-for="item in statistics"
-          :key="item.title"
-          cols="12"
-          sm="4"
-        >
+        <VCol v-for="item in statistics" :key="item.title" cols="12" sm="4">
           <div class="d-flex align-center">
             <VAvatar
               :color="item.color"
@@ -62,13 +57,10 @@ const moreList = [
               size="40"
               class="me-4"
             >
-              <VIcon
-                size="24"
-                :icon="item.icon"
-              />
+              <VIcon size="24" :icon="item.icon" />
             </VAvatar>
 
-            <div class="d-flex flex-column">
+            <div class="!flex flex-col">
               <h6 class="text-h6">
                 {{ item.stats }}
               </h6>

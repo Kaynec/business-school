@@ -1,19 +1,22 @@
 <script setup lang="ts">
-import { kFormatter } from '@core/utils/formatters'
+import { kFormatter } from "@core/utils/formatters";
 
 interface Props {
-  title: string
-  color?: string
-  icon: string
-  stats: number
-  change: number
+  title: string;
+  color?: string;
+  icon: string;
+  stats: number;
+  change: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  color: 'primary',
-})
+  color: "primary",
+});
 
-const isPositive = controlledComputed(() => props.change, () => Math.sign(props.change) === 1)
+const isPositive = controlledComputed(
+  () => props.change,
+  () => Math.sign(props.change) === 1
+);
 </script>
 
 <template>
@@ -26,13 +29,10 @@ const isPositive = controlledComputed(() => props.change, () => Math.sign(props.
         variant="tonal"
         class="me-4"
       >
-        <VIcon
-          :icon="props.icon"
-          size="24"
-        />
+        <VIcon :icon="props.icon" size="24" />
       </VAvatar>
 
-      <div class="d-flex flex-column">
+      <div class="!flex flex-col">
         <div class="d-flex align-center flex-wrap">
           <h6 class="text-h6">
             {{ kFormatter(props.stats) }}

@@ -62,7 +62,7 @@ const fileInput = ref();
 <template>
   <VCard
     class="rounded-30px min-h-70 shadow p-5 pb-8 my-5 relative"
-    style="background: rgba(40, 40, 40, 0.8)"
+    style="background: rgba(40, 40, 40, 80%)"
   >
     <span> درخواست صدور گواهینامه </span>
     <span class="absolute left-5 bottom-2">
@@ -71,7 +71,7 @@ const fileInput = ref();
   </VCard>
   <VCard
     class="rounded-30px min-h-70 shadow p-5 pb-8 my-5 relative"
-    style="background: rgba(40, 40, 40, 0.8)"
+    style="background: rgba(40, 40, 40, 80%)"
   >
     <span>
       لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
@@ -102,7 +102,7 @@ const fileInput = ref();
         "
       />
       <div
-        class="b-1px b-solid p4-4 min-h-15 rounded-15px b-#393939 w-full h-full flex flex-col justify-center pr-4"
+        class="b-1px b-solid p4-4 min-h-15 rounded-15px b-#393939 w-full h-full !flex flex-col justify-center pr-4"
         @click="fileInput.click()"
       >
         <span v-if="!ticket.file"> انتخاب فایل </span>

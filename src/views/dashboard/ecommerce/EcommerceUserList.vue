@@ -1,65 +1,62 @@
 <script setup lang="ts">
-import type { UserProperties } from '@/@fake-db/types'
-import { useUserListStore } from '@/views/apps/user/useUserListStore'
-import { avatarText } from '@core/utils/formatters'
+import type { UserProperties } from "@/@fake-db/types";
+import { useUserListStore } from "@/views/apps/user/useUserListStore";
+import { avatarText } from "@core/utils/formatters";
 
 // 👉 Store
-const userListStore = useUserListStore()
-const searchQuery = ref('')
-const selectedRole = ref()
-const selectedPlan = ref()
-const selectedStatus = ref()
-const rowPerPage = ref(7)
-const currentPage = ref(1)
-const totalPage = ref(1)
-const totalUsers = ref(0)
-const users = ref<UserProperties[]>([])
+const userListStore = useUserListStore();
+const searchQuery = ref("");
+const selectedRole = ref();
+const selectedPlan = ref();
+const selectedStatus = ref();
+const rowPerPage = ref(7);
+const currentPage = ref(1);
+const totalPage = ref(1);
+const totalUsers = ref(0);
+const users = ref<UserProperties[]>([]);
 
 // 👉 Fetching users
 const fetchUsers = () => {
-  userListStore.fetchUsers({
-    q: searchQuery.value,
-    status: selectedStatus.value,
-    plan: selectedPlan.value,
-    role: selectedRole.value,
-    perPage: rowPerPage.value,
-    currentPage: currentPage.value,
-  }).then(response => {
-    users.value = response.data.users
-    totalPage.value = response.data.totalPage
-    totalUsers.value = response.data.totalUsers
-  }).catch(error => {
-    console.error(error)
-  })
-}
+  userListStore
+    .fetchUsers({
+      q: searchQuery.value,
+      status: selectedStatus.value,
+      plan: selectedPlan.value,
+      role: selectedRole.value,
+      perPage: rowPerPage.value,
+      currentPage: currentPage.value,
+    })
+    .then((response) => {
+      users.value = response.data.users;
+      totalPage.value = response.data.totalPage;
+      totalUsers.value = response.data.totalUsers;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
 
-watchEffect(fetchUsers)
+watchEffect(fetchUsers);
 
 const resolveUserRoleVariant = (role: string) => {
-  if (role === 'subscriber')
-    return { color: 'primary', icon: 'mdi-account-outline' }
-  if (role === 'author')
-    return { color: 'warning', icon: 'mdi-cog-outline' }
-  if (role === 'maintainer')
-    return { color: 'success', icon: 'mdi-chart-donut' }
-  if (role === 'editor')
-    return { color: 'info', icon: 'mdi-pencil-outline' }
-  if (role === 'admin')
-    return { color: 'error', icon: 'mdi-laptop' }
+  if (role === "subscriber")
+    return { color: "primary", icon: "mdi-account-outline" };
+  if (role === "author") return { color: "warning", icon: "mdi-cog-outline" };
+  if (role === "maintainer")
+    return { color: "success", icon: "mdi-chart-donut" };
+  if (role === "editor") return { color: "info", icon: "mdi-pencil-outline" };
+  if (role === "admin") return { color: "error", icon: "mdi-laptop" };
 
-  return { color: 'primary', icon: 'mdi-account-outline' }
-}
+  return { color: "primary", icon: "mdi-account-outline" };
+};
 
 const resolveUserStatusVariant = (stat: string) => {
-  if (stat === 'pending')
-    return 'warning'
-  if (stat === 'active')
-    return 'success'
-  if (stat === 'inactive')
-    return 'secondary'
+  if (stat === "pending") return "warning";
+  if (stat === "active") return "success";
+  if (stat === "inactive") return "secondary";
 
-  return 'primary'
-}
+  return "primary";
+};
 </script>
 
 <template>
@@ -68,27 +65,16 @@ const resolveUserStatusVariant = (stat: string) => {
       <!-- 👉 table head -->
       <thead>
         <tr>
-          <th scope="col">
-            USER
-          </th>
-          <th scope="col">
-            EMAIL
-          </th>
-          <th scope="col">
-            ROLE
-          </th>
-          <th scope="col">
-            STATUS
-          </th>
+          <th scope="col">USER</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">ROLE</th>
+          <th scope="col">STATUS</th>
         </tr>
       </thead>
 
       <!-- 👉 table body -->
       <tbody>
-        <tr
-          v-for="user in users"
-          :key="user.id"
-        >
+        <tr v-for="user in users" :key="user.id">
           <!-- 👉 User -->
           <td>
             <div class="d-flex align-center">
@@ -98,17 +84,13 @@ const resolveUserStatusVariant = (stat: string) => {
                 class="me-3"
                 size="34"
               >
-                <VImg
-                  v-if="user.avatar"
-                  :src="user.avatar"
-                />
-                <span
-                  v-else
-                  class="text-sm"
-                >{{ avatarText(user.fullName) }}</span>
+                <VImg v-if="user.avatar" :src="user.avatar" />
+                <span v-else class="text-sm">{{
+                  avatarText(user.fullName)
+                }}</span>
               </VAvatar>
 
-              <div class="d-flex flex-column">
+              <div class="!flex flex-col">
                 <h6 class="text-sm">
                   <RouterLink
                     :to="{ name: 'apps-user-view-id', params: { id: user.id } }"
@@ -154,12 +136,7 @@ const resolveUserStatusVariant = (stat: string) => {
       <!-- 👉 table footer  -->
       <tfoot v-show="!users.length">
         <tr>
-          <td
-            colspan="7"
-            class="text-center"
-          >
-            No data available
-          </td>
+          <td colspan="7" class="text-center">No data available</td>
         </tr>
       </tfoot>
     </VTable>

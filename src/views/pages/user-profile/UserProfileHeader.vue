@@ -31,9 +31,9 @@ fetchHeaderData();
       />
       <div class="grow min-h-45 !items-end pb-18 justify-start flex">
         <div
-          class="flex flex-col md:flex-row gap-3rem md:gap-7rem lg:gap-10rem md:justify-start items-center"
+          class="!flex flex-col md:flex-row gap-3rem md:gap-7rem lg:gap-10rem md:justify-start items-center"
         >
-          <div class="flex flex-col">
+          <div class="!flex flex-col">
             <span class="text-3xl peyda"> علی بابائی </span>
             <span class="!text-gray-3"> مدیر فنی </span>
           </div>
@@ -43,7 +43,7 @@ fetchHeaderData();
               src="@/assets/images/svg/profile/designation.svg"
               alt="designation"
             />
-            <div class="flex flex-col">
+            <div class="!flex flex-col">
               <span class="text-3xl peyda"> حوزه فعالیت </span>
               <span class="!text-gray-3"> صنعت آموزش </span>
             </div>
@@ -54,7 +54,7 @@ fetchHeaderData();
               src="@/assets/images/svg/profile/follower.svg"
               alt="designation"
             />
-            <div class="flex flex-col">
+            <div class="!flex flex-col">
               <span class="text-3xl peyda">دنبال کننده</span>
               <span class="!text-gray-3"> 150</span>
             </div>
@@ -65,7 +65,7 @@ fetchHeaderData();
               src="@/assets/images/svg/profile/point.svg"
               alt="designation"
             />
-            <div class="flex flex-col">
+            <div class="!flex flex-col">
               <span class="text-3xl peyda"> امتیاز شما</span>
               <span class="!text-gray-3"> 2563800</span>
             </div>

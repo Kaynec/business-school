@@ -22,7 +22,6 @@ declare module '@vue/runtime-core' {
     CardStatisticsHorizontal: typeof import('./src/@core/components/CardStatisticsHorizontal.vue')['default']
     CardStatisticsVertical: typeof import('./src/@core/components/CardStatisticsVertical.vue')['default']
     CardStatisticsWithImages: typeof import('./src/@core/components/CardStatisticsWithImages.vue')['default']
-    CircleWithData: typeof import('./src/@core/components/CircleWithData.vue')['default']
     ConfirmDialog: typeof import('./src/@core/components/ConfirmDialog.vue')['default']
     CustomCheckboxes: typeof import('./src/@core/components/CustomCheckboxes.vue')['default']
     CustomCheckboxesWithIcon: typeof import('./src/@core/components/CustomCheckboxesWithIcon.vue')['default']

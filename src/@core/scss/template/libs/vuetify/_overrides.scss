@@ -1,6 +1,9 @@
+@use "@core/scss/base/utils";
+@use "@configured-variables" as variables;
+
 // 👉 Avatar
 .v-avatar {
-  font-size: 1.125rem;
+  font-size: 1.125rem !important;
 }
 
 $alert-icon-size: 22px;
@@ -28,8 +31,8 @@ $alert-prominent-icon-size: 38px;
 // 👉 Table
 .v-table {
   th {
-    color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
-    font-weight: 500;
+    color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !important;
+    font-weight: 500 !important;
   }
 }
 
@@ -37,26 +40,276 @@ $alert-prominent-icon-size: 38px;
 .v-timeline {
   .v-timeline-item:not(:last-child) {
     .v-timeline-item__body {
-      margin-block-end: 0.625rem;
+      margin-block-end: 0.625rem !important;
     }
   }
 }
 
 .v-card {
-  background-color: rgba(var(--v-theme-cardBackground));
-  color: rgba(var(--v-theme-cardText));
-  direction: rtl;
+  border-radius: 10px;
+  background-color: rgba(var(--v-theme-cardBackground)) !important;
+  color: rgba(var(--v-theme-cardText)) !important;
+  direction: rtl !important;
 
   span {
-    color: rgba(var(--v-theme-cardText));
+    color: rgba(var(--v-theme-cardText)) !important;
   }
 }
 
 .v-card-text {
-  color: rgba(var(--v-theme-cardText));
+  color: rgba(var(--v-theme-cardText)) !important;
 }
 
 .v-progress-circular__underlay {
-  border-radius: 1rem;
-  stroke: white;
+  border-radius: 1rem !important;
+  stroke: white !important;
+}
+
+// 👉 Application
+// ℹ️ We need accurate vh in mobile devices as well
+.v-application__wrap {
+  /* stylelint-disable-next-line liberty/use-logical-spec */
+  min-height: calc(var(--vh, 1vh) * 100) !important;
+}
+
+// 👉 Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6,
+.text-button,
+.text-overline,
+.v-card-title {
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !important;
+}
+
+.v-application,
+.text-body-1,
+.text-body-2,
+.text-subtitle-1,
+.text-subtitle-2 {
+  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
+}
+
+// 👉 Grid
+// Remove margin-bottom of v-input_details inside grid (validation error message)
+.v-row {
+  .v-col,
+  [class^="v-col-*"] {
+    .v-input__details {
+      margin-block-end: 0 !important;
+    }
+  }
+}
+
+// 👉 Theme
+.v-theme--light {
+  --v-theme-background:
+    var(
+      --skin-theme-background,
+      #{utils.map-deep-get(variables.$css-vars, "default", "--v-theme-background", "light")}
+    ) !important;
+  --v-theme-surface:
+    var(
+      --skin-theme-surface,
+      #{utils.map-deep-get(variables.$css-vars, "default", "--v-theme-surface", "light")}
+    ) !important;
+}
+
+.v-theme--dark {
+  --v-theme-background:
+    var(
+      --skin-theme-background,
+      #{utils.map-deep-get(variables.$css-vars, "default", "--v-theme-background", "dark")}
+    ) !important;
+  --v-theme-surface:
+    var(
+      --skin-theme-surface,
+      #{utils.map-deep-get(variables.$css-vars, "default", "--v-theme-surface", "dark")}
+    ) !important;
+}
+
+// 👉 Button
+@if variables.$vuetify-reduce-default-compact-button-icon-size {
+  .v-btn--density-compact.v-btn--size-default {
+    .v-btn__content > svg {
+      width: 22px !important;
+      height: 22px !important;
+      font-size: 22px !important;
+    }
+  }
+}
+
+// 👉 Card
+// Removes padding-top for immediately placed v-card-text after itself
+.v-card-text {
+  & + & {
+    padding-block-start: 0 !important;
+  }
+}
+
+/*
+  👉 Checkbox & Radio Ripple
+
+  TODO Checkbox and switch component. Remove it when vuetify resolve the extra spacing: https://github.com/vuetifyjs/vuetify/issues/15519
+  We need this because form elements likes checkbox and switches are by default set to height of textfield height which is way big than we want
+  Tested with checkbox & switches
+*/
+.v-checkbox.v-input,
+.v-switch.v-input {
+  --v-input-control-height: auto !important;
+
+  flex: unset !important;
+}
+
+.v-selection-control--density-comfortable {
+  &.v-checkbox-btn,
+  &.v-radio,
+  &.v-radio-btn {
+    .v-selection-control__wrapper {
+      margin-inline-start: -0.5625rem !important;
+    }
+  }
+}
+
+.v-selection-control--density-compact {
+  &.v-radio,
+  &.v-radio-btn,
+  &.v-checkbox-btn {
+    .v-selection-control__wrapper {
+      margin-inline-start: -0.3125rem !important;
+    }
+  }
+}
+
+.v-selection-control--density-default {
+  &.v-checkbox-btn,
+  &.v-radio,
+  &.v-radio-btn {
+    .v-selection-control__wrapper {
+      margin-inline-start: -0.6875rem !important;
+    }
+  }
+}
+
+.v-radio-group {
+  .v-selection-control-group {
+    .v-radio:not(:last-child) {
+      margin-inline-end: 0.9rem !important;
+    }
+  }
+}
+
+/*
+  👉 Tabs
+  Disable tab transition
+
+  This is for tabs where we don't have card wrapper to tabs and have multiple cards as tab content.
+
+  This class will disable transition and adds `overflow: unset` on `VWindow` to allow spreading shadow
+*/
+.disable-tab-transition {
+  overflow: unset !important;
+
+  .v-window__container {
+    block-size: auto !important;
+  }
+
+  .v-window-item:not(.v-window-item--active) {
+    display: none !important;
+  }
+
+  .v-window__container .v-window-item {
+    transform: none !important;
+  }
+}
+
+// 👉 List
+.v-list {
+  // Set icons opacity to .87
+  .v-list-item__prepend > .v-icon,
+  .v-list-item__append > .v-icon {
+    opacity: var(--v-high-emphasis-opacity) !important;
+  }
+}
+
+// 👉 Card list
+
+/*
+  ℹ️ Custom class
+
+  Remove list spacing inside card
+
+  This is because card title gets padding of 20px and list item have padding of 16px. Moreover, list container have padding-bottom as well.
+*/
+.card-list {
+  --v-card-list-gap: 20px !important;
+
+  &.v-list {
+    padding-block: 0 !important;
+  }
+
+  .v-list-item {
+    min-block-size: unset !important;
+    min-block-size: auto !important;
+    padding-block: 0 !important;
+    padding-inline: 0 !important;
+
+    > .v-ripple__container {
+      opacity: 0 !important;
+    }
+
+    &:not(:last-child) {
+      padding-block-end: var(--v-card-list-gap) !important;
+    }
+  }
+
+  .v-list-item:hover,
+  .v-list-item:focus,
+  .v-list-item:active,
+  .v-list-item.active {
+    > .v-list-item__overlay {
+      opacity: 0 !important;
+    }
+  }
+}
+
+// 👉 Table
+.v-table {
+  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
+}
+
+// 👉 v-field
+.v-field:hover .v-field__outline {
+  --v-field-border-opacity: var(--v-medium-emphasis-opacity) !important;
+}
+
+// 👉 VLabel
+.v-label {
+  opacity: 1 !important;
+
+  &:not(.v-field-label--floating) {
+    color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
+  }
+}
+
+// 👉 Overlay
+.v-overlay__scrim {
+  background: rgba(var(--v-overlay-scrim-background), var(--v-overlay-scrim-opacity)) !important;
+}
+
+.v-btn {
+  font-family: Peyda !important;
+}
+
+td {
+  color: white !important;
 }

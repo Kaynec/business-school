@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import logoCreditCard2 from '@images/cards/logo-credit-card-2.png'
-import logoMastercardSmall from '@images/cards/logo-mastercard-small.png'
+import logoCreditCard2 from "@images/cards/logo-credit-card-2.png";
+import logoMastercardSmall from "@images/cards/logo-mastercard-small.png";
 
 const savedCards = [
   {
     logo: logoMastercardSmall,
-    type: 'Credit card',
-    number: '2566 xxxx xxxx 8908',
+    type: "Credit card",
+    number: "2566 xxxx xxxx 8908",
   },
   {
     logo: logoCreditCard2,
-    type: 'Credit card',
-    number: '8990 xxxx xxxx 6852',
+    type: "Credit card",
+    number: "8990 xxxx xxxx 6852",
   },
-]
+];
 
 const moreList = [
-  { title: 'Last 28 Days', value: 'Last 28 Days' },
-  { title: 'Last Month', value: 'Last Month' },
-  { title: 'Last Year', value: 'Last Year' },
-]
+  { title: "Last 28 Days", value: "Last 28 Days" },
+  { title: "Last Month", value: "Last Month" },
+  { title: "Last Year", value: "Last Year" },
+];
 </script>
 
 <template>
@@ -33,11 +33,14 @@ const moreList = [
 
       <VCardText>
         <p class="text-xs">
-          Please make the payment to start enjoying all the features of our premium plan as soon as possible.
+          Please make the payment to start enjoying all the features of our
+          premium plan as soon as possible.
         </p>
 
         <!-- SECTION upgrade plan banner -->
-        <div class="plan-upgrade-banner d-flex bg-light-primary rounded align-center pa-3">
+        <div
+          class="plan-upgrade-banner d-flex bg-light-primary rounded align-center pa-3"
+        >
           <VAvatar
             rounded
             color="primary"
@@ -47,10 +50,8 @@ const moreList = [
             <VIcon icon="mdi-star-outline" />
           </VAvatar>
 
-          <div class="d-flex flex-column align-start">
-            <h3 class="text-base font-weight-semibold">
-              Platinum
-            </h3>
+          <div class="!flex flex-col align-start">
+            <h3 class="text-base font-weight-semibold">Platinum</h3>
             <span class="text-primary text-xs">Upgrade Plan</span>
           </div>
 
@@ -73,22 +74,14 @@ const moreList = [
             Payment Details
           </VListSubheader>
 
-          <VListItem
-            v-for="card in savedCards"
-            :key="card.number"
-            class="mb-3"
-          >
+          <VListItem v-for="card in savedCards" :key="card.number" class="mb-3">
             <!-- 👉 avatar -->
             <template #prepend>
-              <VAvatar
-                rounded
-                :image="card.logo"
-                class="me-3"
-              />
+              <VAvatar rounded :image="card.logo" class="me-3" />
             </template>
 
             <!-- 👉 Title and Subtitle -->
-            <VListItemTitle class="text-sm font-weight-semibold ">
+            <VListItemTitle class="text-sm font-weight-semibold">
               {{ card.type }}
             </VListItemTitle>
 
@@ -102,17 +95,14 @@ const moreList = [
                 label="CVV"
                 type="number"
                 density="compact"
-                style="width: 5rem;"
+                style="width: 5rem"
               />
             </template>
           </VListItem>
 
           <!-- 👉 Add Payment  -->
           <VListItem class="mb-3">
-            <a
-              href="javascript:void(0)"
-              class="text-xs"
-            >Add Payment Method</a>
+            <a href="javascript:void(0)" class="text-xs">Add Payment Method</a>
           </VListItem>
         </VList>
 
@@ -126,11 +116,7 @@ const moreList = [
             class="mb-3"
           />
 
-          <VBtn
-            block
-            type="submit"
-            append-icon="mdi-arrow-right"
-          >
+          <VBtn block type="submit" append-icon="mdi-arrow-right">
             Proceed to payment
           </VBtn>
         </VForm>

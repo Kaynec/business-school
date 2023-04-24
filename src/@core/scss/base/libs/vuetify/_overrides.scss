@@ -5,7 +5,7 @@
 // ℹ️ We need accurate vh in mobile devices as well
 .v-application__wrap {
   /* stylelint-disable-next-line liberty/use-logical-spec */
-  min-height: calc(var(--vh, 1vh) * 100);
+  min-height: calc(var(--vh, 1vh) * 100) !important;
 }
 
 // 👉 Typography
@@ -24,7 +24,7 @@ h6,
 .text-button,
 .text-overline,
 .v-card-title {
-  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !important;
 }
 
 .v-application,
@@ -32,7 +32,7 @@ h6,
 .text-body-2,
 .text-subtitle-1,
 .text-subtitle-2 {
-  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity));
+  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
 }
 
 // 👉 Grid
@@ -41,7 +41,7 @@ h6,
   .v-col,
   [class^="v-col-*"] {
     .v-input__details {
-      margin-block-end: 0;
+      margin-block-end: 0 !important;
     }
   }
 }
@@ -77,9 +77,9 @@ h6,
 @if variables.$vuetify-reduce-default-compact-button-icon-size {
   .v-btn--density-compact.v-btn--size-default {
     .v-btn__content > svg {
-      width: 22px;
-      height: 22px;
-      font-size: 22px;
+      width: 22px !important;
+      height: 22px !important;
+      font-size: 22px !important;
     }
   }
 }
@@ -101,9 +101,9 @@ h6,
 */
 .v-checkbox.v-input,
 .v-switch.v-input {
-  --v-input-control-height: auto;
+  --v-input-control-height: auto !important;
 
-  flex: unset;
+  flex: unset !important;
 }
 
 .v-selection-control--density-comfortable {
@@ -111,7 +111,7 @@ h6,
   &.v-radio,
   &.v-radio-btn {
     .v-selection-control__wrapper {
-      margin-inline-start: -0.5625rem;
+      margin-inline-start: -0.5625rem !important;
     }
   }
 }
@@ -121,7 +121,7 @@ h6,
   &.v-radio-btn,
   &.v-checkbox-btn {
     .v-selection-control__wrapper {
-      margin-inline-start: -0.3125rem;
+      margin-inline-start: -0.3125rem !important;
     }
   }
 }
@@ -131,7 +131,7 @@ h6,
   &.v-radio,
   &.v-radio-btn {
     .v-selection-control__wrapper {
-      margin-inline-start: -0.6875rem;
+      margin-inline-start: -0.6875rem !important;
     }
   }
 }
@@ -139,7 +139,7 @@ h6,
 .v-radio-group {
   .v-selection-control-group {
     .v-radio:not(:last-child) {
-      margin-inline-end: 0.9rem;
+      margin-inline-end: 0.9rem !important;
     }
   }
 }
@@ -173,7 +173,7 @@ h6,
   // Set icons opacity to .87
   .v-list-item__prepend > .v-icon,
   .v-list-item__append > .v-icon {
-    opacity: var(--v-high-emphasis-opacity);
+    opacity: var(--v-high-emphasis-opacity) !important;
   }
 }
 
@@ -187,20 +187,20 @@ h6,
   This is because card title gets padding of 20px and list item have padding of 16px. Moreover, list container have padding-bottom as well.
 */
 .card-list {
-  --v-card-list-gap: 20px;
+  --v-card-list-gap: 20px !important;
 
   &.v-list {
-    padding-block: 0;
+    padding-block: 0 !important;
   }
 
   .v-list-item {
-    min-block-size: unset;
+    min-block-size: unset !important;
     min-block-size: auto !important;
     padding-block: 0 !important;
     padding-inline: 0 !important;
 
     > .v-ripple__container {
-      opacity: 0;
+      opacity: 0 !important;
     }
 
     &:not(:last-child) {
@@ -220,32 +220,32 @@ h6,
 
 // 👉 Table
 .v-table {
-  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity));
+  color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
 }
 
 // 👉 v-field
 .v-field:hover .v-field__outline {
-  --v-field-border-opacity: var(--v-medium-emphasis-opacity);
+  --v-field-border-opacity: var(--v-medium-emphasis-opacity) !important;
 }
 
 // 👉 VLabel
 .v-label {
-  opacity: 1;
+  opacity: 1 !important;
 
   &:not(.v-field-label--floating) {
-    color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity));
+    color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
   }
 }
 
 // 👉 Overlay
 .v-overlay__scrim {
-  background: rgba(var(--v-overlay-scrim-background), var(--v-overlay-scrim-opacity));
+  background: rgba(var(--v-overlay-scrim-background), var(--v-overlay-scrim-opacity)) !important;
 }
 
 .v-btn {
-  font-family: Peyda;
+  font-family: Peyda !important;
 }
 
 td {
-  color: white;
+  color: white !important;
 }

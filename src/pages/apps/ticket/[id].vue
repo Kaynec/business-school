@@ -101,7 +101,7 @@ const fileInput = ref();
             {{ ticket.departmant }}
             <div
               v-if="showDepartment"
-              class="absolute top-4rem bg-#262732 gap-4 rounded-15px flex flex-col z-100 w-full min-h-full left-0"
+              class="absolute top-4rem bg-#262732 gap-4 rounded-15px !flex flex-col z-100 w-full min-h-full left-0"
             >
               <span
                 v-for="item in [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]"
@@ -151,7 +151,7 @@ const fileInput = ref();
             {{ ticket.howMuch }}
             <div
               v-if="showHowMuch"
-              class="absolute top-5rem bg-#262732 gap-4 rounded-15px flex flex-col z-100 w-full min-h-full left-0"
+              class="absolute top-5rem bg-#262732 gap-4 rounded-15px !flex flex-col z-100 w-full min-h-full left-0"
             >
               <span
                 v-for="item in [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]"
