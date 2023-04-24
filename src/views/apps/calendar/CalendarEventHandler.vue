@@ -109,6 +109,7 @@ const endDateTimePickerConfig = computed(() => {
     :class="`${
       props.isDrawerOpen ? 'absolute inset-0 backdrop-blur z-1000' : ''
     }`"
+    class="peyda"
   >
     <VNavigationDrawer
       temporary

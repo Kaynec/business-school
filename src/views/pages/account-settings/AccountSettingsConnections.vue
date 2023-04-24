@@ -1,181 +1,157 @@
-<script setup lang="ts">
-import asana from '@images/icons/brands/asana.png'
-import behance from '@images/icons/brands/behance.png'
-import dribbble from '@images/icons/brands/dribbble.png'
-import facebook from '@images/icons/brands/facebook.png'
-import github from '@images/icons/brands/github.png'
-import google from '@images/icons/brands/google.png'
-import intagram from '@images/icons/brands/instagram.png'
-import mailchimp from '@images/icons/brands/mailchimp.png'
-import slack from '@images/icons/brands/slack.png'
-import twitter from '@images/icons/brands/twitter.png'
+<script lang="ts" setup>
+import avatar1 from "@images/avatars/avatar-1.png";
 
-const connectedAccounts = ref([
-  {
-    logo: google,
-    name: 'Google',
-    subtitle: 'Calendar and contacts',
-    connected: true,
-  },
-  {
-    logo: slack,
-    name: 'Slack',
-    subtitle: 'Communication',
-    connected: false,
-  },
-  {
-    logo: github,
-    name: 'GitHub',
-    subtitle: 'Manage your Git repositories',
-    connected: true,
-  },
-  {
-    logo: mailchimp,
-    name: 'MailChimp',
-    subtitle: 'Email marketing service',
-    connected: true,
-  },
-  {
-    logo: asana,
-    name: 'Asana',
-    subtitle: 'Task management',
-    connected: false,
-  },
+const show1 = ref(false);
 
-])
+const accountDataLocal = ref({
+  avatarImg: avatar1,
+  file: "",
+});
 
-const socialAccounts = ref([
-  {
-    logo: facebook,
-    name: 'Facebook',
-    connected: false,
-  },
-  {
-    logo: twitter,
-    name: 'Twitter',
-    links: { username: '@Pixinvent', link: 'https://twitter.com/pixinvents' },
-    connected: true,
-  },
-  {
-    logo: intagram,
-    name: 'Instagram',
-    links: { username: '@Pixinvent', link: 'https://www.instagram.com/pixinvents/' },
-    connected: true,
-  },
-  {
-    logo: dribbble,
-    name: 'Dribbble',
-    connected: false,
+const refInputEl = ref<HTMLElement>();
 
-  },
-  {
-    logo: behance,
-    name: 'Behance',
-    connected: false,
-  },
-])
+// changeAvatar function
+const changeAvatar = (file: Event) => {
+  const fileReader = new FileReader();
+  const { files } = file.target as HTMLInputElement;
+
+  if (files && files.length) {
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = () => {
+      if (typeof fileReader.result === "string")
+        accountDataLocal.value.avatarImg = fileReader.result;
+    };
+  }
+};
+// changeAvatar function
+const changeFile = (file: Event) => {
+  const fileReader = new FileReader();
+  const { files } = file.target as HTMLInputElement;
+
+  if (files && files.length) {
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = () => {
+      if (typeof fileReader.result === "string")
+        accountDataLocal.value.file = fileReader.result;
+    };
+  }
+};
+
+// reset avatar image
+const resetAvatar = () => {
+  accountDataLocal.value.avatarImg = accountDataLocal.value.avatarImg;
+};
+//
+
+const rules = {
+  required: (value: string) => !!value || "لطفا رمز عبور خودرا وارد نمایید",
+  sameAs: (value: string) =>
+    value === accountDataLocal.value.new_password ||
+    "تکرار رمز باید با رمز یکی باشد",
+};
 </script>
 
 <template>
   <VRow>
-    <!-- 👉 Connected Accounts -->
-    <VCol
-      cols="12"
-      md="6"
-    >
-      <VCard
-        title="Connected Accounts"
-        subtitle="Display content from your connected accounts on your site"
-      >
-        <VCardText>
-          <VList class="card-list">
-            <VListItem
-              v-for="item in connectedAccounts"
-              :key="item.logo"
-              :title="item.name"
-            >
-              <template #prepend>
-                <VAvatar start>
-                  <VImg
-                    :src="item.logo"
-                    height="30"
-                  />
-                </VAvatar>
-              </template>
+    <VCol cols="12">
+      <VCard title="Account Details">
+        <VCardText class="d-flex">
+          <!-- 👉 Avatar -->
+          <VAvatar
+            rounded
+            size="120"
+            class="me-6"
+            :image="accountDataLocal.avatarImg"
+          />
 
-              <VListItemSubtitle>
-                {{ item.subtitle }}
-              </VListItemSubtitle>
-
-              <template #append>
-                <VListItemAction>
-                  <VSwitch
-                    v-model="item.connected"
-                    density="compact"
-                    class="me-1"
-                  />
-                </VListItemAction>
-              </template>
-            </VListItem>
-          </VList>
-        </VCardText>
-      </VCard>
-    </VCol>
-
-    <!-- 👉 Social Accounts -->
-    <VCol
-      cols="12"
-      md="6"
-    >
-      <VCard
-        title="Social Accounts"
-        subtitle="Display content from social accounts on your site"
-      >
-        <VCardText>
-          <VList class="card-list">
-            <VListItem
-              v-for="item in socialAccounts"
-              :key="item.logo"
-              :title="item.name"
-            >
-              <template #prepend>
-                <VAvatar start>
-                  <VImg
-                    :src="item.logo"
-                    height="30"
-                  />
-                </VAvatar>
-              </template>
-
-              <VListItemSubtitle
-                v-if="item.links?.link"
-                tag="a"
-                :href="item.links?.link"
-                style="opacity: 1;"
+          <!-- 👉 Upload Photo -->
+          <form
+            ref="refForm"
+            class="d-flex flex-column justify-center w-full gap-3"
+          >
+            <div class="d-flex flex-wrap gap-4">
+              <VBtn
+                class="rounded-15px"
+                color="primary"
+                @click="refInputEl?.click()"
               >
-                {{ item.links?.username }}
-              </VListItemSubtitle>
+                <VIcon icon="mdi-cloud-upload-outline" class="d-sm-none" />
+                <span class="d-none d-sm-block peyda">بارگذاری عکس</span>
+              </VBtn>
 
-              <VListItemSubtitle v-else>
-                Not Connected
-              </VListItemSubtitle>
+              <input
+                ref="refInputEl"
+                type="file"
+                name="file"
+                accept=".jpeg,.png,.jpg,GIF"
+                hidden
+                @input="changeAvatar"
+              />
 
-              <template #append>
-                <VListItemAction>
-                  <IconBtn
-                    variant="tonal"
-                    :color="item.connected ? 'error' : 'secondary'"
-                    class="rounded"
-                  >
-                    <VIcon
-                      size="20"
-                      :icon="item.connected ? 'mdi-delete-outline' : 'mdi-link-variant' "
-                    />
-                  </IconBtn>
-                </VListItemAction>
-              </template>
-            </VListItem>
-          </VList>
+              <VBtn
+                class="rounded-15px"
+                type="reset"
+                color="error"
+                variant="tonal"
+                @click="resetAvatar"
+              >
+                <span class="d-none d-sm-block peyda">حذف تصویر</span>
+                <VIcon icon="mdi-refresh" class="d-sm-none" />
+              </VBtn>
+            </div>
+
+            <p class="mb-0 peyda">PNG یا JPEG مجاز است. حداکثر اندازه 800K</p>
+          </form>
+        </VCardText>
+
+        <VCardText>
+          <!-- 👉 Form -->
+          <VForm class="mt-6">
+            <VCol>
+              <div>
+                <span class="text-3xl mb-5 inline-block peyda">
+                  الزامات آپلود مدارک:
+                </span>
+                <VList class="bg-transparent gap-4 flex flex-col">
+                  <span class="relative pr-4">
+                    <span
+                      class="absolute right-0 top-50% w-5px h-5px rounded-full bg-white"
+                    >
+                    </span>
+                    عکس واضح و با کیفیت اپلود شود.
+                  </span>
+                  <span class="relative pr-4">
+                    <span
+                      class="absolute right-0 top-50% w-5px h-5px rounded-full bg-white"
+                    >
+                    </span>
+                    فایل در فرمت های jpg، pdf و png اپلود شود.
+                  </span>
+                  <span class="relative pr-4">
+                    <span
+                      class="absolute right-0 top-50% w-5px h-5px rounded-full bg-white"
+                    >
+                    </span>
+                    حداکثر اندازه مجاز 800k
+                  </span>
+                </VList>
+              </div>
+            </VCol>
+            <VRow class="mt-8">
+              <VCol cols="12" md="6">
+                <VFileInput
+                  label="انتخاب فایل"
+                  class="min-h-15"
+                  @change="changeFile"
+                />
+              </VCol>
+              <VCol cols="12" md="6">
+                <VBtn class="rounded-15px min-h-15 min-w-43"
+                  >بارگذاری مدارک</VBtn
+                >
+              </VCol>
+            </VRow>
+          </VForm>
         </VCardText>
       </VCard>
     </VCol>

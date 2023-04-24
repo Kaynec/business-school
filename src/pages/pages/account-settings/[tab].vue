@@ -1,42 +1,38 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router'
-import AccountSettingsAccount from '@/views/pages/account-settings/AccountSettingsAccount.vue'
-import AccountSettingsBillingAndPlans from '@/views/pages/account-settings/AccountSettingsBillingAndPlans.vue'
-import AccountSettingsConnections from '@/views/pages/account-settings/AccountSettingsConnections.vue'
-import AccountSettingsNotification from '@/views/pages/account-settings/AccountSettingsNotification.vue'
-import AccountSettingsSecurity from '@/views/pages/account-settings/AccountSettingsSecurity.vue'
+import AccountSettingPassword from "@/views/pages/account-settings/AccountSettingPassword.vue";
+import AccountSettingPersonInfo from "@/views/pages/account-settings/AccountSettingPersonInfo.vue";
+import AccountSettingWork from "@/views/pages/account-settings/AccountSettingWork.vue";
+import AccountSettingsAccount from "@/views/pages/account-settings/AccountSettingsAccount.vue";
+import AccountSettingsBillingAndPlans from "@/views/pages/account-settings/AccountSettingsBillingAndPlans.vue";
+import AccountSettingsConnections from "@/views/pages/account-settings/AccountSettingsConnections.vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 
-const activeTab = ref(route.params.tab)
+const activeTab = ref(route.params.tab);
 
 // tabs
 const tabs = [
-  { title: 'Account', icon: 'mdi-account-outline', tab: 'account' },
-  { title: 'Security', icon: 'mdi-lock-open-outline', tab: 'security' },
-  { title: 'Billing & Plans', icon: 'mdi-bookmark-outline', tab: 'billing-plans' },
-  { title: 'Notifications', icon: 'mdi-bell-outline', tab: 'notification' },
-  { title: 'Connections', icon: 'mdi-link-variant', tab: 'connection' },
-]
+  { title: "پروفایل کاربری", icon: "mdi-account-outline", tab: "account" },
+  { title: "اطلاعات هویتی", icon: "mdi-account-question", tab: "security" },
+  { title: "اطلاعات تماس", icon: "mdi-phone", tab: "billing-plans" },
+  { title: "اطلاعات محل کار", icon: "mdi-finance", tab: "notification" },
+  { title: "آپلود مدارک", icon: "mdi-folder-plus-outline", tab: "connection" },
+  { title: "تنظیمات امنیتی", icon: "mdi-lock", tab: "password" },
+];
 </script>
 
 <template>
   <div>
-    <VTabs
-      v-model="activeTab"
-      class="v-tabs-pill"
-    >
+    <VTabs v-model="activeTab" class="v-tabs-pill">
       <VTab
         v-for="item in tabs"
         :key="item.icon"
         :value="item.tab"
         :to="{ name: 'pages-account-settings-tab', params: { tab: item.tab } }"
+        class="mx-4 !rounded-2.4rem"
       >
-        <VIcon
-          size="20"
-          start
-          :icon="item.icon"
-        />
+        <VIcon size="20" start :icon="item.icon" />
         {{ item.title }}
       </VTab>
     </VTabs>
@@ -53,7 +49,7 @@ const tabs = [
 
       <!-- Security -->
       <VWindowItem value="security">
-        <AccountSettingsSecurity />
+        <AccountSettingPersonInfo />
       </VWindowItem>
 
       <!-- Billing -->
@@ -63,12 +59,15 @@ const tabs = [
 
       <!-- Notification -->
       <VWindowItem value="notification">
-        <AccountSettingsNotification />
+        <AccountSettingWork />
       </VWindowItem>
 
       <!-- Connections -->
       <VWindowItem value="connection">
         <AccountSettingsConnections />
+      </VWindowItem>
+      <VWindowItem value="password">
+        <AccountSettingPassword />
       </VWindowItem>
     </VWindow>
   </div>

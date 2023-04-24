@@ -4,8 +4,10 @@ import type { VuetifyOptions } from "vuetify";
 
 export const staticPrimaryColor = "#666CFF";
 
+console.log(resolveVuetifyTheme());
+
 const theme: VuetifyOptions["theme"] = {
-  defaultTheme: resolveVuetifyTheme(),
+  defaultTheme: "dark",
   themes: {
     light: {
       dark: false,

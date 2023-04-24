@@ -46,7 +46,20 @@ const tickets = ref([
       />
     </VCol>
     <VCol cols="12" md="2">
-      <VBtn class="!h-16 w-full !rounded-20px"> ارسال تیکت </VBtn>
+      <!-- TODO Change This to dynamic -->
+      <VBtn
+        class="!h-16 w-full !rounded-20px"
+        @click="
+          $router.push({
+            name: 'apps-ticket-id',
+            params: {
+              id: 0,
+            },
+          })
+        "
+      >
+        ارسال تیکت
+      </VBtn>
     </VCol>
   </VRow>
   <VCard class="table">

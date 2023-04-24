@@ -15,17 +15,24 @@ import { createPinia } from "pinia";
 import "uno.css";
 import { createApp } from "vue";
 
+import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
+
+import { dragscroll as vDragscroll } from "vue-dragscroll";
+
 loadFonts();
 
 // Create vue app
 const app = createApp(App);
 
+app.directive("dragscroll", vDragscroll);
+
 // Use plugins
+
 app.use(vuetify);
 app.use(createPinia());
 app.use(router);
 app.use(layoutsPlugin);
-app.use(i18n);
+app.use(i18n).use(autoAnimatePlugin);
 app.use(abilitiesPlugin, ability, {
   useGlobalProperties: true,
 });

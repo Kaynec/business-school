@@ -106,7 +106,7 @@ const fileInput = ref();
               <span
                 v-for="item in [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]"
                 class="p-2 hover:bg-#262755 transition-350"
-                @click="
+                @click.stop="
                   () => {
                     ticket.departmant = item.toString();
                     showDepartment = false;

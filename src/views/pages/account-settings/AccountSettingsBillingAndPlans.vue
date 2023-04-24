@@ -1,501 +1,148 @@
 <script lang="ts" setup>
-import BillingHistoryTable from './BillingHistoryTable.vue'
+import stateAndCities from "@/@fake-db/apps/cities";
+import avatar1 from "@images/avatars/avatar-1.png";
 
-// Images
-import mastercard from '@images/icons/payments/mastercard.png'
-import visa from '@images/icons/payments/visa.png'
+const accountDataLocal = ref({
+  avatarImg: avatar1,
+  state: "تهران",
+  city: "تهران",
+  address: "آیت الله کاشانی، خیابان حبیب الله زاده، پلاک، 18، واحد4",
+  fixed_phone: "02144964734",
+  phone: "09122821265",
+  email: "AliakbarBabaei@gmail.com",
+});
 
-interface CardDetails {
-  name: string
-  number: string
-  expiry: string
-  isPopular: boolean
-  type: string
-  cvv: string
-  image: string
-}
-const selectedPaymentMethod = ref('credit-debit-atm-card')
+const refInputEl = ref<HTMLElement>();
 
-const isPricingPlanDialogVisible = ref(false)
-const isConfirmDialogVisible = ref(false)
-const isCardEditDialogVisible = ref(false)
-const isCardDetailSaveBilling = ref(false)
+// changeAvatar function
+const changeAvatar = (file: Event) => {
+  const fileReader = new FileReader();
+  const { files } = file.target as HTMLInputElement;
 
-const creditCards: CardDetails[] = [
-  {
-    name: 'Tom McBride',
-    number: '5577 0000 5577 9865',
-    expiry: '12/24',
-    isPopular: true,
-    type: 'mastercard',
-    cvv: '587',
-    image: mastercard,
-  },
-  {
-    name: 'Mildred Wagner',
-    number: '4532 3616 2070 5678',
-    expiry: '02/24',
-    isPopular: false,
-    type: 'visa',
-    cvv: '681',
-    image: visa,
-  },
-]
+  if (files && files.length) {
+    fileReader.readAsDataURL(files[0]);
+    fileReader.onload = () => {
+      if (typeof fileReader.result === "string")
+        accountDataLocal.value.avatarImg = fileReader.result;
+    };
+  }
+};
 
-const countryList = ['United States', 'Canada', 'United Kingdom', 'Australia', 'New Zealand', 'India', 'Russia', 'China', 'Japan']
-
-const currentCardDetails = ref()
-
-const openEditCardDialog = (cardDetails: CardDetails) => {
-  currentCardDetails.value = cardDetails
-
-  isCardEditDialogVisible.value = true
-}
-
-const cardNumber = ref(135632156548789)
-const cardName = ref('john Doe')
-const cardExpiryDate = ref('05/24')
-const cardCvv = ref(420)
-
-const resetPaymentForm = () => {
-  cardNumber.value = 135632156548789
-  cardName.value = 'john Doe'
-  cardExpiryDate.value = '05/24'
-  cardCvv.value = 420
-
-  selectedPaymentMethod.value = 'credit-debit-atm-card'
-}
+// reset avatar image
+const resetAvatar = () => {
+  accountDataLocal.value.avatarImg = accountDataLocal.value.avatarImg;
+};
+//
+const currentCitiesOfState = computed(() => {
+  return (stateAndCities as any)[accountDataLocal.value.state];
+});
 </script>
 
 <template>
   <VRow>
-    <!-- 👉 Current Plan -->
     <VCol cols="12">
-      <VCard title="Current Plan">
-        <VCardText>
-          <VRow>
-            <VCol
-              cols="12"
-              md="6"
-            >
-              <div>
-                <div class="mb-6">
-                  <h3 class="text-base font-weight-semibold mb-1">
-                    Your Current Plan is Basic
-                  </h3>
-                  <p class="text-base">
-                    A simple start for everyone
-                  </p>
-                </div>
-
-                <div class="mb-6">
-                  <h3 class="text-base font-weight-semibold mb-1">
-                    Active until Dec 09, 2021
-                  </h3>
-                  <p class="text-base">
-                    We will send you a notification upon Subscription expiration
-                  </p>
-                </div>
-
-                <div>
-                  <h3 class="text-base font-weight-semibold mb-1">
-                    <span class="me-3">$199 Per Month</span>
-                    <VChip
-                      color="primary"
-                      size="x-small"
-                    >
-                      Popular
-                    </VChip>
-                  </h3>
-                  <p class="text-base mb-0">
-                    Standard plan for small to medium businesses
-                  </p>
-                </div>
-              </div>
-            </VCol>
-
-            <VCol
-              cols="12"
-              md="6"
-            >
-              <VAlert
-                color="warning"
-                variant="tonal"
-              >
-                <div class="d-flex align-center gap-3 mb-1">
-                  <div>
-                    <VIcon
-                      icon="mdi-alert-outline"
-                      size="22"
-                    />
-                  </div>
-                  <VAlertTitle>
-                    We need your attention!
-                  </VAlertTitle>
-                </div>
-
-                <span class="ms-sm-9 ms-xs-0">Your plan requires update</span>
-              </VAlert>
-
-              <!-- progress -->
-              <div class="d-flex font-weight-semibold text-sm text-high-emphasis mt-8 mb-2">
-                <span>Days</span>
-                <VSpacer />
-                <span>24 of 30 Days</span>
-              </div>
-              <VProgressLinear
-                color="primary"
-                rounded
-                height="8"
-                model-value="75"
-              />
-              <p class="text-sm mt-2">
-                6 days remaining until your plan requires update
-              </p>
-            </VCol>
-
-            <VCol cols="12">
-              <div class="d-flex flex-wrap gap-y-4">
-                <VBtn
-                  class="me-3"
-                  @click="isPricingPlanDialogVisible = true"
-                >
-                  upgrade plan
-                </VBtn>
-
-                <VBtn
-                  color="secondary"
-                  variant="tonal"
-                  @click="isConfirmDialogVisible = true"
-                >
-                  Cancel Subscription
-                </VBtn>
-              </div>
-            </VCol>
-          </VRow>
-
-          <!-- 👉 Confirm Dialog -->
-          <ConfirmDialog
-            v-model:isDialogVisible="isConfirmDialogVisible"
-            confirmation-msg="Are you sure to cancel your subscription?"
+      <VCard title="Account Details">
+        <VCardText class="d-flex">
+          <!-- 👉 Avatar -->
+          <VAvatar
+            rounded
+            size="120"
+            class="me-6"
+            :image="accountDataLocal.avatarImg"
           />
 
-          <!-- 👉 plan and pricing dialog -->
-          <PricingPlanDialog v-model:is-dialog-visible="isPricingPlanDialogVisible" />
+          <!-- 👉 Upload Photo -->
+          <form
+            ref="refForm"
+            class="d-flex flex-column justify-center w-full gap-3"
+          >
+            <div class="d-flex flex-wrap gap-4">
+              <VBtn
+                class="rounded-15px"
+                color="primary"
+                @click="refInputEl?.click()"
+              >
+                <VIcon icon="mdi-cloud-upload-outline" class="d-sm-none" />
+                <span class="d-none d-sm-block peyda">بارگذاری عکس</span>
+              </VBtn>
+
+              <input
+                ref="refInputEl"
+                type="file"
+                name="file"
+                accept=".jpeg,.png,.jpg,GIF"
+                hidden
+                @input="changeAvatar"
+              />
+
+              <VBtn
+                class="rounded-15px"
+                type="reset"
+                color="error"
+                variant="tonal"
+                @click="resetAvatar"
+              >
+                <span class="d-none d-sm-block peyda">حذف تصویر</span>
+                <VIcon icon="mdi-refresh" class="d-sm-none" />
+              </VBtn>
+            </div>
+
+            <p class="mb-0 peyda">PNG یا JPEG مجاز است. حداکثر اندازه 800K</p>
+          </form>
         </VCardText>
-      </VCard>
-    </VCol>
 
-    <!-- 👉 Payment Methods -->
-    <VCol cols="12">
-      <VCard title="Payment Methods">
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <!-- 👉 Form -->
+          <VForm class="mt-6">
             <VRow>
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VRow>
-                  <!-- 👉 card type switch -->
-                  <VCol cols="12">
-                    <VRadioGroup
-                      v-model="selectedPaymentMethod"
-                      inline
-                    >
-                      <VRadio
-                        value="credit-debit-atm-card"
-                        label="Credit/Debit/ATM Card"
-                        color="primary"
-                      />
-                      <VRadio
-                        value="cod-cheque"
-                        label="COD/Cheque"
-                        color="primary"
-                      />
-                    </VRadioGroup>
-                  </VCol>
-
-                  <VCol cols="12">
-                    <VRow v-show="selectedPaymentMethod === 'credit-debit-atm-card'">
-                      <!-- 👉 Card Number -->
-                      <VCol cols="12">
-                        <VTextField
-                          v-model="cardNumber"
-                          label="Card Number"
-                          type="number"
-                        />
-                      </VCol>
-
-                      <!-- 👉 Name -->
-                      <VCol
-                        cols="12"
-                        md="6"
-                      >
-                        <VTextField
-                          v-model="cardName"
-                          label="Name"
-                        />
-                      </VCol>
-
-                      <!-- 👉 Expiry date -->
-                      <VCol
-                        cols="6"
-                        md="3"
-                      >
-                        <VTextField
-                          v-model="cardExpiryDate"
-                          label="Expiry Date"
-                        />
-                      </VCol>
-
-                      <!-- 👉 Cvv code -->
-                      <VCol
-                        cols="6"
-                        md="3"
-                      >
-                        <VTextField
-                          v-model="cardCvv"
-                          type="password"
-                          label="CVV Code"
-                        />
-                      </VCol>
-
-                      <!-- 👉 Future Billing switch -->
-                      <VCol cols="12">
-                        <VSwitch
-                          v-model="isCardDetailSaveBilling"
-                          density="compact"
-                          label="Save card for future billing?"
-                        />
-                      </VCol>
-                    </VRow>
-
-                    <p
-                      v-show="selectedPaymentMethod === 'cod-cheque'"
-                      class="text-base"
-                    >
-                      Cash on delivery is a mode of payment where you make the payment after the goods/services are received.
-                    </p>
-                    <p
-                      v-show="selectedPaymentMethod === 'cod-cheque'"
-                      class="text-base"
-                    >
-                      You can pay cash or make the payment via debit/credit card directly to the delivery person.
-                    </p>
-                  </VCol>
-                </VRow>
-              </VCol>
-
-              <!-- 👉 Saved Cards -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <h6 class="text-base font-weight-semibold mb-6">
-                  My Cards
-                </h6>
-
-                <div class="d-flex flex-column gap-y-4">
-                  <VCard
-                    v-for="card in creditCards"
-                    :key="card.name"
-                    class="bg-var-theme-background"
-                    flat
-                  >
-                    <VCardText class="d-flex flex-sm-row flex-column justify-space-between">
-                      <div class="text-no-wrap">
-                        <VImg
-                          :src="card.image"
-                          width="46"
-                        />
-                        <h3 class="my-3 text-base">
-                          <span class="me-4">{{ card.name }}</span>
-
-                          <VChip
-                            v-if="card.isPopular"
-                            label
-                            color="primary"
-                            size="x-small"
-                          >
-                            Popular
-                          </VChip>
-                        </h3>
-                        <span class="text-base">**** **** **** {{ card.number.substring(card.number.length - 4) }}</span>
-                      </div>
-
-                      <div class="d-flex flex-column text-sm-end">
-                        <div class="d-flex flex-wrap gap-4 order-sm-0 order-1">
-                          <VBtn
-                            variant="tonal"
-                            @click="openEditCardDialog(card)"
-                          >
-                            Edit
-                          </VBtn>
-                          <VBtn
-                            color="secondary"
-                            variant="tonal"
-                          >
-                            Delete
-                          </VBtn>
-                        </div>
-                        <span class="mt-sm-auto mb-sm-0 my-5 order-sm-1 order-0">Card expires at {{ card.expiry }}</span>
-                      </div>
-                    </VCardText>
-                  </VCard>
-                </div>
-
-                <!-- 👉 Add Edit Card Dialog -->
-                <CardAddEditDialog
-                  v-model:isDialogVisible="isCardEditDialogVisible"
-                  :card-details="currentCardDetails"
-                  class="v-dialog-lg"
-                />
-              </VCol>
-
-              <!-- 👉 Payment method action button -->
-              <VCol
-                cols="12"
-                class="d-flex flex-wrap gap-4"
-              >
-                <VBtn type="submit">
-                  Save changes
-                </VBtn>
-                <VBtn
-                  color="secondary"
-                  variant="tonal"
-                  @click="resetPaymentForm"
-                >
-                  Reset
-                </VBtn>
-              </VCol>
-            </VRow>
-          </VForm>
-        </VCardText>
-      </VCard>
-    </VCol>
-
-    <!-- 👉 Billing Address -->
-    <VCol cols="12">
-      <VCard title="Billing Address">
-        <VCardText>
-          <VForm @submit.prevent="() => {}">
-            <VRow>
-              <!-- 👉 Company name -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="Company Name" />
-              </VCol>
-
-              <!-- 👉 Billing Email -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="Billing Email" />
-              </VCol>
-
-              <!-- 👉 Tax ID -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="Tax ID" />
-              </VCol>
-
-              <!-- 👉 Vat Number -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="VAT Number" />
-              </VCol>
-
-              <!-- 👉 Mobile -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField
-                  dirty
-                  label="Phone Number"
-                  type="number"
-                  prefix="US (+1)"
-                />
-              </VCol>
-
-              <!-- 👉 Country -->
-              <VCol
-                cols="12"
-                md="6"
-              >
+              <VCol cols="12" md="6">
                 <VSelect
-                  label="Country"
-                  :items="countryList"
+                  v-model="accountDataLocal.state"
+                  label="استان"
+                  :items="Object.keys(stateAndCities)"
+                />
+              </VCol>
+              <VCol cols="12" md="6">
+                <VSelect
+                  v-model="accountDataLocal.city"
+                  label="شهر"
+                  :items="currentCitiesOfState"
                 />
               </VCol>
 
-              <!-- 👉 Billing Address -->
-              <VCol cols="12">
-                <VTextField label="Billing Address" />
+              <!-- 👉 Last Name -->
+              <VCol md="6" cols="12">
+                <VTextField v-model="accountDataLocal.address" label="آدرس" />
+              </VCol>
+              <VCol cols="12" md="6">
+                <VTextField
+                  v-model="accountDataLocal.fixed_phone"
+                  label="تلفن ثابت"
+                  type="tel"
+                />
               </VCol>
 
-              <!-- 👉 State -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="State" />
+              <!-- 👉 Phone -->
+              <VCol cols="12" md="6">
+                <VTextField
+                  v-model="accountDataLocal.phone"
+                  label="تلفن "
+                  type="tel"
+                />
               </VCol>
 
-              <!-- 👉 Zip Code -->
-              <VCol
-                cols="12"
-                md="6"
-              >
-                <VTextField label="Zip Code" />
+              <VCol cols="12" md="6">
+                <VTextField v-model="accountDataLocal.email" label="ایمیل" />
               </VCol>
 
-              <!-- 👉 Actions Button -->
-              <VCol
-                cols="12"
-                class="d-flex flex-wrap gap-4"
-              >
-                <VBtn type="submit">
-                  Save changes
-                </VBtn>
-                <VBtn
-                  type="reset"
-                  color="secondary"
-                  variant="tonal"
-                >
-                  Reset
-                </VBtn>
+              <!-- 👉 Form Actions -->
+              <VCol cols="12" class="d-flex flex-wrap gap-4">
+                <VBtn class="rounded-15px peyda">ثبت اطلاعات</VBtn>
               </VCol>
             </VRow>
           </VForm>
         </VCardText>
       </VCard>
-    </VCol>
-
-    <!-- 👉 Billing History -->
-    <VCol cols="12">
-      <BillingHistoryTable />
     </VCol>
   </VRow>
 </template>
-
-<style lang="scss">
-.pricing-dialog {
-  .pricing-title {
-    font-size: 24px !important;
-  }
-
-  .v-card {
-    border: 0.0625rem solid rgba(var(--v-border-color), var(--v-border-opacity));
-    box-shadow: none;
-  }
-}
-</style>

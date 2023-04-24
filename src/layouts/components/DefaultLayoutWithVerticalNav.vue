@@ -7,7 +7,6 @@ import Footer from "@/layouts/components/Footer.vue";
 import NavBarI18n from "@/layouts/components/NavBarI18n.vue";
 import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue";
 import NavbarShortcuts from "@/layouts/components/NavbarShortcuts.vue";
-import NavbarThemeSwitcher from "@/layouts/components/NavbarThemeSwitcher.vue";
 import NavSearchBar from "@/layouts/components/NavSearchBar.vue";
 import UserProfile from "@/layouts/components/UserProfile.vue";
 
@@ -31,47 +30,40 @@ watch(isVerticalNavCollapsed, (val) => {
     ? "rotate-180"
     : "rotate-back-180";
 });
+//
 </script>
 
 <template>
   <VerticalNavLayout :nav-items="navItems">
     <!-- 👉 navbar -->
     <template #navbar="{ toggleVerticalOverlayNavActive }">
-      <VContainer fluid>
-        <div class="d-flex h-100 align-center">
-          <IconBtn
-            v-if="isLessThanOverlayNavBreakpoint(windowWidth)"
-            class="ms-n3"
-            @click="toggleVerticalOverlayNavActive(true)"
-          >
-            <VIcon icon="mdi-menu" />
-          </IconBtn>
+      <div class="d-flex h-100 align-center">
+        <IconBtn
+          v-if="isLessThanOverlayNavBreakpoint(windowWidth)"
+          class="ms-n3"
+          @click="toggleVerticalOverlayNavActive(true)"
+        >
+          <VIcon icon="mdi-menu" />
+        </IconBtn>
 
-          <NavSearchBar class="ms-lg-n3" />
+        <NavSearchBar class="ms-lg-n3" />
 
-          <VSpacer />
-
-          <NavBarI18n class="me-1" />
-          <NavbarThemeSwitcher class="me-1" />
-          <NavbarShortcuts class="me-1" />
-          <NavBarNotifications class="me-3" />
-          <UserProfile />
-        </div>
-      </VContainer>
+        <VSpacer />
+        <NavBarI18n class="me-1" />
+        <NavbarShortcuts class="me-1" />
+        <NavBarNotifications class="me-3" />
+        <UserProfile />
+      </div>
     </template>
 
     <!-- 👉 Pages -->
-    <VContainer fluid>
-      <RouterView v-slot="{ Component }">
-        <Component :is="Component" />
-      </RouterView>
-    </VContainer>
+    <RouterView v-slot="{ Component }">
+      <Component :is="Component" />
+    </RouterView>
 
     <!-- 👉 Footer -->
     <template #footer>
-      <VContainer fluid>
-        <Footer />
-      </VContainer>
+      <Footer />
     </template>
 
     <!-- 👉 Customizer -->

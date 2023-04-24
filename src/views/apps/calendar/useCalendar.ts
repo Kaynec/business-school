@@ -204,6 +204,8 @@ export const useCalendar = (
     events: fetchEvents,
     locale: "fa",
 
+    firstDay: -1,
+
     // ❗ We need this to be true because when its false and event is allDay event and end date is same as start data then Full calendar will set end to null
     forceEventDuration: true,
 

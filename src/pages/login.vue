@@ -1,69 +1,78 @@
 <script setup lang="ts">
-import { VForm } from 'vuetify/components'
-import { useGenerateImageVariant } from '@/@core/composable/useGenerateImageVariant'
-import type { LoginResponse } from '@/@fake-db/types'
-import { useAppAbility } from '@/plugins/casl/useAppAbility'
-import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
-import axios from '@axios'
-import authV2LoginIllustrationBorderedDark from '@images/pages/auth-v2-login-illustration-bordered-dark.png'
-import authV2LoginIllustrationBorderedLight from '@images/pages/auth-v2-login-illustration-bordered-light.png'
-import authV2LoginIllustrationDark from '@images/pages/auth-v2-login-illustration-dark.png'
-import authV2LoginIllustrationLight from '@images/pages/auth-v2-login-illustration-light.png'
-import authV2LoginMaskDark from '@images/pages/auth-v2-login-mask-dark.png'
-import authV2LoginMaskLight from '@images/pages/auth-v2-login-mask-light.png'
-import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
-import { themeConfig } from '@themeConfig'
-import { emailValidator, requiredValidator } from '@validators'
+import { useGenerateImageVariant } from "@/@core/composable/useGenerateImageVariant";
+import type { LoginResponse } from "@/@fake-db/types";
+import { useAppAbility } from "@/plugins/casl/useAppAbility";
+import axios from "@axios";
+import authV2LoginIllustrationBorderedDark from "@images/pages/auth-v2-login-illustration-bordered-dark.png";
+import authV2LoginIllustrationBorderedLight from "@images/pages/auth-v2-login-illustration-bordered-light.png";
+import authV2LoginIllustrationDark from "@images/pages/auth-v2-login-illustration-dark.png";
+import authV2LoginIllustrationLight from "@images/pages/auth-v2-login-illustration-light.png";
+import authV2LoginMaskDark from "@images/pages/auth-v2-login-mask-dark.png";
+import authV2LoginMaskLight from "@images/pages/auth-v2-login-mask-light.png";
+import { themeConfig } from "@themeConfig";
+import { emailValidator, requiredValidator } from "@validators";
+import { VForm } from "vuetify/components";
 
-const isPasswordVisible = ref(false)
+const isPasswordVisible = ref(false);
 
-const authV2LoginMask = useGenerateImageVariant(authV2LoginMaskLight, authV2LoginMaskDark)
-const authV2LoginIllustration = useGenerateImageVariant (authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
+const authV2LoginMask = useGenerateImageVariant(
+  authV2LoginMaskLight,
+  authV2LoginMaskDark
+);
+const authV2LoginIllustration = useGenerateImageVariant(
+  authV2LoginIllustrationLight,
+  authV2LoginIllustrationDark,
+  authV2LoginIllustrationBorderedLight,
+  authV2LoginIllustrationBorderedDark,
+  true
+);
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const ability = useAppAbility()
+const ability = useAppAbility();
 
 const errors = ref<Record<string, string | undefined>>({
   email: undefined,
   password: undefined,
-})
+});
 
-const refVForm = ref<VForm>()
-const email = ref('admin@demo.com')
-const password = ref('admin')
-const rememberMe = ref(false)
+const refVForm = ref<VForm>();
+const email = ref("admin@demo.com");
+const password = ref("admin");
+const rememberMe = ref(false);
 
 const login = () => {
-  axios.post<LoginResponse>('/auth/login', { email: email.value, password: password.value })
-    .then(r => {
-      const { accessToken, userData, userAbilities } = r.data
+  axios
+    .post<LoginResponse>("/auth/login", {
+      email: email.value,
+      password: password.value,
+    })
+    .then((r) => {
+      const { accessToken, userData, userAbilities } = r.data;
 
-      localStorage.setItem('userAbilities', JSON.stringify(userAbilities))
-      ability.update(userAbilities)
+      localStorage.setItem("userAbilities", JSON.stringify(userAbilities));
+      ability.update(userAbilities);
 
-      localStorage.setItem('userData', JSON.stringify(userData))
-      localStorage.setItem('accessToken', JSON.stringify(accessToken))
+      localStorage.setItem("userData", JSON.stringify(userData));
+      localStorage.setItem("accessToken", JSON.stringify(accessToken));
 
       // Redirect to `to` query if exist or redirect to index route
-      router.replace(route.query.to ? String(route.query.to) : '/')
+      router.replace(route.query.to ? String(route.query.to) : "/");
     })
-    .catch(e => {
-      const { errors: formErrors } = e.response.data
+    .catch((e) => {
+      const { errors: formErrors } = e.response.data;
 
-      errors.value = formErrors
-      console.error(e.response.data)
-    })
-}
+      errors.value = formErrors;
+      console.error(e.response.data);
+    });
+};
 
 const onSubmit = () => {
-  refVForm.value?.validate()
-    .then(({ valid: isValid }) => {
-      if (isValid)
-        login()
-    })
-}
+  refVForm.value?.validate().then(({ valid: isValid }) => {
+    if (isValid) login();
+  });
+};
 </script>
 
 <template>
@@ -76,10 +85,7 @@ const onSubmit = () => {
       {{ themeConfig.app.title }}
     </h5>
   </div>
-  <VRow
-    no-gutters
-    class="auth-wrapper"
-  >
+  <VRow no-gutters class="auth-wrapper">
     <VCol
       md="8"
       class="d-none d-md-flex align-center justify-center position-relative"
@@ -89,7 +95,7 @@ const onSubmit = () => {
           :src="authV2LoginIllustration"
           class="auth-illustration w-100"
           alt="auth-illustration"
-        >
+        />
       </div>
       <VImg
         :src="authV2LoginMask"
@@ -102,39 +108,29 @@ const onSubmit = () => {
       cols="12"
       md="4"
       class="auth-card-v2 d-flex align-center justify-center"
-      style="background-color: rgb(var(--v-theme-surface));"
+      style="background-color: rgb(var(--v-theme-surface))"
     >
-      <VCard
-        flat
-        :max-width="500"
-        class="mt-12 mt-sm-0 pa-4"
-      >
+      <VCard flat :max-width="500" class="mt-12 mt-sm-0 pa-4">
         <VCardText>
           <h5 class="text-h5 font-weight-semibold mb-1">
-            Welcome to {{ themeConfig.app.title }}! 👋🏻
+            به {{ themeConfig.app.title }} خوش آمدید ! 👋🏻
           </h5>
-          <p class="mb-0">
-            Please sign-in to your account and start the adventure
-          </p>
+          <p class="mb-0">برای وارد شدن لطفا اطلاعات خود را وارد کنید</p>
         </VCardText>
         <VCardText>
-          <VAlert
-            color="primary"
-            variant="tonal"
-          >
+          <VAlert color="primary" variant="tonal">
             <p class="text-caption mb-2">
-              Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
+              Admin Email: <strong>admin@demo.com</strong> / Pass:
+              <strong>admin</strong>
             </p>
             <p class="text-caption mb-0">
-              Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
+              Client Email: <strong>client@demo.com</strong> / Pass:
+              <strong>client</strong>
             </p>
           </VAlert>
         </VCardText>
         <VCardText>
-          <VForm
-            ref="refVForm"
-            @submit.prevent="onSubmit"
-          >
+          <VForm ref="refVForm" @submit.prevent="onSubmit">
             <VRow>
               <!-- email -->
               <VCol cols="12">
@@ -155,11 +151,15 @@ const onSubmit = () => {
                   :rules="[requiredValidator]"
                   :type="isPasswordVisible ? 'text' : 'password'"
                   :error-messages="errors.password"
-                  :append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+                  :append-inner-icon="
+                    isPasswordVisible
+                      ? 'mdi-eye-off-outline'
+                      : 'mdi-eye-outline'
+                  "
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
-                <div class="d-flex align-center flex-wrap justify-space-between mt-1 mb-4">
+                <!-- <div class="d-flex align-center flex-wrap justify-space-between mt-1 mb-4">
                   <VCheckbox
                     v-model="rememberMe"
                     label="Remember me"
@@ -170,21 +170,13 @@ const onSubmit = () => {
                   >
                     Forgot Password?
                   </RouterLink>
-                </div>
+                </div> -->
 
-                <VBtn
-                  block
-                  type="submit"
-                >
-                  Login
-                </VBtn>
+                <VBtn block mt-5 type="submit"> ورود </VBtn>
               </VCol>
 
               <!-- create account -->
-              <VCol
-                cols="12"
-                class="text-base text-center"
-              >
+              <!-- <VCol cols="12" class="text-base text-center">
                 <span>New on our platform?</span>
                 <RouterLink
                   class="text-primary ms-2"
@@ -192,23 +184,17 @@ const onSubmit = () => {
                 >
                   Create an account
                 </RouterLink>
-              </VCol>
-              <VCol
-                cols="12"
-                class="d-flex align-center"
-              >
+              </VCol> -->
+              <!-- <VCol cols="12" class="d-flex align-center">
                 <VDivider />
                 <span class="mx-4">or</span>
                 <VDivider />
-              </VCol>
+              </VCol> -->
 
               <!-- auth providers -->
-              <VCol
-                cols="12"
-                class="text-center"
-              >
+              <!-- <VCol cols="12" class="text-center">
                 <AuthProvider />
-              </VCol>
+              </VCol> -->
             </VRow>
           </VForm>
         </VCardText>
