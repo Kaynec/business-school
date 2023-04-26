@@ -1,18 +1,4 @@
 <script setup lang="ts">
-// Table
-
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
-
-const resolveUserStatusVariant = (stat: string) => {
-  if (stat === "pending") return "warning";
-  if (stat === "active") return "success";
-  if (stat === "inactive") return "secondary";
-
-  return "primary";
-};
-
 const courses = ref([
   {
     title: "مدیریت رفتار سازمانی",

@@ -39,19 +39,6 @@ const courses = ref([
 </script>
 
 <template>
-  <VRow mx-auto>
-    <VCol cols="12" md="10">
-      <VSelect
-        v-model="selectedOptions"
-        :items="states"
-        label="همه تیکت‌ ها"
-        class="rounded-xl mb-8 !w-full !h-16"
-      />
-    </VCol>
-    <VCol cols="12" md="2">
-      <VBtn class="!h-16 w-full !rounded-20px"> ارسال تیکت </VBtn>
-    </VCol>
-  </VRow>
   <VCard class="table">
     <VTable class="text-no-wrap">
       <!-- 👉 table head -->
