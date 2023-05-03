@@ -1,15 +1,9 @@
 <script setup lang="ts">
-// Table
-
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
-
 const getClass = (stat: string) => {
-  if (stat === "pending") return "bg-#F7A600";
-  if (stat === "active") return "bg-#52AE32";
-  if (stat === "passed") return "bg-#E30613";
-  if (stat === "not_yet") return "bg-gradient-to-r from-#814997 to-#C464EA";
+  if (stat === "pending") return "!bg-#F7A600";
+  if (stat === "active") return "!bg-#52AE32";
+  if (stat === "passed") return "!bg-#E30613";
+  if (stat === "not_yet") return "!bg-gradient-to-r from-#814997 to-#C464EA";
 
   return "primary";
 };
@@ -63,7 +57,7 @@ const courses = ref([
 </script>
 
 <template>
-  <VCard class="table">
+  <VCard>
     <VTable class="text-no-wrap">
       <!-- 👉 table head -->
       <thead>

@@ -37,13 +37,13 @@ const chartJsCustomColors: ChartJsCustomColors = {
         <JalaliCalendar />
       </VCard>
     </VCol>
-    <VCol cols="12" md="6" lg="3">
+    <VCol cols="12" md="4" lg="3">
       <VCard class="rounded-xl h-100% customCard" :image="globe">
-        <div class="!flex flex-col w-full pr-6 gap-4 pb-8 pt-25 peyda">
-          <span class="text-3xl"> ثبت نام در دوره بین المللی </span>
-          <span class="text-2xl"> Executive MBA </span>
-          <span class="text-2xl"> دانشگاه UMEF </span>
-          <span class="text-3xl"> سوییس آغاز شد</span>
+        <div class="!flex flex-col w-full pr-3 gap-4 pb-3 peyda">
+          <span class="text-2xl"> ثبت نام در دوره بین المللی </span>
+          <span class="text-xl"> Executive MBA </span>
+          <span class="text-xl"> دانشگاه UMEF </span>
+          <span class="text-2xl"> سوییس آغاز شد</span>
         </div>
         <VCardActions style="display: flex; width: 100%; justify-content: end">
           <VBtn
@@ -62,7 +62,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
       </VCard>
     </VCol>
 
-    <VCol cols="12" md="10" lg="5">
+    <VCol cols="12" lg="5">
       <VCard class="pa-2 !flex-center-row rounded-xl h-100%">
         <ChartJsBarChart />
       </VCard>
@@ -71,9 +71,9 @@ const chartJsCustomColors: ChartJsCustomColors = {
   <!--  -->
   <VRow>
     <VCol cols="12" md="8" lg="4">
-      <VCard class="!p-3 rounded-xl h-100% space-y-2">
-        <span class="text-3xl inline-block mb-8 peyda"> دوره‌های من </span>
-        <div class="flex justify-between items-center my-4" v-for="i in 4">
+      <VCard class="rounded-xl h-100% space-y-2">
+        <span class="text-2xl inline-block pt-2 pr-3 peyda"> دوره‌های من </span>
+        <div class="flex justify-between items-center my-4 px-2" v-for="i in 4">
           <div class="!flex flex-col">
             <span class="text-lg pb-3 peyda">دوره مدیر اجرایی</span>
             <div class="text-xs text-400 flex-center-row gap-2">
@@ -98,9 +98,9 @@ const chartJsCustomColors: ChartJsCustomColors = {
         </div>
       </VCard>
     </VCol>
-    <VCol cols="12" md="6" lg="3">
-      <VCard class="rounded-xl min-h-100% !p-4 !flex flex-col justify-between">
-        <span class="text-3xl pt-4 peyda"> مهلت سررسید </span>
+    <VCol cols="12" md="4" lg="3">
+      <VCard class="rounded-xl min-h-100% !p-2 !flex flex-col justify-between">
+        <span class="text-2xl peyda pt-2 pr-3"> مهلت سررسید </span>
 
         <div
           class="w-full flex-nowrap flex gap-6 pt-4 h-full overflow-hidden gap-2 scrollbar"
@@ -112,7 +112,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
           >
             <div class="flex justify-between items-center">
               <div class="!flex flex-col items-start gap-3">
-                <span class="text-2xl !text-#8D99AE pb-3 peyda">
+                <span class="text-xl !text-#8D99AE pb-3 peyda">
                   {{ i }} دوره مدیریت</span
                 >
 
@@ -132,7 +132,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
                 </div>
               </div>
             </div>
-            <div class="flex justify-end gap-2">
+            <div class="flex justify-end gap-2 pt-3">
               <VBtn :variant="'outlined'">جزئیات </VBtn>
               <VBtn> پرداخت </VBtn>
             </div>
@@ -141,9 +141,9 @@ const chartJsCustomColors: ChartJsCustomColors = {
       </VCard>
     </VCol>
 
-    <VCol cols="12" md="10" lg="5">
-      <VCard class="!p-6 rounded-xl h-100% space-y-2">
-        <span class="text-3xl inline-block mb-8 peyda"
+    <VCol cols="12" lg="5">
+      <VCard class="pt-2 pr-3 pl-2 rounded-xl h-100% space-y-2">
+        <span class="text-2xl inline-block mb-3 peyda"
           >جعبه ابزار مدیریتی
         </span>
         <div class="!flex flex-col gap-8">
@@ -439,7 +439,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
   <VRow>
     <VCol cols="12" md="7">
       <VCard class="pa-5 rounded-xl h-100%">
-        <span class="text-3xl peyda"> پیشرفت من </span>
+        <span class="text-2xl peyda"> پیشرفت من </span>
         <div style="display: flex; justify-content: end; gap: 1rem">
           <VProgressCircular
             :rotate="90"
@@ -448,7 +448,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
             model-value="64"
             color="primary"
           >
-            <div class="!flex !flex-center-column text-2xl">
+            <div class="!flex !flex-center-column text-xl">
               <span> کلاس </span>
               <span> 64% </span>
             </div>
@@ -460,7 +460,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
             model-value="12"
             color="primary"
           >
-            <div class="!flex !flex-center-column text-2xl">
+            <div class="!flex !flex-center-column text-xl">
               <span> تمرین </span>
               <span> 12% </span>
             </div>
@@ -472,7 +472,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
             model-value="42"
             color="primary"
           >
-            <div class="!flex !flex-center-column text-2xl">
+            <div class="!flex !flex-center-column text-xl">
               <span> دوره </span>
               <span> 42% </span>
             </div>
@@ -484,7 +484,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
             model-value="75"
             color="primary"
           >
-            <div class="!flex !flex-center-column text-2xl">
+            <div class="!flex !flex-center-column text-xl">
               <span> کلاس </span>
               <span> 60% </span>
             </div>
@@ -495,11 +495,11 @@ const chartJsCustomColors: ChartJsCustomColors = {
     <VCol cols="12" md="5">
       <VCard
         :image="nelson"
-        class="pa-2 rounded-xl min-h-50 h-100% !flex flex-col justify-center px-10 pb-8 peyda"
+        class="pa-2 rounded-xl min-h-50 h-100% !flex flex-col justify-center px-3 pb-2 peyda"
       >
         <div
           self-start
-          class="max-w-75% pb-4 !flex flex-col text-xl leading-loose text-right"
+          class="w-90% max-w-160 pb-4 !flex flex-col text-xl leading-loose text-right"
           dir="rtl"
         >
           <span class="!text-gray-3"> بزرگترین ریسک، ریسک نکردن است! </span>
@@ -508,7 +508,7 @@ const chartJsCustomColors: ChartJsCustomColors = {
             می کند، ریسک نکردن است.
           </span>
         </div>
-        <span class="!text-#8D99AE self-end text-3xl"> “نلسون ماندلا” </span>
+        <span class="!text-#8D99AE self-end text-2xl"> “نلسون ماندلا” </span>
       </VCard>
     </VCol>
   </VRow>

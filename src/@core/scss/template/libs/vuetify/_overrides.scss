@@ -52,7 +52,7 @@ $alert-prominent-icon-size: 38px;
   direction: rtl !important;
 
   span {
-    color: rgba(var(--v-theme-cardText)) !important;
+    color: rgba(var(--v-theme-cardText));
   }
 }
 

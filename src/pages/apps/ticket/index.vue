@@ -62,7 +62,7 @@ const tickets = ref([
       </VBtn>
     </VCol>
   </VRow>
-  <VCard class="table">
+  <VCard>
     <VTable class="text-no-wrap">
       <!-- 👉 table head -->
       <thead>

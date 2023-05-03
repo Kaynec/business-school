@@ -1,38 +1,7 @@
-@use "@configured-variables" as variables;
-
-.table {
-  border-end-start-radius: 2.4rem;
-  border-start-end-radius: 2.4rem;
-  border-start-start-radius: 2.4rem;
-
-  th {
-    background: #323233;
-  }
-
-  td {
-    background-color: #282828;
-  }
+th {
+  background: #323233;
 }
 
-.table-content {
-  max-block-size: 75vh;
-  overflow-x: visible;
-  overflow-y: scroll;
-
-  td {
-    background-color: #282828;
-  }
-}
-
-.table tbody {
-  display: block;
-  overflow: auto;
-  block-size: 75%;
-}
-
-.table thead,
-.table tbody tr {
-  display: table;
-  inline-size: 100%;
-  table-layout: fixed;/* even columns width , fix width of table too */
+td {
+  background-color: #282828;
 }

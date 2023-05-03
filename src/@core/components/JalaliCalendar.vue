@@ -98,13 +98,13 @@ const days = ref();
 // Function getClass
 function getClass(index: number) {
   if (index === 4) {
-    return "bg-#814997 rounded-5px text-white  font-700";
+    return "!bg-#814997 rounded-5px text-white  font-700";
   }
   if (index === 7 || index === 10) {
-    return "bg-#F7A600 rounded-5px text-white  font-700";
+    return "!bg-#F7A600 rounded-5px text-white  font-700";
   }
   if (index === 19) {
-    return "bg-#E30613 rounded-5px text-white  font-700";
+    return "!bg-#E30613 rounded-5px text-white  font-700";
   }
 }
 

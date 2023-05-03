@@ -61,7 +61,7 @@ const resolveUserStatusVariant = (stat: string) => {
 </script>
 
 <template>
-  <VCard class="table">
+  <VCard>
     <VTable class="text-no-wrap">
       <!-- 👉 table head -->
       <thead>

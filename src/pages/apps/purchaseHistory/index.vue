@@ -512,7 +512,14 @@ const tickets = ref([
         </div>
       </VCard>
     </div>
-    <VCard class="table">
+    <VCard>
+      <VChip
+        :color="resolveUserStatusVariant('success')"
+        size="small"
+        class="text-capitalize"
+      >
+        sssssss
+      </VChip>
       <VTable class="text-no-wrap">
         <!-- 👉 table head -->
         <thead>
