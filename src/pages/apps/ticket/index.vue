@@ -62,7 +62,7 @@ const tickets = ref([
       </VBtn>
     </VCol>
   </VRow>
-  <VCard class="table">
+  <VCard>
     <VTable class="text-no-wrap">
       <!-- 👉 table head -->
       <thead>
@@ -116,7 +116,7 @@ const tickets = ref([
       <!-- 👉 table footer  -->
       <tfoot v-show="!tickets.length">
         <tr>
-          <td colspan="7" class="text-center">No data available</td>
+          <td colspan="7" class="text-center">محتوایی برای نمایش وجود ندارد</td>
         </tr>
       </tfoot>
     </VTable>

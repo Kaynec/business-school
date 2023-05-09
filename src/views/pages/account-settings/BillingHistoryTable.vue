@@ -280,7 +280,9 @@ const computedMoreList = computed(() => {
       <!-- 👉 table footer  -->
       <tfoot v-show="!invoices.length">
         <tr>
-          <td colspan="8" class="text-center text-base">No data available</td>
+          <td colspan="8" class="text-center text-base">
+            محتوایی برای نمایش وجود ندارد
+          </td>
         </tr>
       </tfoot>
     </VTable>

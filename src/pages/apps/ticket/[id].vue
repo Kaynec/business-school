@@ -1,18 +1,4 @@
 <script setup lang="ts">
-// Table
-
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
-
-const resolveUserStatusVariant = (stat: string) => {
-  if (stat === "pending") return "warning";
-  if (stat === "active") return "success";
-  if (stat === "inactive") return "secondary";
-
-  return "primary";
-};
-
 const showDepartment = ref(false);
 const showHowMuch = ref(false);
 const showDepartmentRef = ref();
@@ -24,27 +10,6 @@ onClickOutside(showDepartmentRef, () => {
 onClickOutside(showHowMuchRef, () => {
   showHowMuch.value = false;
 });
-
-const tickets = ref([
-  {
-    id: 2656,
-    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
-    date: "1401/09/01",
-    status: "pending",
-  },
-  {
-    id: 2656,
-    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
-    date: "1401/09/01",
-    status: "active",
-  },
-  {
-    id: 2656,
-    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
-    date: "1401/09/01",
-    status: "inactive",
-  },
-]);
 
 const ticket = ref({
   title: "",

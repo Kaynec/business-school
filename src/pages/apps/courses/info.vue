@@ -1,9 +1,5 @@
 <script setup lang="ts">
-// Table
-
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
+import ShowStudentAttendance from "@/views/apps/ShowStudentAttendance.vue";
 
 const getClass = (stat: string) => {
   if (stat === "pending") return "bg-#F7A600";
@@ -28,6 +24,17 @@ const courses = ref([
     status: "pending",
     id: 88,
     description: "رشد شما در این درس متوسط بوده است.",
+
+    students: [
+      {
+        name: "سارا سعیدی",
+        isActive: false,
+      },
+      {
+        name: "2 سارا سعیدی",
+        isActive: false,
+      },
+    ],
   },
   {
     title: "مدیریت رفتار سازمانی",
@@ -42,6 +49,16 @@ const courses = ref([
     status: "active",
     id: 88,
     description: "رشد شما در این درس متوسط بوده است.",
+    students: [
+      {
+        name: "سارا سعیدی",
+        isActive: false,
+      },
+      {
+        name: "2 سارا سعیدی",
+        isActive: false,
+      },
+    ],
   },
   {
     title: "مدیریت رفتار سازمانی",
@@ -56,6 +73,16 @@ const courses = ref([
     status: "passed",
     id: 88,
     description: "رشد شما در این درس متوسط بوده است.",
+    students: [
+      {
+        name: "سارا سعیدی",
+        isActive: false,
+      },
+      {
+        name: "2 سارا سعیدی",
+        isActive: false,
+      },
+    ],
   },
   {
     title: "مدیریت رفتار سازمانی",
@@ -70,11 +97,32 @@ const courses = ref([
     status: "not_yet",
     id: 88,
     description: "رشد شما در این درس متوسط بوده است.",
+    students: [
+      {
+        name: "سارا سعیدی",
+        isActive: false,
+      },
+      {
+        name: "2 سارا سعیدی",
+        isActive: false,
+      },
+    ],
   },
 ]);
+
+const showAttendance = ref(false),
+  currentData = ref();
+//
 </script>
 
 <template>
+  <!--  -->
+  <ShowStudentAttendance
+    v-if="showAttendance"
+    @return="showAttendance = false"
+    :data="currentData.students"
+  />
+  <!--  -->
   <span class="text-3xl peyda text-white pb-4 block font-700">
     مدیریت رفتار سازمانی
   </span>
@@ -112,17 +160,18 @@ const courses = ref([
     </div>
   </div>
 
-  <VCard class="table">
-    <VTable class="text-no-wrap">
+  <VCard class="!mt-4">
+    <VTable class="!whitespace-nowrap">
       <!-- 👉 table head -->
       <thead>
         <tr>
-          <th scope="col">ماژول</th>
-          <th scope="col">تاریخ</th>
-          <th scope="col">ساعت شروع</th>
-          <th scope="col">ساعت پایان</th>
-          <th scope="col">لینک کلاس</th>
-          <th scope="col">وضعیت</th>
+          <th scope="col" class="">ماژول</th>
+          <th scope="col" class="">تاریخ</th>
+          <th scope="col" class="">ساعت شروع</th>
+          <th scope="col" class="">ساعت پایان</th>
+          <th scope="col" class="">حضور غیاب</th>
+          <th scope="col" class="">لینک کلاس</th>
+          <th scope="col" class="">وضعیت</th>
         </tr>
       </thead>
 
@@ -130,25 +179,79 @@ const courses = ref([
       <tbody class="table-content">
         <tr v-for="ticket in courses" :key="ticket.id">
           <!-- 👉 User -->
-          <td>
+          <td class="">
             {{ ticket.title }}
           </td>
-          <td>
+          <td class="">
             {{ ticket.date }}
           </td>
-          <td>
+          <td class="">
             {{ ticket.startHour }}
           </td>
-          <td>
+          <td class="">
             {{ ticket.endHour }}
           </td>
-          <td>
-            <span p-1 rounded-25px px-8 class="custom-border">
+          <td
+            class="cursor-pointer"
+            @click="
+              showAttendance = true;
+              currentData = ticket;
+            "
+          >
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 30 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M27.4624 18.75V11.25C27.4624 5 24.9624 2.5 18.7124 2.5H11.2124C4.9624 2.5 2.4624 5 2.4624 11.25V18.75C2.4624 25 4.9624 27.5 11.2124 27.5H18.7124C24.9624 27.5 27.4624 25 27.4624 18.75Z"
+                stroke="#808DA4"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M24.6499 4.0625L4.0874 24.625"
+                stroke="#808DA4"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M20.0752 22.5V16.25"
+                stroke="#808DA4"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M23.125 19.375H16.875"
+                stroke="#808DA4"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.125 9.375H6.875"
+                stroke="#808DA4"
+                stroke-width="2"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </td>
+          <td class="">
+            <span p-1 rounded-25px class="custom-border">
               {{ ticket.link }}
             </span>
           </td>
 
-          <td>
+          <td class="">
             <VChip
               :class="getClass(ticket.status)"
               size="small"
@@ -166,7 +269,7 @@ const courses = ref([
       <!-- 👉 table footer  -->
       <tfoot v-show="!courses.length">
         <tr>
-          <td colspan="7" class="text-center">No data available</td>
+          <td colspan="7" class="">محتوایی برای نمایش وجود ندارد</td>
         </tr>
       </tfoot>
     </VTable>

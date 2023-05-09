@@ -126,7 +126,9 @@ onClickOutside(target, () => {
         <!-- 👉 table footer  -->
         <tfoot v-show="!item.items.length">
           <tr>
-            <td colspan="7" class="text-center">No data available</td>
+            <td colspan="7" class="text-center">
+              محتوایی برای نمایش وجود ندارد
+            </td>
           </tr>
         </tfoot>
       </VTable>

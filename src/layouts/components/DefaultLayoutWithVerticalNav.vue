@@ -3,12 +3,11 @@ import navItems from "@/navigation/vertical";
 import { useThemeConfig } from "@core/composable/useThemeConfig";
 
 // Components
-import Footer from "@/layouts/components/Footer.vue";
 import NavBarI18n from "@/layouts/components/NavBarI18n.vue";
 import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue";
-import NavbarShortcuts from "@/layouts/components/NavbarShortcuts.vue";
 import NavSearchBar from "@/layouts/components/NavSearchBar.vue";
-import UserProfile from "@/layouts/components/UserProfile.vue";
+import NavbarShortcuts from "@/layouts/components/NavbarShortcuts.vue";
+import UserProfile from "./UserProfile.vue";
 
 // @layouts plugin
 import { VerticalNavLayout } from "@layouts";
@@ -60,14 +59,6 @@ watch(isVerticalNavCollapsed, (val) => {
     <RouterView v-slot="{ Component }">
       <Component :is="Component" />
     </RouterView>
-
-    <!-- 👉 Footer -->
-    <template #footer>
-      <Footer />
-    </template>
-
-    <!-- 👉 Customizer -->
-    <!-- <TheCustomizer /> -->
   </VerticalNavLayout>
 </template>
 

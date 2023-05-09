@@ -1,29 +1,28 @@
 <script setup lang="ts">
-import { initialAbility } from '@/plugins/casl/ability'
-import { useAppAbility } from '@/plugins/casl/useAppAbility'
+import { initialAbility } from "@/plugins/casl/ability";
+import { useAppAbility } from "@/plugins/casl/useAppAbility";
 
-const router = useRouter()
-const ability = useAppAbility()
-const userData = JSON.parse(localStorage.getItem('userData') || 'null')
+const router = useRouter();
+const ability = useAppAbility();
+const userData = JSON.parse(localStorage.getItem("userData") || "null");
 
 const logout = () => {
   // Remove "userData" from localStorage
-  localStorage.removeItem('userData')
+  localStorage.removeItem("userData");
 
   // Remove "accessToken" from localStorage
-  localStorage.removeItem('accessToken')
+  localStorage.removeItem("accessToken");
 
   // Redirect to login page
-  router.push('/login')
-    .then(() => {
-      // ℹ️ We had to remove abilities in then block because if we don't nav menu items mutation is visible while redirecting user to login page
-      // Remove "userAbilities" from localStorage
-      localStorage.removeItem('userAbilities')
+  router.push("/login").then(() => {
+    // ℹ️ We had to remove abilities in then block because if we don't nav menu items mutation is visible while redirecting user to login page
+    // Remove "userAbilities" from localStorage
+    localStorage.removeItem("userAbilities");
 
-      // Reset ability to initial ability
-      ability.update(initialAbility)
-    })
-}
+    // Reset ability to initial ability
+    ability.update(initialAbility);
+  });
+};
 </script>
 
 <template>
@@ -35,27 +34,12 @@ const logout = () => {
     color="success"
     bordered
   >
-    <VAvatar
-      class="cursor-pointer"
-      color="primary"
-      variant="tonal"
-    >
-      <VImg
-        v-if="userData && userData.avatar"
-        :src="userData.avatar"
-      />
-      <VIcon
-        v-else
-        icon="mdi-account-outline"
-      />
+    <VAvatar class="cursor-pointer" color="primary" variant="tonal">
+      <VImg v-if="userData && userData.avatar" :src="userData.avatar" />
+      <VIcon v-else icon="mdi-account-outline" />
 
       <!-- SECTION Menu -->
-      <VMenu
-        activator="parent"
-        width="230"
-        location="bottom end"
-        offset="14px"
-      >
+      <VMenu activator="parent" width="230" location="bottom end" offset="14px">
         <VList>
           <!-- 👉 User Avatar & Name -->
           <VListItem>
@@ -68,18 +52,12 @@ const logout = () => {
                   offset-y="3"
                   color="success"
                 >
-                  <VAvatar
-                    color="primary"
-                    variant="tonal"
-                  >
+                  <VAvatar color="primary" variant="tonal">
                     <VImg
                       v-if="userData && userData.avatar"
                       :src="userData.avatar"
                     />
-                    <VIcon
-                      v-else
-                      icon="mdi-account-outline"
-                    />
+                    <VIcon v-else icon="mdi-account-outline" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
@@ -96,24 +74,21 @@ const logout = () => {
           <!-- 👉 Profile -->
           <VListItem :to="{ name: 'apps-user-view-id', params: { id: 21 } }">
             <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-account-outline"
-                size="22"
-              />
+              <VIcon class="me-2" icon="mdi-account-outline" size="22" />
             </template>
 
             <VListItemTitle>Profile</VListItemTitle>
           </VListItem>
 
           <!-- 👉 Settings -->
-          <VListItem :to="{ name: 'pages-account-settings-tab', params: { tab: 'account' } }">
+          <VListItem
+            :to="{
+              name: 'pages-account-settings-tab',
+              params: { tab: 'account' },
+            }"
+          >
             <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-cog-outline"
-                size="22"
-              />
+              <VIcon class="me-2" icon="mdi-cog-outline" size="22" />
             </template>
 
             <VListItemTitle>Settings</VListItemTitle>
@@ -122,11 +97,7 @@ const logout = () => {
           <!-- 👉 Pricing -->
           <VListItem :to="{ name: 'pages-pricing' }">
             <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-currency-usd"
-                size="22"
-              />
+              <VIcon class="me-2" icon="mdi-currency-usd" size="22" />
             </template>
 
             <VListItemTitle>Pricing</VListItemTitle>
@@ -135,11 +106,7 @@ const logout = () => {
           <!-- 👉 FAQ -->
           <VListItem :to="{ name: 'pages-faq' }">
             <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-help-circle-outline"
-                size="22"
-              />
+              <VIcon class="me-2" icon="mdi-help-circle-outline" size="22" />
             </template>
 
             <VListItemTitle>FAQ</VListItemTitle>
@@ -149,16 +116,9 @@ const logout = () => {
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem
-            link
-            @click="logout"
-          >
+          <VListItem link @click="logout">
             <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="mdi-logout"
-                size="22"
-              />
+              <VIcon class="me-2" icon="mdi-logout" size="22" />
             </template>
 
             <VListItemTitle>Logout</VListItemTitle>

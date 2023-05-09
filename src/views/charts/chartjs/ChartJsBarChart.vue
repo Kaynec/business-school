@@ -1,32 +1,17 @@
 <script setup lang="ts">
 import BarChart from "@/@core/libs/chartjs/components/BarChart";
-import type { ChartJsCustomColors } from "@/views/demos/charts-and-maps/charts/chartjs/types";
 // import datalabels from "chartjs-plugin-datalabels";
 // console.log(datalabels);
-interface Props {
-  colors?: ChartJsCustomColors;
-}
-
-const props = defineProps<Props>();
+// interface Props {
+//   colors?: ChartJsCustomColors;
+// }
 
 const chartOptions = {
   plugins: {
     legend: {
-      display: true,
+      display: false,
     },
     responsive: true,
-    datalabels: {
-      // This code is used to display data values
-      anchor: "end",
-      align: "top",
-      marginLeft: 100,
-      formatter: Math.round,
-
-      font: {
-        weight: "bold",
-        size: 16,
-      },
-    },
   },
   responsive: true,
 
@@ -38,11 +23,10 @@ const chartOptions = {
 
     y: {
       min: 0,
-      max: 5,
-      step: 1,
+      max: 100,
       ticks: {
         // forces step size to be 50 units
-        stepSize: 1,
+        stepSize: 10,
       },
     },
   },
@@ -50,26 +34,27 @@ const chartOptions = {
 
 var data = {
   labels: [
-    "دیجیتال مارکتینگ",
-    "توسعه فردی",
-    "بورس مقدماتی",
-    "دیجیتال مارکتینگ",
+    " تسلط بر درس",
+    "نحوه تدریس",
+    "نحوه رفتار",
+    "حضور",
+    "مشارکت دادن دانشجو",
+    "پاسخگویی",
   ],
 
   datasets: [
     {
-      label: "PLO1",
       maxBarThickness: 20,
-      backgroundColor: "#E30613",
-      borderRadius: { topRight: 10, topLeft: 10 },
-      data: [1, 3.5, 5.0, 5.0],
-    },
-    {
-      label: "PLO2",
-      maxBarThickness: 20,
-      backgroundColor: "#D9D9D9",
-      borderRadius: { topRight: 10, topLeft: 10 },
-      data: [5.0, 4.9, 5, 1.2],
+      backgroundColor: [
+        "#52AE32",
+        "#6CBE99",
+        "#F7A600",
+        "#EA342A",
+        "#8D99AE",
+        "#FFEE00",
+      ],
+      borderRadius: { topRight: 3, topLeft: 3 },
+      data: [50, 60, 25, 65, 70, 50],
     },
   ],
 };

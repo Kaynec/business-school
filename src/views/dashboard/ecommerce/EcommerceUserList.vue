@@ -136,7 +136,7 @@ const resolveUserStatusVariant = (stat: string) => {
       <!-- 👉 table footer  -->
       <tfoot v-show="!users.length">
         <tr>
-          <td colspan="7" class="text-center">No data available</td>
+          <td colspan="7" class="text-center">محتوایی برای نمایش وجود ندارد</td>
         </tr>
       </tfoot>
     </VTable>
