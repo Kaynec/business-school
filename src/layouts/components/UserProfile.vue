@@ -39,6 +39,7 @@ const logout = () => {
       class="cursor-pointer max-w-7 max-h-7 aspect-1"
       color="primary"
       variant="tonal"
+      @click="$router.push('/pages/account-settings/account')"
     >
       <VImg v-if="userData && userData.avatar" :src="userData.avatar" />
       <VIcon v-else icon="mdi-account-outline" />

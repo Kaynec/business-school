@@ -169,6 +169,14 @@ const handleNavScroll = (evt: Event) => {
           class="mr-3 mt-10 transition-250"
           v-else
         />
+        <img
+          src="@images/logos/sidebar-footer-logo.svg"
+          alt="sidebar"
+          width="270"
+          height="90"
+          w="95%"
+          class="mr-3 mt-40"
+        />
       </PerfectScrollbar>
     </slot>
   </Component>

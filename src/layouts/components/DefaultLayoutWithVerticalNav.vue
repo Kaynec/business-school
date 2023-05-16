@@ -4,7 +4,12 @@ import { useThemeConfig } from "@core/composable/useThemeConfig";
 
 // Components
 import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue";
+<<<<<<< HEAD
 import UserProfile from "./UserProfile.vue";
+=======
+import NavSearchBar from "@/layouts/components/NavSearchBar.vue";
+import UserProfile from "@/layouts/components/UserProfile.vue";
+>>>>>>> 2725f1b489abc73e9f945334d8b98671eb2373cc
 
 // @layouts plugin
 import { VerticalNavLayout } from "@layouts";
@@ -78,7 +83,6 @@ watch(isVerticalNavCollapsed, (val) => {
 .layout-vertical-nav {
   .nav-header {
     .header-action {
-      animation-duration: 0s;
       animation-duration: 0.35s;
       animation-fill-mode: forwards;
       animation-name: v-bind(verticalNavHeaderActionAnimationName);
