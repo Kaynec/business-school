@@ -37,7 +37,7 @@ syncConfigThemeWithVuetifyTheme();
       )}`"
       relative
     >
-      <div class="demo-bg" v-if="showBackgroundImage"></div>
+      <div class="demo-bg" v-if="!showBackgroundImage"></div>
       <RouterView />
     </VApp>
   </VLocaleProvider>

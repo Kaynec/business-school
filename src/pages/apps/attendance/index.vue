@@ -174,7 +174,7 @@ const tickets = ref([
   </VRow>
 
   <VCard class="mt-8">
-    <VTable class="text-no-wrap">
+    <VTable class="text-no-wrap max-h-70vh">
       <!-- 👉 table head -->
       <thead>
         <tr>
@@ -195,12 +195,16 @@ const tickets = ref([
 
           <!-- 👉 Status -->
           <td>
-            <VCheckbox v-model="ticket.isActive" color="#fff" :value="true">
-            </VCheckbox>
+            <div class="!grid place-content-center">
+              <VCheckbox v-model="ticket.isActive" color="#fff" :value="true">
+              </VCheckbox>
+            </div>
           </td>
           <td>
-            <VCheckbox v-model="ticket.isActive" color="#fff" :value="false">
-            </VCheckbox>
+            <div class="!grid place-content-center">
+              <VCheckbox v-model="ticket.isActive" color="#fff" :value="false">
+              </VCheckbox>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -215,7 +219,7 @@ const tickets = ref([
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

@@ -197,9 +197,24 @@ export const useCalendar = (
   const calendarOptions = {
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
     initialView: "dayGridMonth",
+    customButtons: {
+      myCustomButton: {
+        text: "custom!",
+        click: function () {
+          alert("clicked the custom button!");
+        },
+      },
+    },
     headerToolbar: {
       start: "drawerToggler,prev,next title",
       end: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+    },
+    buttonText: {
+      today: "روز",
+      month: "ماه",
+      week: "هفته",
+      day: "روز",
+      list: "لیست",
     },
     events: fetchEvents,
     locale: "fa",

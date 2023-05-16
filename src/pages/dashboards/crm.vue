@@ -24,6 +24,12 @@ const students = ref([
     plo: 45,
   },
 ]);
+
+const { updateBg } = inject("showBackgroundImage") as any;
+updateBg(true);
+onBeforeUnmount(() => {
+  updateBg(false);
+});
 </script>
 
 <template>
@@ -34,16 +40,18 @@ const students = ref([
       <div class="flex flex-col md:flex-row gap-2">
         <VCard
           shadow-xl
-          class="pa-2 rounded-xl flex-basis-50% flex flex items-center justify-center"
+          class="px-6 py-4 rounded-30px flex-basis-50% flex flex items-center justify-center"
         >
           <JalaliCalendar />
         </VCard>
-        <VCard shadow-xl class="!p-6 rounded-xl flex-basis-50% space-y-2">
-          <span class="text-3xl inline-block mb-8 peyda"
+        <VCard shadow-xl class="rounded-30px flex-basis-50% space-y-2">
+          <span class="text-3xl inline-block peyda pr-3 pt-2"
             >مدیریت پیام ها من
           </span>
-          <div class="!flex flex-col gap-8">
-            <div class="flex justify-between items-center" v-for="i in 4">
+          <div
+            class="!flex flex-col gap-8 h-80% max-h-50 overflow-auto custom-scroll"
+          >
+            <div class="flex justify-between items-center" v-for="i in 7">
               <div flex items-end gap-2>
                 <div
                   style="background: rgba(141, 153, 174, 30%)"
@@ -111,7 +119,10 @@ const students = ref([
       </div>
       <!-- Second Part -->
       <div class="flex gap-2 flex-col md:flex-row">
-        <VCard shadow-xl class="!p-6 rounded-xl flex-basis-50% space-y-2">
+        <VCard
+          shadow-xl
+          class="px-6 pt-2 rounded-30px flex-basis-50% space-y-2"
+        >
           <span class="self-start text-2xl peyda font-700"> ثبت نمرات </span>
           <div
             class="bg-#E30613 grid grid-cols-4 p-3 items-center rounded-10px text-sm"
@@ -140,7 +151,7 @@ const students = ref([
         </VCard>
         <VCard
           shadow-xl
-          class="!p-6 rounded-xl flex-basis-50% space-y-2 flex-center-column"
+          class="pt-2 px-6 rounded-30px flex-basis-50% flex-center-column"
         >
           <span class="self-start peyda font-700 text-2xl">
             ارزیابی عملکرد و بازخوردهای من
@@ -149,27 +160,21 @@ const students = ref([
         </VCard>
       </div>
       <VCard
-        shadow-xl
-        :image="nelson"
-        class="pa-2 rounded-xl min-h-65 h-100% justify-center px-10 pb-8 peyda hidden 2xl:flex"
+        class="relative min-h-55 h-100% !bg-transparent !shadow-none px-8 !flex flex-col justify-center peyda"
       >
-        <div
-          self-start
-          class="max-w-75% pb-4 !flex flex-col text-xl leading-loose text-right"
-          dir="rtl"
-        >
-          <span class="!text-gray-3 text-2xl">
-            آموزش و یادگیری نیرومندترین سلاحی است که می توان با آن جهان را
-            دگرگون کرد.
-          </span>
-        </div>
+        <img class="absolute inset-0 -z-1 w-full h-full" :src="nelson" alt="" />
+
+        <span class="!text-gray-3 text-2xl">
+          آموزش و یادگیری نیرومندترین سلاحی است که می توان با آن جهان را دگرگون
+          کرد.
+        </span>
         <span class="!text-#8D99AE self-end text-xl"> “نلسون ماندلا” </span>
       </VCard>
       <!--  -->
     </div>
-    <div class="h-full items-stretch w-100% space-y-2 flex flex-col">
+    <div class="h-full items-stretch w-100% space-y-2 !flex !flex-col">
       <!-- Dont Render This Unless Big Screen -->
-      <div class="flex-center-row w-full hidden 2xl:flex">
+      <div class="!flex-center-row w-full hidden !2xl:flex">
         <swiper
           :slides-per-view="1"
           :space-between="20"
@@ -186,34 +191,32 @@ const students = ref([
             <img
               src="@/assets/images/cards/dashboard.png"
               alt="dashboard.png"
-              width="100"
-              height="100"
               w-full
               h-full
-              max-h-70
+              max-h-60
             />
           </SwiperSlide>
         </swiper>
       </div>
       <VCard
         shadow-xl
-        class="rounded-xl !p-4 !flex flex-col justify-between min-h-90"
+        class="rounded-30px px-4 !flex flex-col justify-center gap-2 min-h-54"
       >
-        <span class="text-3xl pt-4 peyda b-b-4px pb-3 b-b-solid b-b-#323232">
+        <span class="text-3xl pt-4 peyda b-b-4px pb-2 b-b-solid b-b-#323232">
           گزارش حق التدریس</span
         >
 
         <div
-          class="w-full flex-nowrap flex gap-6 pt-4 h-max overflow-hidden gap-2 scrollbar"
+          class="w-full flex-nowrap flex overflow-hidden scrollbar"
           v-dragscroll
         >
           <section
-            class="cursor-pointer w-full shrink-0 h-90% my-auto !flex flex-col justify-between pb-8"
+            class="cursor-pointer w-full shrink-0 my-auto !flex flex-col justify-between"
             v-for="i in 3"
           >
             <div class="flex justify-between items-center">
-              <div class="!flex flex-col items-start gap-5">
-                <h6 class="text-2xl !text-#8D99AE pb-3 peyda">
+              <div class="!flex flex-col items-start gap-2">
+                <h6 class="text-2xl !text-#8D99AE peyda">
                   {{ i }} دوره مدیریت
                 </h6>
 
@@ -237,9 +240,11 @@ const students = ref([
           </section>
         </div>
       </VCard>
-      <VCard shadow-xl class="!p-6 rounded-xl flex-basis-50% space-y-2">
-        <span class="text-3xl inline-block mb-8 peyda"> درس‌های من </span>
-        <div class="flex-col space-y-8">
+      <VCard shadow-xl class="!p-6 rounded-30px flex-basis-50% space-y-2">
+        <span class="text-3xl inline-block pb-3 peyda"> درس‌های من </span>
+        <div
+          class="flex-col space-y-8 max-h-40 h-75% overflow-auto custom-scroll pl-4"
+        >
           <div class="flex justify-between items-center" v-for="i in 4">
             <div flex items-end gap-2>
               <div class="!flex flex-col items-start">
@@ -281,7 +286,7 @@ const students = ref([
       <VCard
         shadow-xl
         :image="nelson"
-        class="rounded-xl min-h-65 h-100% justify-center px-6 items-center peyda flex flex-col basis-50%"
+        class="rounded-30px min-h-65 h-100% !bg-green justify-center px-6 items-center peyda flex flex-col basis-50%"
       >
         <span class="!text-gray-3 text-2xl w-full">
           آموزش و یادگیری نیرومندترین سلاحی است که می توان با آن جهان را دگرگون
@@ -365,5 +370,29 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
 .scrollbar::-webkit-scrollbar-thumb {
   border-radius: 0.75rem;
   background-color: red;
+}
+
+.custom-scroll {
+  margin-inline-end: 5px;
+  padding-inline-end: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  inline-size: 5px;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>

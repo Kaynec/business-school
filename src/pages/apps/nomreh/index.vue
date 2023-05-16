@@ -298,7 +298,7 @@ const updateStudent = (newStudentDescription: string) => {
   </VRow>
 
   <VCard class="mt-4">
-    <VTable class="text-no-wrap">
+    <VTable class="text-no-wrap overflow-auto max-h-70vh mb-2">
       <!-- 👉 table head -->
       <thead>
         <tr>
@@ -310,7 +310,7 @@ const updateStudent = (newStudentDescription: string) => {
       </thead>
 
       <!-- 👉 table body -->
-      <tbody class="table-content max-h-70vh">
+      <tbody class="table-content">
         <tr v-for="student in students" :key="student.id">
           <!-- 👉 User -->
 

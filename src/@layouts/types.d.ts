@@ -46,6 +46,7 @@ export interface Config {
   app: {
     title: UserConfig["app"]["title"];
     logo: UserConfig["app"]["logo"];
+    smLogo: UserConfig["app"]["logo"];
     contentWidth: Ref<UserConfig["app"]["contentWidth"]>;
     contentLayoutNav: Ref<UserConfig["app"]["contentLayoutNav"]>;
     overlayNavFromBreakpoint: UserConfig["app"]["overlayNavFromBreakpoint"];

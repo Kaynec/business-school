@@ -1,11 +1,17 @@
-import { breakpointsVuetify } from '@vueuse/core'
-import { AppContentLayoutNav, ContentWidth, FooterType, NavbarType } from '@layouts/enums'
-import type { Config } from '@layouts/types'
+import {
+  AppContentLayoutNav,
+  ContentWidth,
+  FooterType,
+  NavbarType,
+} from "@layouts/enums";
+import type { Config } from "@layouts/types";
+import { breakpointsVuetify } from "@vueuse/core";
 
 export const config: Config = {
   app: {
-    title: 'Title',
-    logo: h('img', { src: '/src/assets/logo.svg' }),
+    title: "Title",
+    logo: h("img", { src: "/src/assets/logo.svg" }),
+    smLogo: h("img", { src: "/src/assets/images/logos/mahan-sm.png" }),
 
     // logo: () => h('img', { src: 'assets/colored-logo.png' }, null),
     contentWidth: ref(ContentWidth.Boxed),
@@ -21,17 +27,17 @@ export const config: Config = {
   footer: { type: ref(FooterType.Static) },
   verticalNav: {
     isVerticalNavCollapsed: ref(false),
-    defaultNavItemIconProps: { icon: 'mdi-circle-outline' },
+    defaultNavItemIconProps: { icon: "mdi-circle-outline" },
   },
   horizontalNav: {
-    type: ref('sticky'),
+    type: ref("sticky"),
   },
   icons: {
-    chevronDown: { icon: 'mdi-chevron-down' },
-    chevronRight: { icon: 'mdi-chevron-right' },
-    close: { icon: 'mdi-close' },
-    verticalNavPinned: { icon: 'mdi-record-circle-outline' },
-    verticalNavUnPinned: { icon: 'mdi-radiobox-blank' },
-    sectionTitlePlaceholder: { icon: 'mdi-minus' },
+    chevronDown: { icon: "mdi-chevron-down" },
+    chevronRight: { icon: "mdi-chevron-right" },
+    close: { icon: "mdi-close" },
+    verticalNavPinned: { icon: "mdi-record-circle-outline" },
+    verticalNavUnPinned: { icon: "mdi-radiobox-blank" },
+    sectionTitlePlaceholder: { icon: "mdi-minus" },
   },
-}
+};

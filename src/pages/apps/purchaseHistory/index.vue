@@ -1,10 +1,6 @@
 <script setup lang="ts">
 // Table
 
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
-
 const getClass = (stat: string) => {
   if (stat === "active") return "bg-#52AE32";
   if (stat === "passed") return "bg-#E30613";
@@ -130,7 +126,7 @@ const courses = ref([
 
 <template>
   <VCard>
-    <VTable class="text-no-wrap">
+    <VTable class="text-no-wrap max-h-70vh">
       <!-- 👉 table head -->
       <thead>
         <tr>
@@ -178,7 +174,7 @@ const courses = ref([
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .custom-border {
   border: 1px solid rgba(237, 242, 244, 30%);
 }

@@ -1,4 +1,18 @@
 <script setup lang="ts">
+// Table
+
+const selectedOptions = ref(["Alabama"]);
+
+const states = ["Alabama", "Alaska", "American Samoa"];
+
+const resolveUserStatusVariant = (stat: string) => {
+  if (stat === "pending") return "bg-#E30613";
+  if (stat === "active") return "bg-#52AE32";
+  if (stat === "inactive") return "bg-#F7A600";
+
+  return "primary";
+};
+
 const showDepartment = ref(false);
 const showHowMuch = ref(false);
 const showDepartmentRef = ref();
@@ -10,6 +24,27 @@ onClickOutside(showDepartmentRef, () => {
 onClickOutside(showHowMuchRef, () => {
   showHowMuch.value = false;
 });
+
+const tickets = ref([
+  {
+    id: 2656,
+    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
+    date: "1401/09/01",
+    status: "pending",
+  },
+  {
+    id: 2656,
+    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
+    date: "1401/09/01",
+    status: "active",
+  },
+  {
+    id: 2656,
+    title: "مشکل در ورود به لینک کلاس‌های آنلاین",
+    date: "1401/09/01",
+    status: "inactive",
+  },
+]);
 
 const ticket = ref({
   title: "",
@@ -29,14 +64,14 @@ const fileInput = ref();
         <input
           type="text"
           v-model="ticket.title"
-          class="w-full h-full rounded-15px bg-#323232 text-white px-2 placeholder-text-white"
+          class="w-full h-full rounded-15px bg-#323232 bg-opacity-45 text-white px-2 placeholder-text-white"
           placeholder="عنوان تیکت"
           min-h-15
         />
       </VCol>
       <VCol cols="12" md="4">
         <div
-          class="w-full h-full rounded-15px relative bg-#323232 text-white placeholder-text-white flex items-center"
+          class="w-full h-full rounded-15px relative bg-#323232 bg-opacity-45 text-white placeholder-text-white flex items-center"
         >
           <span
             v-if="!ticket.departmant"
@@ -85,7 +120,7 @@ const fileInput = ref();
       </VCol>
       <VCol cols="12" md="4">
         <div
-          class="w-full h-full rounded-15px relative bg-#323232 text-white placeholder-text-white flex items-center"
+          class="w-full h-full rounded-15px relative bg-#323232 bg-opacity-45 text-white placeholder-text-white flex items-center"
           @click="showHowMuch = !showHowMuch"
           ref="showHowMuchRef"
         >
@@ -139,6 +174,7 @@ const fileInput = ref();
     <VCol>
       <textarea
         bg="#323232"
+        bg-opacity-45
         w-full
         h-full
         resize-none
@@ -181,7 +217,7 @@ const fileInput = ref();
   </VRow>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

@@ -6,9 +6,9 @@ const selectedOptions = ref(["Alabama"]);
 const states = ["Alabama", "Alaska", "American Samoa"];
 
 const resolveUserStatusVariant = (stat: string) => {
-  if (stat === "pending") return "warning";
-  if (stat === "active") return "success";
-  if (stat === "inactive") return "secondary";
+  if (stat === "pending") return "bg-#E30613";
+  if (stat === "active") return "bg-#52AE32";
+  if (stat === "inactive") return "bg-#F7A600";
 
   return "primary";
 };
@@ -36,7 +36,7 @@ const tickets = ref([
 </script>
 
 <template>
-  <VRow mx-auto>
+  <VRow mx-auto mt-5>
     <VCol cols="12" md="10">
       <VSelect
         v-model="selectedOptions"
@@ -63,7 +63,7 @@ const tickets = ref([
     </VCol>
   </VRow>
   <VCard>
-    <VTable class="text-no-wrap">
+    <VTable class="text-no-wrap max-h-70vh overflow-auto">
       <!-- 👉 table head -->
       <thead>
         <tr>
@@ -76,7 +76,17 @@ const tickets = ref([
 
       <!-- 👉 table body -->
       <tbody class="table-content">
-        <tr v-for="ticket in tickets" :key="ticket.id">
+        <tr
+          v-for="ticket in [
+            ...tickets,
+            ...tickets,
+            ...tickets,
+            ...tickets,
+            ...tickets,
+            ...tickets,
+          ]"
+          :key="ticket.id"
+        >
           <!-- 👉 User -->
           <td>
             {{ ticket.id }}
@@ -95,7 +105,7 @@ const tickets = ref([
           <!-- 👉 Status -->
           <td>
             <VChip
-              :color="resolveUserStatusVariant(ticket.status)"
+              :class="resolveUserStatusVariant(ticket.status)"
               size="small"
               class="text-capitalize"
             >
@@ -116,14 +126,14 @@ const tickets = ref([
       <!-- 👉 table footer  -->
       <tfoot v-show="!tickets.length">
         <tr>
-          <td colspan="7" class="text-center">محتوایی برای نمایش وجود ندارد</td>
+          <td colspan="7" class="text-center">No data available</td>
         </tr>
       </tfoot>
     </VTable>
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

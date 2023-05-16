@@ -147,7 +147,7 @@
   .fc-toolbar-title {
     display: inline-block;
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 500;
   }
 
@@ -179,7 +179,11 @@
     > tr > td[role="presentation"] {
       border: none;
     }
+
+    
   }
+
+
 
   .fc-scrollgrid {
     border-inline-start: none;
@@ -241,7 +245,7 @@
         inline-size: 1.5625rem;
         margin-inline-end: 0.25rem;
 
-        @media (max-width: 1264px) {
+        @media (width <= 1264px) {
           display: block !important;
         }
 

@@ -90,56 +90,54 @@ const handleNavScroll = (evt: Event) => {
     ]"
   >
     <!-- 👉 Header -->
-    <div class="nav-header">
-      <slot name="nav-header">
-        <RouterLink
-          to="/"
-          class="app-logo d-flex align-center gap-x-2 app-title-wrapper"
-        >
-          <VNodeRenderer :nodes="config.app.logo" />
 
-          <Transition name="vertical-nav-app-title">
-            <h1
-              v-show="!hideTitleAndIcon"
-              class="leading-normal text-xl font-weight-bold"
-            />
-          </Transition>
-        </RouterLink>
-        <!-- 👉 Vertical nav actions -->
-        <!-- Show toggle collapsible in >md and close button in <md -->
-        <template v-if="!isLessThanOverlayNavBreakpoint(windowWidth)">
-          <Component
-            :is="config.app.iconRenderer || 'div'"
-            v-show="isCollapsed && !hideTitleAndIcon"
-            class="header-action"
-            v-bind="config.icons.verticalNavUnPinned"
-            @click="isCollapsed = !isCollapsed"
-          />
-          <Component
-            :is="config.app.iconRenderer || 'div'"
-            v-show="!isCollapsed && !hideTitleAndIcon"
-            class="header-action"
-            v-bind="config.icons.verticalNavPinned"
-            @click="isCollapsed = !isCollapsed"
-          />
-        </template>
-        <template v-else>
-          <Component
-            :is="config.app.iconRenderer || 'div'"
-            class="header-action"
-            v-bind="config.icons.close"
-            @click="toggleIsOverlayNavActive(false)"
-          />
-        </template>
-      </slot>
-    </div>
-    <slot name="before-nav-items">
-      <div class="vertical-nav-items-shadow" />
-    </slot>
     <slot
       name="nav-items"
       :update-is-vertical-nav-scrolled="updateIsVerticalNavScrolled"
     >
+      <div class="nav-header">
+        <slot name="nav-header ">
+          <RouterLink
+            to="/"
+            class="app-logo d-flex align-center gap-x-2 app-title-wrapper"
+          >
+            <VNodeRenderer
+              v-if="isCollapsed && !isHovered"
+              :nodes="config.app.smLogo"
+              class="max-w-10"
+            />
+            <VNodeRenderer v-else :nodes="config.app.logo" />
+
+            <Transition name="vertical-nav-app-title"> </Transition>
+          </RouterLink>
+          <!-- 👉 Vertical nav actions -->
+          <!-- Show toggle collapsible in >md and close button in <md -->
+          <template v-if="!isLessThanOverlayNavBreakpoint(windowWidth)">
+            <Component
+              :is="config.app.iconRenderer || 'div'"
+              v-show="isCollapsed && !hideTitleAndIcon"
+              class="header-action"
+              v-bind="config.icons.verticalNavUnPinned"
+              @click="isCollapsed = !isCollapsed"
+            />
+            <Component
+              :is="config.app.iconRenderer || 'div'"
+              v-show="!isCollapsed && !hideTitleAndIcon"
+              class="header-action"
+              v-bind="config.icons.verticalNavPinned"
+              @click="isCollapsed = !isCollapsed"
+            />
+          </template>
+          <template v-else>
+            <Component
+              :is="config.app.iconRenderer || 'div'"
+              class="header-action"
+              v-bind="config.icons.close"
+              @click="toggleIsOverlayNavActive(false)"
+            />
+          </template>
+        </slot>
+      </div>
       <PerfectScrollbar
         :key="isAppRtl"
         tag="ul"
@@ -152,14 +150,24 @@ const handleNavScroll = (evt: Event) => {
           v-for="(item, index) in navItems"
           :key="index"
           :item="item"
+          v-auto-animte
         />
         <img
-          src="@/assets/images/logos/sidebar-footer-logo.svg"
+          src="@images/logos/vira-sm.svg"
+          alt="sidebar"
+          aspect="1"
+          max-w-10
+          class="mr-3 mt-10 transition-250"
+          v-if="isCollapsed && !isHovered"
+        />
+        <img
+          src="@images/logos/sidebar-footer-logo.svg"
           alt="sidebar"
           width="270"
           height="90"
           w="95%"
-          class="mr-3 mt-40"
+          class="mr-3 mt-10 transition-250"
+          v-else
         />
       </PerfectScrollbar>
     </slot>
@@ -176,10 +184,12 @@ const handleNavScroll = (evt: Event) => {
   z-index: variables.$layout-vertical-nav-z-index;
   display: flex;
   flex-direction: column;
+  background: url("@/assets/images/svg/background.svg");
+  background-size: cover;
   block-size: 100%;
   inline-size: variables.$layout-vertical-nav-width;
-  inset-block-start: 0;
-  inset-inline-start: 0;
+  inset: 0;
+  min-block-size: 100vh;
   transition: transform 0.25s ease-in-out, inline-size 0.25s ease-in-out,
     box-shadow 0.25s ease-in-out;
   will-change: transform, inline-size;
@@ -198,9 +208,12 @@ const handleNavScroll = (evt: Event) => {
   }
 
   .nav-items {
+    display: flex;
+    flex-direction: column;
     block-size: 100%;
+    gap: 1rem;
+    margin-block-start: 3rem;
 
-    // ℹ️ We no loner needs this overflow styles as perfect scrollbar applies it
     // overflow-x: hidden;
 
     // // ℹ️ We used `overflow-y` instead of `overflow` to mitigate overflow x. Revert back if any issue found.

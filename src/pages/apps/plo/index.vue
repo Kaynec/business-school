@@ -113,7 +113,7 @@ const courses = ref([
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

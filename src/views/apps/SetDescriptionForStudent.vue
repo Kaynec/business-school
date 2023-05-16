@@ -46,14 +46,14 @@ const handleSubmit = () => {
   >
     <VCard
       ref="target"
-      class="!rounded-30px !flex flex-col pb-3 relative w-90% max-w-150 mb-100"
+      class="!rounded-30px !flex flex-col pb-3 relative w-90% max-w-150 bg-#282828"
     >
       <form @submit.prevent="handleSubmit">
         <div class="flex justify-between p-4 px-6 bg-#EDF2F4 bg-opacity-15">
           <span>توضیحات</span>
           <span>{{ data.name }}</span>
         </div>
-        <div class="textarea">
+        <div class="textarea bg-#282828">
           <textarea
             class="resize-none pt-2 pr-6 w-full h-full focus:outline-2 rounded-10px"
             placeholder="توضیحات..."

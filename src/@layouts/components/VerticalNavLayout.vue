@@ -123,11 +123,6 @@ export default defineComponent({
         h("div", { class: "page-content-container" }, mainChildren)
       );
 
-      // 👉 Footer
-      const footer = h("footer", { class: "layout-footer" }, [
-        h("div", { class: "footer-content-container" }, slots.footer?.()),
-      ]);
-
       // 👉 Overlay
       const layoutOverlay = h("div", {
         class: ["layout-overlay", { visible: isLayoutOverlayVisible.value }],
@@ -150,7 +145,7 @@ export default defineComponent({
                 default: () => verticalNav,
               })
             : verticalNav,
-          h("div", { class: "layout-content-wrapper" }, [navbar, main, footer]),
+          h("div", { class: "layout-content-wrapper" }, [navbar, main]),
           layoutOverlay,
         ]
       );
@@ -259,5 +254,10 @@ export default defineComponent({
       }
     }
   }
+}
+
+.layout-page-content {
+  margin: 0 !important;
+  padding-block: 0 !important;
 }
 </style>

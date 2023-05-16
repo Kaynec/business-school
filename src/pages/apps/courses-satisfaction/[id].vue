@@ -91,7 +91,7 @@ const numberToLetter = {
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

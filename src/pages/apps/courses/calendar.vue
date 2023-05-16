@@ -6,7 +6,6 @@ import FullCalendar from "@fullcalendar/vue3";
 
 // Components
 import CalendarEventHandler from "@/views/apps/calendar/CalendarEventHandler.vue";
-import { Ref } from "vue";
 
 // 👉 Store
 const store = useCalendarStore();
@@ -41,65 +40,52 @@ const checkAll = computed({
       store.selectedCalendars = [];
   },
 });
-//
-const { updateBg } = inject("showBackgroundImage") as {
-  showBackgroundImage: Ref<boolean>;
-  updateBg: (boolean: boolean) => void;
-};
-onMounted(() => {
-  updateBg(true);
-});
-onBeforeUnmount(() => {
-  updateBg(false);
-});
 </script>
 
 <template>
   <div>
     <VCard>
       <!-- `z-index: 0` Allows overlapping vertical nav on calendar -->
-      <VLayout style="z-index: 0">
-        <!-- 👉 Navigation drawer -->
-        <VNavigationDrawer
-          v-model="isLeftSidebarOpen"
-          width="250"
-          absolute
-          touchless
-          location="start"
-          class="calendar-add-event-drawer"
-          :temporary="$vuetify.display.mdAndDown"
-          style="background: #282828; border-top-right-radius: 2.4rem"
-        >
-          <div class="pa-5 !flex flex-col gap-y-8 pt-8">
-            <div>
-              <p class="text-xl text-uppercase text-white text-bold mb-3 peyda">
-                تقویم دوره‌ها
-              </p>
+      <!-- 👉 Navigation drawer -->
+      <VNavigationDrawer
+        v-model="isLeftSidebarOpen"
+        width="250"
+        absolute
+        touchless
+        location="start"
+        class="calendar-add-event-drawer"
+        :temporary="$vuetify.display.mdAndDown"
+        style="background: inherit"
+      >
+        <div class="pa-5 !flex flex-col gap-y-8 pt-8">
+          <div>
+            <p class="text-xl text-uppercase text-white text-bold mb-3 peyda">
+              تقویم دوره‌ها
+            </p>
 
-              <div class="!flex flex-col calendars-checkbox">
-                <VCheckbox
-                  v-model="checkAll"
-                  label="مشاهده همه"
-                  density="default"
-                  color="secondary"
-                />
-                <VCheckbox
-                  v-for="calendar in store.availableCalendars"
-                  :key="calendar.label"
-                  v-model="store.selectedCalendars"
-                  :value="calendar.label"
-                  :color="calendar.color"
-                  :label="calendar.label"
-                  density="default"
-                />
-              </div>
+            <div class="!flex flex-col calendars-checkbox">
+              <VCheckbox
+                v-model="checkAll"
+                label="مشاهده همه"
+                density="default"
+                color="secondary"
+              />
+              <VCheckbox
+                v-for="calendar in store.availableCalendars"
+                :key="calendar.label"
+                v-model="store.selectedCalendars"
+                :value="calendar.label"
+                :color="calendar.color"
+                :label="calendar.label"
+                density="default"
+              />
             </div>
           </div>
-        </VNavigationDrawer>
-        <VMain>
-          <FullCalendar ref="refCalendar" :options="calendarOptions" />
-        </VMain>
-      </VLayout>
+        </div>
+      </VNavigationDrawer>
+      <VMain class="bg-inherit bg-opacity-1">
+        <FullCalendar ref="refCalendar" :options="calendarOptions" />
+      </VMain>
     </VCard>
     <CalendarEventHandler
       v-model:isDrawerOpen="isEventHandlerSidebarActive"
@@ -111,7 +97,7 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "@core/scss/template/libs/full-calendar";
 
 .calendars-checkbox {
@@ -126,12 +112,6 @@ onBeforeUnmount(() => {
     border-end-start-radius: 0.375rem;
     border-start-start-radius: 0.375rem;
   }
-}
-
-.v-card {
-  z-index: 10 !important;
-  border-radius: 2.4rem;
-  background-color: #282828 !important;
 }
 
 .v-layout {

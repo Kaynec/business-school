@@ -1,88 +1,84 @@
 <template>
-  <div class="w-full">
-    <div class="calendar">
-      <div class="flex items-center b-b-3px b-b-solid b-b-#323232">
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          @click="month--"
-        >
-          <rect
-            x="-1"
-            y="1"
-            width="28"
-            height="28"
-            rx="6"
-            transform="matrix(-1 0 0 1 28 0)"
-            stroke="#323232"
-            stroke-width="2"
-          />
-          <path
-            d="M18.5 15.866C19.1667 15.4811 19.1667 14.5189 18.5 14.134L14 11.5359C13.3333 11.151 12.5 11.6321 12.5 12.4019V17.5981C12.5 18.3679 13.3333 18.849 14 18.4641L18.5 15.866Z"
-            fill="#767676"
-          />
-        </svg>
+  <div class="calendar w-full">
+    <div class="flex items-center b-b-3px b-b-solid pb-2 b-b-#323232">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        @click="month--"
+      >
+        <rect
+          x="-1"
+          y="1"
+          width="28"
+          height="28"
+          rx="6"
+          transform="matrix(-1 0 0 1 28 0)"
+          stroke="#323232"
+          stroke-width="2"
+        />
+        <path
+          d="M18.5 15.866C19.1667 15.4811 19.1667 14.5189 18.5 14.134L14 11.5359C13.3333 11.151 12.5 11.6321 12.5 12.4019V17.5981C12.5 18.3679 13.3333 18.849 14 18.4641L18.5 15.866Z"
+          fill="#767676"
+        />
+      </svg>
 
-        <div class="calendar-header">
-          <h3 class="calendar-header-text">
-            {{ templateDate[1] + " " + templateDate[2] }}
-          </h3>
-        </div>
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          @click="month++"
+      <div class="calendar-header">
+        <h3>
+          {{ templateDate[1] + " " + templateDate[2] }}
+        </h3>
+      </div>
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 30 30"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        @click="month++"
+      >
+        <rect
+          x="1"
+          y="1"
+          width="28"
+          height="28"
+          rx="6"
+          stroke="#323232"
+          stroke-width="2"
+        />
+        <path
+          d="M11.5 15.866C10.8333 15.4811 10.8333 14.5189 11.5 14.134L16 11.5359C16.6667 11.151 17.5 11.6321 17.5 12.4019V17.5981C17.5 18.3679 16.6667 18.849 16 18.4641L11.5 15.866Z"
+          fill="#767676"
+        />
+      </svg>
+    </div>
+    <div class="days">
+      <div ref="days" class="days-text font-600 !text-0.7rem">
+        <span> ش </span>
+        <span> ی </span>
+        <span> د </span>
+        <span> س</span>
+        <span> چ </span>
+        <span> پ </span>
+        <span> ج </span>
+      </div>
+      <!-- Add Class blue For 'blue' Background And 'red' For a Red Background -->
+      <div class="days-number" ref="daysNumber">
+        <span v-for="(i, n) in numbersBeforeTheMonthStart" :key="i"> -- </span>
+        <span
+          v-for="(number, index) in numberDays"
+          :key="number"
+          :class="getClass(index)"
         >
-          <rect
-            x="1"
-            y="1"
-            width="28"
-            height="28"
-            rx="6"
-            stroke="#323232"
-            stroke-width="2"
-          />
-          <path
-            d="M11.5 15.866C10.8333 15.4811 10.8333 14.5189 11.5 14.134L16 11.5359C16.6667 11.151 17.5 11.6321 17.5 12.4019V17.5981C17.5 18.3679 16.6667 18.849 16 18.4641L11.5 15.866Z"
-            fill="#767676"
-          />
-        </svg>
+          <!-- If Number Has  a class it means that it's a object  -->
+          {{ number.class ? number["count"] : number }}
+        </span>
       </div>
-      <div class="days">
-        <div ref="days" class="days-text font-600 !text-xl">
-          <span> ش </span>
-          <span> ی </span>
-          <span> د </span>
-          <span> س</span>
-          <span> چ </span>
-          <span> پ </span>
-          <span> ج </span>
-        </div>
-        <!-- Add Class blue For 'blue' Background And 'red' For a Red Background -->
-        <div class="days-number" ref="daysNumber">
-          <span v-for="(i, n) in numbersBeforeTheMonthStart" :key="i">
-            --
-          </span>
-          <span
-            v-for="(number, index) in numberDays"
-            :key="number"
-            :class="getClass(index)"
-          >
-            <!-- If Number Has  a class it means that it's a object  -->
-            {{ number.class ? number["count"] : number }}
-          </span>
-        </div>
-      </div>
-      <div class="bg-#814997 rounded-5px mt-4 flex justify-between p-2">
-        <span> استراتژی سرمایه گذاری </span>
-        <span> 09:45 </span>
-      </div>
+    </div>
+    <div class="bg-#814997 rounded-5px mt-2 flex justify-between p-1">
+      <span> استراتژی سرمایه گذاری </span>
+      <span> 09:45 </span>
     </div>
   </div>
 </template>
@@ -98,13 +94,13 @@ const days = ref();
 // Function getClass
 function getClass(index: number) {
   if (index === 4) {
-    return "bg-#814997 rounded-5px text-white  font-700";
+    return "!bg-#814997 rounded-5px text-white  font-700";
   }
   if (index === 7 || index === 10) {
-    return "bg-#F7A600 rounded-5px text-white  font-700";
+    return "!bg-#F7A600 rounded-5px text-white  font-700";
   }
   if (index === 19) {
-    return "bg-#E30613 rounded-5px text-white  font-700";
+    return "!bg-#E30613 rounded-5px text-white  font-700";
   }
 }
 
@@ -328,26 +324,18 @@ const formatCardDate = (date) => {
 </script>
 <style lang="scss" scoped>
 .calendar {
-  padding: 1rem;
-  inline-size: 100%;
   margin-inline: auto;
+  padding-inline: 0.4rem;
 
   .calendar-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
     border-radius: 9.4px;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: bold;
     inline-size: 100%;
-
-    .calendar-header-number {
-      font-size: 1.75rem;
-      font-weight: bold;
-      text-align: end;
-    }
   }
 
   .days {
@@ -359,11 +347,12 @@ const formatCardDate = (date) => {
       display: grid;
       justify-content: space-between;
       color: #000;
-      font-size: 12px;
+      font-size: 9px;
       grid-template-columns: repeat(7, 1fr);
       inline-size: 100%;
       margin-block: 0;
-      padding-block-start: 1rem;
+      padding-block: 0.4rem;
+      padding-block-end: 0.5rem;
       text-align: center;
     }
 
@@ -373,24 +362,26 @@ const formatCardDate = (date) => {
 
     .days-number {
       display: grid;
+      align-items: center;
       justify-content: space-between;
       color: #000;
-      font-size: 12px;
       grid-template-columns: repeat(7, 1fr);
       inline-size: 100%;
       margin-block: 0;
-      padding-block-start: 1rem;
-      row-gap: 1rem;
+      padding-block-start: 0.4rem;
+      row-gap: 0.38rem;
       text-align: center;
 
       span {
-        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         aspect-ratio: 1;
-        block-size: 2rem;
+        block-size: 1.6rem;
         color: #767676;
-        font-size: 1.3rem;
+        font-size: 0.8rem;
         font-weight: 600;
-        inline-size: 2rem;
+        inline-size: 1.6rem;
         place-self: center;
       }
     }

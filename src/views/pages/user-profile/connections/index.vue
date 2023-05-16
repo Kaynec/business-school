@@ -110,7 +110,7 @@ const moreBtnList = [
   </VRow>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .vertical-more {
   position: absolute;
   inset-block-start: 1rem;

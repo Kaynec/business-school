@@ -14,36 +14,33 @@ const states = ["Alabama", "Alaska", "American Samoa"];
     v-model="selectedOptions"
     :items="states"
     label="دوره ها"
-    style="border-radius: 250px; margin-bottom: 2rem"
+    style="border-radius: 250px; margin-block-end: 2rem"
     class="rounded-xl"
   />
 
   <VRow>
     <VCol cols="12" md="4" lg="3">
-      <VCard
-        class="rounded-xl gap-10 !flex flex-col"
-        style="background: rgba(40, 40, 40, 80%)"
-      >
+      <VCard class="rounded-xl gap-5 !flex flex-col">
         <!-- <VImg :src="avatar1" height="201" cover /> -->
 
         <VCardItem class="d-flex justify-center">
           <VProgressCircular
             :rotate="90"
-            :size="200"
-            :width="6"
+            :size="125"
+            :width="7"
             model-value="75"
             color="primary"
           >
             <img
               :src="avatar1"
-              style="width: 90%; border-radius: 999rem; object-fit: cover"
+              style="border-radius: 999rem; inline-size: 90%; object-fit: cover"
             />
           </VProgressCircular>
         </VCardItem>
 
         <div class="!flex flex-col justify-center align-center gap-2">
           <span>کددوره : 414</span>
-          <h1 class="peyda" style="color: white">Self leadership</h1>
+          <h2 class="peyda" style="color: white">Self leadership</h2>
         </div>
 
         <!--  -->
@@ -52,7 +49,7 @@ const states = ["Alabama", "Alaska", "American Samoa"];
             color="primary"
             variant="outlined"
             class="rounded-lg basis-45% peyda"
-            style="height: 2.75rem; padding-inline: 4rem"
+            style="block-size: 2.75rem; padding-inline: 4rem"
             @click="
               $router.push({
                 name: 'apps-courses-satisfaction-id',
@@ -66,7 +63,7 @@ const states = ["Alabama", "Alaska", "American Samoa"];
           </VBtn>
           <VBtn
             class="rounded-lg basis-45% peyda"
-            style="height: 2.75rem; padding-inline: 4rem"
+            style="block-size: 2.75rem; padding-inline: 4rem"
             color="primary"
             @click="
               $router.push({
@@ -82,7 +79,7 @@ const states = ["Alabama", "Alaska", "American Samoa"];
   </VRow>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }

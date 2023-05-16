@@ -30,6 +30,8 @@ $alert-prominent-icon-size: 38px;
 
 // 👉 Table
 .v-table {
+  background-color: rgba(40, 40, 40, 20%);
+
   th {
     color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !important;
     font-weight: 500 !important;
@@ -45,11 +47,18 @@ $alert-prominent-icon-size: 38px;
   }
 }
 
+.v-row {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .v-card {
   border-radius: 10px;
-  background-color: rgba(var(--v-theme-cardBackground)) !important;
+  background-color: rgb(40, 40, 40, 45%) !important;
   color: rgba(var(--v-theme-cardText)) !important;
   direction: rtl !important;
+
+
 
   span {
     color: rgba(var(--v-theme-cardText));
@@ -284,7 +293,18 @@ h6,
 
 // 👉 Table
 .v-table {
+  overflow: auto;
   color: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)) !important;
+
+
+
+  th {
+    text-align: center !important;
+  }
+
+  td {
+    text-align: center;
+  }
 }
 
 // 👉 v-field

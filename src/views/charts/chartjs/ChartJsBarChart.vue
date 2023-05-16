@@ -66,6 +66,6 @@ var data = {
     style="padding-left: 3rem"
     :chart-data="data"
     :chart-options="chartOptions"
-    :height="200"
+    :height="175"
   />
 </template>

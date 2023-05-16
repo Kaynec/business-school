@@ -52,9 +52,9 @@ const resolveUserRoleVariant = (role: string) => {
 };
 
 const resolveUserStatusVariant = (stat: string) => {
-  if (stat === "pending") return "warning";
-  if (stat === "active") return "success";
-  if (stat === "inactive") return "secondary";
+  if (stat === "pending") return "bg-#E30613";
+  if (stat === "active") return "bg-#52AE32";
+  if (stat === "inactive") return "bg-#F7A600";
 
   return "primary";
 };
@@ -127,7 +127,7 @@ const resolveUserStatusVariant = (stat: string) => {
           <!-- 👉 Status -->
           <td>
             <VChip
-              :color="resolveUserStatusVariant(user.status)"
+              :class="resolveUserStatusVariant(user.status)"
               size="small"
               class="text-capitalize"
             >
@@ -140,7 +140,7 @@ const resolveUserStatusVariant = (stat: string) => {
       <!-- 👉 table footer  -->
       <tfoot v-show="!users.length">
         <tr>
-          <td colspan="7" class="text-center">محتوایی برای نمایش وجود ندارد</td>
+          <td colspan="7" class="text-center">No data available</td>
         </tr>
       </tfoot>
     </VTable>

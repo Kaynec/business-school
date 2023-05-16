@@ -3,10 +3,7 @@ import navItems from "@/navigation/vertical";
 import { useThemeConfig } from "@core/composable/useThemeConfig";
 
 // Components
-import NavBarI18n from "@/layouts/components/NavBarI18n.vue";
 import NavBarNotifications from "@/layouts/components/NavBarNotifications.vue";
-import NavSearchBar from "@/layouts/components/NavSearchBar.vue";
-import NavbarShortcuts from "@/layouts/components/NavbarShortcuts.vue";
 import UserProfile from "./UserProfile.vue";
 
 // @layouts plugin
@@ -44,12 +41,7 @@ watch(isVerticalNavCollapsed, (val) => {
         >
           <VIcon icon="mdi-menu" />
         </IconBtn>
-
-        <NavSearchBar class="ms-lg-n3" />
-
         <VSpacer />
-        <NavBarI18n class="me-1" />
-        <NavbarShortcuts class="me-1" />
         <NavBarNotifications class="me-3" />
         <UserProfile />
       </div>

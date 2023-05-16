@@ -1,18 +1,4 @@
 <script setup lang="ts">
-// Table
-
-const selectedOptions = ref(["Alabama"]);
-
-const states = ["Alabama", "Alaska", "American Samoa"];
-
-const resolveUserStatusVariant = (stat: string) => {
-  if (stat === "pending") return "warning";
-  if (stat === "active") return "success";
-  if (stat === "inactive") return "secondary";
-
-  return "primary";
-};
-
 const courses = ref([
   {
     title: "مدیریت رفتار سازمانی",
@@ -40,7 +26,7 @@ const courses = ref([
 
 <template>
   <VCard>
-    <VTable class="text-no-wrap">
+    <VTable class="text-no-wrap max-h-70vh">
       <!-- 👉 table head -->
       <thead>
         <tr>
@@ -81,14 +67,14 @@ const courses = ref([
       <!-- 👉 table footer  -->
       <tfoot v-show="!courses.length">
         <tr>
-          <td colspan="7" class="text-center">محتوایی برای نمایش وجود ندارد</td>
+          <td colspan="7" class="text-center">No data available</td>
         </tr>
       </tfoot>
     </VTable>
   </VCard>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 i.v-icon.v-icon {
   color: red;
 }
